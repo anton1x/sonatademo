@@ -14,6 +14,7 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\AdminBundle\Form\Type\ModelType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -23,12 +24,15 @@ class AddressAdmin extends AbstractAdmin
 {
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $formMapper->add('title', TextType::class);
+        $formMapper->add('title', TextType::class, [
+            'label' => 'Название',
+        ]);
         $formMapper->add('description', TextareaType::class);
         $formMapper->add('city', ModelType::class, [
             'class' => City::class,
             'property' => 'title',
         ]);
+        $formMapper->add('image', ModelListType::class, [], []);
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
@@ -38,6 +42,8 @@ class AddressAdmin extends AbstractAdmin
 
     protected function configureListFields(ListMapper $listMapper)
     {
-        $listMapper->addIdentifier('title');
+        $listMapper->addIdentifier('title', null, [
+            'label' => 'Название'
+        ]);
     }
 }

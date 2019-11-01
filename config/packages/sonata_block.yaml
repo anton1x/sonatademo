@@ -1,0 +1,4 @@
+sonata_block:
+  http_cache:
+    handler: sonata.block.cache.handler.noop
+    listener: false

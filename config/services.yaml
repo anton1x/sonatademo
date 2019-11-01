@@ -15,7 +15,7 @@ services:
     # this creates a service per class whose id is the fully-qualified class name
     App\:
         resource: '../src/*'
-        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Application,Kernel.php}'
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
@@ -29,11 +29,18 @@ services:
     App\Admin\CityAdmin:
         arguments: [~, App\Entity\City, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Город }
+            - { name: sonata.admin, manager_type: orm, label: Город, group: География }
+
+
     App\Admin\AddressAdmin:
         arguments: [~, App\Entity\Address, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Адрес }
+            - { name: sonata.admin, manager_type: orm, label: Адрес, group: География }
+
+#    app.media_remove_listener:
+#        class: App\EventListener\MediaRemoveEventListener
+#        tags:
+#            - { name: doctrine.event_listener, event: preRemove }
 
     mailer:
         alias: fos_user.mailer.noop

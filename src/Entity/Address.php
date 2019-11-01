@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Application\Sonata\MediaBundle\Entity\Media;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -42,6 +44,27 @@ class Address
      * @ORM\ManyToOne(targetEntity="City", inversedBy="addresses")
      */
     private $city;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Application\Sonata\MediaBundle\Entity\Media")
+     * @ORM\JoinColumn(name="image_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     */
+    private $image;
+
+    /**
+     * @return mixed
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    public function setImage($image)
+    {
+        $this->image = $image;
+    }
+
+
 
     /**
      * @return string

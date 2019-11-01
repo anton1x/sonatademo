@@ -16,4 +16,10 @@ return [
     FOS\UserBundle\FOSUserBundle::class => ['all' => true],
     Sonata\UserBundle\SonataUserBundle::class => ['all' => true],
     Symfony\Bundle\AclBundle\AclBundle::class => ['all' => true],
+    JMS\SerializerBundle\JMSSerializerBundle::class => ['all' => true],
+    Sonata\MediaBundle\SonataMediaBundle::class => ['all' => true],
+    App\Application\Sonata\MediaBundle\ApplicationSonataMediaBundle::class => ['all' => true],
+    Symfony\Bundle\WebProfilerBundle\WebProfilerBundle::class => ['dev' => true, 'test' => true],
+    Symfony\Bundle\MonologBundle\MonologBundle::class => ['all' => true],
+    Symfony\Bundle\DebugBundle\DebugBundle::class => ['dev' => true, 'test' => true],
 ];

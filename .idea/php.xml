@@ -85,6 +85,39 @@
       <path value="$PROJECT_DIR$/vendor/symfony/asset" />
       <path value="$PROJECT_DIR$/vendor/symfony/translation-contracts" />
       <path value="$PROJECT_DIR$/vendor/symfony/var-exporter" />
+      <path value="$PROJECT_DIR$/vendor/ralouphie/getallheaders" />
+      <path value="$PROJECT_DIR$/vendor/imagine/imagine" />
+      <path value="$PROJECT_DIR$/vendor/kriswallsmith/buzz" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/psr7" />
+      <path value="$PROJECT_DIR$/vendor/jms/metadata" />
+      <path value="$PROJECT_DIR$/vendor/hoa/visitor" />
+      <path value="$PROJECT_DIR$/vendor/jms/serializer" />
+      <path value="$PROJECT_DIR$/vendor/jms/serializer-bundle" />
+      <path value="$PROJECT_DIR$/vendor/hoa/math" />
+      <path value="$PROJECT_DIR$/vendor/hoa/stream" />
+      <path value="$PROJECT_DIR$/vendor/hoa/event" />
+      <path value="$PROJECT_DIR$/vendor/hoa/compiler" />
+      <path value="$PROJECT_DIR$/vendor/hoa/protocol" />
+      <path value="$PROJECT_DIR$/vendor/hoa/iterator" />
+      <path value="$PROJECT_DIR$/vendor/hoa/file" />
+      <path value="$PROJECT_DIR$/vendor/hoa/regex" />
+      <path value="$PROJECT_DIR$/vendor/hoa/ustring" />
+      <path value="$PROJECT_DIR$/vendor/hoa/exception" />
+      <path value="$PROJECT_DIR$/vendor/hoa/consistency" />
+      <path value="$PROJECT_DIR$/vendor/hoa/zformat" />
+      <path value="$PROJECT_DIR$/vendor/sonata-project/media-bundle" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/vendor/knplabs/gaufrette" />
+      <path value="$PROJECT_DIR$/vendor/symfony/monolog-bridge" />
+      <path value="$PROJECT_DIR$/vendor/symfony/monolog-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/web-profiler-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/var-dumper" />
+      <path value="$PROJECT_DIR$/vendor/symfony/debug-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/debug-pack" />
+      <path value="$PROJECT_DIR$/vendor/symfony/profiler-pack" />
+      <path value="$PROJECT_DIR$/vendor/symfony/stopwatch" />
+      <path value="$PROJECT_DIR$/vendor/easycorp/easy-log-handler" />
+      <path value="$PROJECT_DIR$/vendor/monolog/monolog" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.1" />

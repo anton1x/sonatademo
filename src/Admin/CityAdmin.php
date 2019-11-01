@@ -20,7 +20,9 @@ final class CityAdmin extends AbstractAdmin
     {
         $formMapper->add('title', TextType::class);
         $formMapper->add('description', TextareaType::class);
-        $formMapper->add('isBig', CheckboxType::class);
+        $formMapper->add('isBig', CheckboxType::class, [
+            'required' => false,
+        ]);
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
