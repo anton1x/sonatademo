@@ -13,6 +13,22 @@ sonata_media:
                 small: { width: 100 , quality: 70}
                 big:   { width: 500 , quality: 70}
 
+        sonata_collection:
+            providers:
+                - sonata.media.provider.image
+
+            formats:
+                preview: { width: 100, quality: 100}
+                wide:    { width: 820, quality: 100}
+
+        sonata_category:
+            providers:
+                - sonata.media.provider.image
+
+            formats:
+                preview: { width: 100, quality: 100}
+                wide:    { width: 820, quality: 100}
+
     cdn:
         server:
             path: /upload/media
@@ -27,5 +43,6 @@ sonata_media:
         media: App\Application\Sonata\MediaBundle\Entity\Media
         gallery: App\Application\Sonata\MediaBundle\Entity\Gallery
         gallery_has_media: App\Application\Sonata\MediaBundle\Entity\GalleryHasMedia
+        category: App\Application\Sonata\ClassificationBundle\Entity\Category
 
     db_driver: doctrine_orm
