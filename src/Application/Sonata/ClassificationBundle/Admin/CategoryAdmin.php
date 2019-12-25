@@ -11,14 +11,15 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Sonata\ClassificationBundle\Admin;
+namespace App\Application\Sonata\ClassificationBundle\Admin;
 
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\AdminBundle\Route\RouteCollection;
-use Sonata\ClassificationBundle\Form\Type\CategorySelectorType;
+use Sonata\ClassificationBundle\Admin\ContextAwareAdmin;
+use App\Application\Sonata\ClassificationBundle\Form\Type\CategorySelectorType;
 use Sonata\MediaBundle\Model\MediaInterface;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;

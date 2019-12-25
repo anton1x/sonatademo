@@ -3,8 +3,51 @@ sonata_admin:
     dashboard:
         blocks:
             - { type: sonata.admin.block.admin_list, position: left }
+        groups:
+            География: ~
+            Продукты:
+                items:
+                    - app.admin.product_admin
+                    -
+                        route: admin_sonata_classification_category_list
+                        label: "Категории"
+                        admin: sonata.classification.admin.category
+                        route_params: { context: products, hide_context: true }
+            Новости:
+                items:
+                    - admin.news_item
+
     security:
              handler: sonata.admin.security.handler.role
+
+    assets:
+        extra_javascripts:
+            # ...
+            - bundles/fosckeditor/ckeditor.js
+            - bundles/sonataformatter/vendor/markitup-markitup/markitup/jquery.markitup.js
+            - bundles/sonataformatter/markitup/sets/markdown/set.js
+            - bundles/sonataformatter/markitup/sets/html/set.js
+            - bundles/sonataformatter/markitup/sets/textile/set.js
+            # DateTimePicker JS
+            - bundles/sonatacore/vendor/moment/min/moment-with-locales.min.js
+            - bundles/sonatacore/vendor/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js
+
+
+        extra_stylesheets:
+            # ...
+            - bundles/sonataformatter/markitup/skins/sonata/style.css
+            - bundles/sonataformatter/markitup/sets/markdown/style.css
+            - bundles/sonataformatter/markitup/sets/html/style.css
+            - bundles/sonataformatter/markitup/sets/textile/style.css
+            - bundles/sonatacore/vendor/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css
+
+    extensions:
+        app.admin.extension.seo_info_extension:
+            implements:
+                - App\Entity\SeoPoweredInterface
+
+
+
 
 sonata_block:
     blocks:

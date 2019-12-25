@@ -17,5 +17,9 @@
             <generator strategy="AUTO"/>
         </id>
 
+        <field name="slugPath" type="string" length="255">
+        </field>
+
+
     </entity>
 </doctrine-mapping>

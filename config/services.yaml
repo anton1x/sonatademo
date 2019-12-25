@@ -4,7 +4,7 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-
+    app.products.categories.context: products
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -37,6 +37,37 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, label: Адрес, group: География }
 
+    app.admin.product_admin:
+        class: App\Admin\ProductAdmin
+        arguments: [~, App\Entity\Product,~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Продукт, group: Продукты }
+
+
+    App\Model\CategoryModelFactory:
+        class: App\Model\CategoryModelFactory
+        arguments: ['@sonata.classification.manager.category']
+
+    App\Model\ProductsCategoryModel:
+        factory: ['@App\Model\CategoryModelFactory', 'createModel']
+        arguments: ['%app.products.categories.context%']
+
+    sonata_category_selector:
+        class: App\Application\Sonata\ClassificationBundle\Form\Type\CategorySelectorType
+        arguments: ['@sonata.classification.manager.category']
+
+
+    app.admin.extension.seo_info_extension:
+        class: App\Admin\Extension\SeoInfoExtension
+
+    App\Basket\BasketManager:
+        class: App\Basket\BasketManager
+        arguments: ['@session']
+        calls:
+            - [ 'initFromSession' ]
+
+
+
 #    app.media_remove_listener:
 #        class: App\EventListener\MediaRemoveEventListener
 #        tags:
@@ -44,4 +75,11 @@ services:
 
     mailer:
         alias: fos_user.mailer.noop
+        public: true
+
+    admin.news_item:
+        class: App\Admin\NewsItemAdmin
+        arguments: [~, App\Entity\NewsItem, App\Controller\NewsItemAdminController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: "Новости" }
         public: true

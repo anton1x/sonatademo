@@ -1,0 +1,10 @@
+{%  extends 'base.html.twig' %}
+
+{% block body %}
+    {% for item in items %}
+        <div>
+            <h5>{{ item.title }}</h5>
+            <a href="{{ path('basket_add', {product: item.id}) }}">В корзину</a>
+        </div>
+    {% endfor %}
+{%  endblock %}

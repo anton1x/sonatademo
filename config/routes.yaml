@@ -16,3 +16,13 @@ gallery:
 media:
     resource: '@SonataMediaBundle/Resources/config/routing/media.xml'
     prefix: /media
+
+products:
+    resource: App\Controller\ProductsController
+    type: annotation
+    prefix: /
+
+basket:
+    resource: App\Controller\BasketController
+    type: annotation
+    prefix: /basket
