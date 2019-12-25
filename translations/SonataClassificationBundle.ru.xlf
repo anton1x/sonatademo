@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="ru" target-language="ru" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="hoG4O3f" resname="sonata_classification">
+        <source>sonata_classification</source>
+        <target>Классификация</target>
+      </trans-unit>
+      <trans-unit id="ZftDFKI" resname="label_categories">
+        <source>label_categories</source>
+        <target>Категории</target>
+      </trans-unit>
+      <trans-unit id="fQsJd3p" resname="label_tags">
+        <source>label_tags</source>
+        <target>Теги</target>
+      </trans-unit>
+      <trans-unit id="z8mRYdN" resname="label_collections">
+        <source>label_collections</source>
+        <target>Коллекции</target>
+      </trans-unit>
+      <trans-unit id="frtcOED" resname="breadcrumb.link_collection_list">
+        <source>breadcrumb.link_collection_list</source>
+        <target>Коллекции</target>
+      </trans-unit>
+      <trans-unit id="ZGB5MUv" resname="breadcrumb.link_category_list">
+        <source>breadcrumb.link_category_list</source>
+        <target>Категории</target>
+      </trans-unit>
+      <trans-unit id="OCTPMkh" resname="list.label_name">
+        <source>list.label_name</source>
+        <target>Имя</target>
+      </trans-unit>
+      <trans-unit id="W_mGpZ9" resname="list.label_slug">
+        <source>list.label_slug</source>
+        <target>Slug</target>
+      </trans-unit>
+      <trans-unit id="uqGGsSH" resname="list.label_description">
+        <source>list.label_description</source>
+        <target>Описание</target>
+      </trans-unit>
+      <trans-unit id="UDfXwla" resname="list.label_enabled">
+        <source>list.label_enabled</source>
+        <target>Включено</target>
+      </trans-unit>
+      <trans-unit id="UNwKbqc" resname="filter.label_name">
+        <source>filter.label_name</source>
+        <target>Имя</target>
+      </trans-unit>
+      <trans-unit id="sCHvQ7F" resname="filter.label_enabled">
+        <source>filter.label_enabled</source>
+        <target>Включено</target>
+      </trans-unit>
+      <trans-unit id="amc0VL9" resname="form.label_name">
+        <source>form.label_name</source>
+        <target>Имя</target>
+      </trans-unit>
+      <trans-unit id="Degn71l" resname="form.label_description">
+        <source>form.label_description</source>
+        <target>Описание</target>
+      </trans-unit>
+      <trans-unit id="TXGji8g" resname="form.label_enabled">
+        <source>form.label_enabled</source>
+        <target>Включено</target>
+      </trans-unit>
+      <trans-unit id=".LVpzZT" resname="form.label_slug">
+        <source>form.label_slug</source>
+        <target>Slug</target>
+      </trans-unit>
+      <trans-unit id="E7hGbhZ" resname="breadcrumb.link_tag_list">
+        <source>breadcrumb.link_tag_list</source>
+        <target>Теги</target>
+      </trans-unit>
+      <trans-unit id="3AGGzCx" resname="form.label_created_at">
+        <source>form.label_created_at</source>
+        <target>Создан</target>
+      </trans-unit>
+      <trans-unit id="hpHo4dg" resname="form.label_updated_at">
+        <source>form.label_updated_at</source>
+        <target>Обновлен</target>
+      </trans-unit>
+      <trans-unit id="vINylMw" resname="list.label_created_at">
+        <source>list.label_created_at</source>
+        <target>Создан</target>
+      </trans-unit>
+      <trans-unit id="5bQGDCR" resname="list.label_updated_at">
+        <source>list.label_updated_at</source>
+        <target>Обновлен</target>
+      </trans-unit>
+      <trans-unit id="kw1vkRz" resname="form.label_position">
+        <source>form.label_position</source>
+        <target>Позиция</target>
+      </trans-unit>
+      <trans-unit id="dtyR2px" resname="form.label_parent">
+        <source>form.label_parent</source>
+        <target>Родитель</target>
+      </trans-unit>
+      <trans-unit id="BoTQm.t" resname="list.label_position">
+        <source>list.label_position</source>
+        <target>Позиция</target>
+      </trans-unit>
+      <trans-unit id="nJlXwzN" resname="list.label_parent">
+        <source>list.label_parent</source>
+        <target>Родитель</target>
+      </trans-unit>
+      <trans-unit id="vZqUow_" resname="filter.label_parent">
+        <source>filter.label_parent</source>
+        <target>Родитель</target>
+      </trans-unit>
+      <trans-unit id="oVzyy7r" resname="form.label_media">
+        <source>form.label_media</source>
+        <target>Медиа</target>
+      </trans-unit>
+      <trans-unit id="VPiSKLA" resname="breadcrumb.link_context_list">
+        <source>breadcrumb.link_context_list</source>
+        <target>Контексты</target>
+      </trans-unit>
+      <trans-unit id="tpMxmoe" resname="list.label_id">
+        <source>list.label_id</source>
+        <target>Код</target>
+      </trans-unit>
+      <trans-unit id="ZtPEucJ" resname="filter.label_id">
+        <source>filter.label_id</source>
+        <target>Код</target>
+      </trans-unit>
+      <trans-unit id="3Q8Gz06" resname="label_contexts">
+        <source>label_contexts</source>
+        <target>Контексты</target>
+      </trans-unit>
+      <trans-unit id="D72WvE7" resname="form.label_id">
+        <source>form.label_id</source>
+        <target>Код</target>
+      </trans-unit>
+      <trans-unit id="aNCvGib" resname="filter.label_context">
+        <source>filter.label_context</source>
+        <target>Контекст</target>
+      </trans-unit>
+      <trans-unit id="QK762of" resname="list.label_context">
+        <source>list.label_context</source>
+        <target>Контекст</target>
+      </trans-unit>
+      <trans-unit id="mlAI7jm" resname="form.label_context">
+        <source>form.label_context</source>
+        <target>Контекст</target>
+      </trans-unit>
+      <trans-unit id="aD062gn" resname="tree_catalog_title">
+        <source>tree_catalog_title</source>
+        <target>Категории</target>
+      </trans-unit>
+      <trans-unit id="H4ggfz8" resname="element.tree_site_label">
+        <source>element.tree_site_label</source>
+        <target>Категории</target>
+      </trans-unit>
+      <trans-unit id="A1WqPw_" resname="classification.list_mode">
+        <source>classification.list_mode</source>
+        <target>Список</target>
+      </trans-unit>
+      <trans-unit id="TmD8h0l" resname="classification.tree_mode">
+        <source>classification.tree_mode</source>
+        <target>Дерево</target>
+      </trans-unit>
+      <trans-unit id="Nz7KoW6" resname="breadcrumb.link_category_tree">
+        <source>breadcrumb.link_category_tree</source>
+        <target>Категории</target>
+      </trans-unit>
+      <trans-unit id="loeWEWU" resname="active">
+        <source>active</source>
+        <target>Включено</target>
+      </trans-unit>
+      <trans-unit id="F_s8AWj" resname="disabled">
+        <source>disabled</source>
+        <target>Отключено</target>
+      </trans-unit>
+      <trans-unit id="toevr1X" resname="form.label_category">
+        <source>form.label_category</source>
+        <target>Категория</target>
+      </trans-unit>
+      <trans-unit id="jSc.TmH" resname="form.label_collection">
+        <source>form.label_collection</source>
+        <target>Коллекция</target>
+      </trans-unit>
+      <trans-unit id="SodPiHJ" resname="form.label_tag">
+        <source>form.label_tag</source>
+        <target>Тег</target>
+      </trans-unit>
+      <trans-unit id="hEFmOyL" resname="form.label_title">
+        <source>form.label_title</source>
+        <target>Заголовок</target>
+      </trans-unit>
+      <trans-unit id="ATH2HT9" resname="no_collections_found">
+        <source>no_collections_found</source>
+        <target>Коллекции не найдены.</target>
+      </trans-unit>
+      <trans-unit id="51jwLIf" resname="no_categories_found">
+        <source>no_categories_found</source>
+        <target>Категории не найдены.</target>
+      </trans-unit>
+      <trans-unit id="bL4lQR." resname="no_tags_found">
+        <source>no_tags_found</source>
+        <target>Теги не найдены.</target>
+      </trans-unit>
+      <trans-unit id="WKoj9cv" resname="breadcrumb.link_category_create">
+        <source>breadcrumb.link_category_create</source>
+        <target>Создать</target>
+      </trans-unit>
+      <trans-unit id="6bHaKbP" resname="breadcrumb.link_tag_create">
+        <source>breadcrumb.link_tag_create</source>
+        <target>Создать</target>
+      </trans-unit>
+      <trans-unit id="WsjZWBg" resname="breadcrumb.link_collection_create">
+        <source>breadcrumb.link_collection_create</source>
+        <target>Создать</target>
+      </trans-unit>
+      <trans-unit id="pghmVXK" resname="breadcrumb.link_context_create">
+        <source>breadcrumb.link_context_create</source>
+        <target>Создать</target>
+      </trans-unit>
+      <trans-unit id="yRDUdNz" resname="General">
+        <source>General</source>
+        <target>Общее</target>
+      </trans-unit>
+      <trans-unit id="0NuLXjZ" resname="Options">
+        <source>Options</source>
+        <target>Опции</target>
+      </trans-unit>
+        <trans-unit id="group_general" resname="group_general">
+          <source>group_general</source>
+          <target>Основные</target>
+        </trans-unit>
+        <trans-unit id="group_options" resname="group_options">
+          <source>group_options</source>
+          <target>Дополнительные</target>
+        </trans-unit>
+    </body>
+  </file>
+</xliff>

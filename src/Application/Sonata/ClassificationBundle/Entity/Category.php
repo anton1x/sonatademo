@@ -28,4 +28,28 @@ class Category extends BaseCategory
     {
         return $this->id;
     }
+
+    private $slugPath;
+
+    public function getSlugPath()
+    {
+        return $this->slugPath;
+    }
+
+    public function setSlugPath(){
+        $parent = $this->getParent();
+        if(null == $parent)
+            $this->slugPath = $this->getSlug();
+        else
+            $this->slugPath = $parent->getSlugPath().'/'.$this->getSlug();
+
+    }
+
+    public function setSlug($slug)
+    {
+        parent::setSlug($slug);
+        $this->setSlugPath();
+    }
+
+
 }
