@@ -67,12 +67,6 @@ services:
             - [ 'initFromSession' ]
 
 
-
-#    app.media_remove_listener:
-#        class: App\EventListener\MediaRemoveEventListener
-#        tags:
-#            - { name: doctrine.event_listener, event: preRemove }
-
     mailer:
         alias: fos_user.mailer.noop
         public: true
