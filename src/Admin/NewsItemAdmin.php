@@ -30,7 +30,7 @@ final class NewsItemAdmin extends AbstractAdmin
     {
         $listMapper
             ->add('id')
-            ->add('title', null, [
+            ->addIdentifier('title', null, [
                 'label' => 'Заголовок'
             ])
             ->add('publishedAt', 'datetime', [
