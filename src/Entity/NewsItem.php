@@ -3,11 +3,12 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\NewsItemRepository")
  */
-class NewsItem implements SeoPoweredInterface
+class NewsItem implements SeoPoweredInterface, ActivatedInterface
 {
     /**
      * @ORM\Id()
@@ -18,6 +19,7 @@ class NewsItem implements SeoPoweredInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $title;
 
@@ -38,6 +40,7 @@ class NewsItem implements SeoPoweredInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @Assert\NotNull()
      */
     private $author;
 
@@ -60,6 +63,7 @@ class NewsItem implements SeoPoweredInterface
      * @ORM\Column(type="boolean")
      */
     private $isActive;
+
 
     public function __construct()
     {
