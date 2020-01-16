@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controller;
+namespace App\Admin\Controller;
 
 use App\Entity\ActivatedInterface;
 use Sonata\AdminBundle\Controller\CRUDController;

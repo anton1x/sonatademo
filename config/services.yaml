@@ -44,14 +44,6 @@ services:
             - { name: sonata.admin, manager_type: orm, label: Продукт, group: Продукты }
 
 
-    App\Model\CategoryModelFactory:
-        class: App\Model\CategoryModelFactory
-        arguments: ['@sonata.classification.manager.category']
-
-    App\Model\ProductsCategoryModel:
-        factory: ['@App\Model\CategoryModelFactory', 'createModel']
-        arguments: ['%app.products.categories.context%']
-
     sonata_category_selector:
         class: App\Application\Sonata\ClassificationBundle\Form\Type\CategorySelectorType
         arguments: ['@sonata.classification.manager.category']
@@ -72,7 +64,7 @@ services:
 
     admin.news_item:
         class: App\Admin\NewsItemAdmin
-        arguments: [~, App\Entity\NewsItem, App\Controller\NewsItemAdminController]
+        arguments: [~, App\Entity\NewsItem, App\Admin\Controller\NewsItemAdminController]
         tags:
             - { name: sonata.admin, manager_type: orm, label: "Новости" }
         public: true

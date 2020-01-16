@@ -149,10 +149,6 @@ class Product implements SeoPoweredInterface
         return $this->title;
     }
 
-    public function getRawContent()
-    {
-        return '';
-    }
 
     public function getContent()
     {
@@ -164,20 +160,7 @@ class Product implements SeoPoweredInterface
         
     }
 
-    public function getFormat()
-    {
-        return '';
-    }
 
-    public function getDescriptionFormatter()
-    {
-        return '';
-    }
-
-    public function getRawDescription()
-    {
-        return '';
-    }
 
 
 }
