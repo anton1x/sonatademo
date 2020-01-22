@@ -26,16 +26,16 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
-    App\Admin\CityAdmin:
-        arguments: [~, App\Entity\City, ~]
-        tags:
-            - { name: sonata.admin, manager_type: orm, label: Город, group: География }
-
-
-    App\Admin\AddressAdmin:
-        arguments: [~, App\Entity\Address, ~]
-        tags:
-            - { name: sonata.admin, manager_type: orm, label: Адрес, group: География }
+#    App\Admin\CityAdmin:
+#        arguments: [~, App\Entity\City, ~]
+#        tags:
+#            - { name: sonata.admin, manager_type: orm, label: Город, group: География }
+#
+#
+#    App\Admin\AddressAdmin:
+#        arguments: [~, App\Entity\Address, ~]
+#        tags:
+#            - { name: sonata.admin, manager_type: orm, label: Адрес, group: География }
 
     app.admin.product_admin:
         class: App\Admin\ProductAdmin

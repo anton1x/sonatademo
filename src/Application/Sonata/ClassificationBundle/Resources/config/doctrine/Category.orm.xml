@@ -21,5 +21,8 @@
         </field>
 
 
+        <field name="code" type="string" length="255">
+        </field>
+
     </entity>
 </doctrine-mapping>
