@@ -26,16 +26,16 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
-    App\Admin\CityAdmin:
-        arguments: [~, App\Entity\City, ~]
-        tags:
-            - { name: sonata.admin, manager_type: orm, label: Город, group: География }
-
-
-    App\Admin\AddressAdmin:
-        arguments: [~, App\Entity\Address, ~]
-        tags:
-            - { name: sonata.admin, manager_type: orm, label: Адрес, group: География }
+#    App\Admin\CityAdmin:
+#        arguments: [~, App\Entity\City, ~]
+#        tags:
+#            - { name: sonata.admin, manager_type: orm, label: Город, group: География }
+#
+#
+#    App\Admin\AddressAdmin:
+#        arguments: [~, App\Entity\Address, ~]
+#        tags:
+#            - { name: sonata.admin, manager_type: orm, label: Адрес, group: География }
 
     app.admin.product_admin:
         class: App\Admin\ProductAdmin
@@ -43,14 +43,6 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, label: Продукт, group: Продукты }
 
-
-    App\Model\CategoryModelFactory:
-        class: App\Model\CategoryModelFactory
-        arguments: ['@sonata.classification.manager.category']
-
-    App\Model\ProductsCategoryModel:
-        factory: ['@App\Model\CategoryModelFactory', 'createModel']
-        arguments: ['%app.products.categories.context%']
 
     sonata_category_selector:
         class: App\Application\Sonata\ClassificationBundle\Form\Type\CategorySelectorType
@@ -66,20 +58,13 @@ services:
         calls:
             - [ 'initFromSession' ]
 
-
-
-#    app.media_remove_listener:
-#        class: App\EventListener\MediaRemoveEventListener
-#        tags:
-#            - { name: doctrine.event_listener, event: preRemove }
-
     mailer:
         alias: fos_user.mailer.noop
         public: true
 
     admin.news_item:
         class: App\Admin\NewsItemAdmin
-        arguments: [~, App\Entity\NewsItem, App\Controller\NewsItemAdminController]
+        arguments: [~, App\Entity\NewsItem, App\Admin\Controller\NewsItemAdminController]
         tags:
             - { name: sonata.admin, manager_type: orm, label: "Новости" }
         public: true

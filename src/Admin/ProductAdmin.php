@@ -54,7 +54,7 @@ final class ProductAdmin extends AbstractAdmin
                 'btn_add' => false
             ])
 
-            ->add('content', SimpleFormatterType::class, [
+            ->add('description', SimpleFormatterType::class, [
                 'format' => 'richhtml',
                 'ckeditor_context' => 'default',
                 'ckeditor_image_format' => 'big',

@@ -38,7 +38,7 @@ class Product implements SeoPoweredInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Application\Sonata\ClassificationBundle\Entity\Category", fetch="LAZY")
-     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $category;
 
@@ -147,36 +147,6 @@ class Product implements SeoPoweredInterface
     public function __toString():string
     {
         return $this->title;
-    }
-
-    public function getRawContent()
-    {
-        return '';
-    }
-
-    public function getContent()
-    {
-        return '';
-    }
-
-    public function setContent($content)
-    {
-        
-    }
-
-    public function getFormat()
-    {
-        return '';
-    }
-
-    public function getDescriptionFormatter()
-    {
-        return '';
-    }
-
-    public function getRawDescription()
-    {
-        return '';
     }
 
 

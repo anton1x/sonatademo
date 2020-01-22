@@ -22,7 +22,9 @@ final class NewsItemAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('id')
-            ->add('title')
+            ->add('title', null, [
+                'label' => 'Заголовок'
+            ])
             ;
     }
 
@@ -30,13 +32,18 @@ final class NewsItemAdmin extends AbstractAdmin
     {
         $listMapper
             ->add('id')
-            ->add('title', null, [
+            ->addIdentifier('title', 'text', [
                 'label' => 'Заголовок'
+            ])
+            ->add('isActive', 'boolean', [
+                'editable' => true,
+                'label' => 'Опубликована'
             ])
             ->add('publishedAt', 'datetime', [
                 'format' => 'd.m.Y H:i',
                 'label' => 'Дата публикации'
             ])
+
 
             ->add('_action', null, [
                 'actions' => [
@@ -63,6 +70,8 @@ final class NewsItemAdmin extends AbstractAdmin
                         'label' => 'Активность',
                         'required' => false,
                     ])
+
+                    ->add('author')
                 ->end()
                 ->with('Основное')
                     ->add('title')
@@ -76,6 +85,19 @@ final class NewsItemAdmin extends AbstractAdmin
                 ->end()
             ->end()
             ;
+    }
+
+    protected function configureBatchActions($actions)
+    {
+        if (
+            $this->hasRoute('edit') && $this->hasAccess('edit')
+        ) {
+            $actions['publish'] = [
+                'ask_confirmation' => true
+            ];
+        }
+
+        return $actions;
     }
 
 }

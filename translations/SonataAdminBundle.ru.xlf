@@ -493,6 +493,10 @@
         <source>toggle_navigation</source>
         <target>Переключить навигацию</target>
       </trans-unit>
+      <trans-unit id="flash_batch_publish_success">
+        <source>flash_batch_publish_success</source>
+        <target>Успешно опубликовано</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

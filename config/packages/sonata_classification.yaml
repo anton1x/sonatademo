@@ -9,5 +9,6 @@ sonata_classification:
     admin:
         category:
             class: App\Application\Sonata\ClassificationBundle\Admin\CategoryAdmin
+            controller: App\Application\Sonata\ClassificationBundle\Controller\CategoryAdminController
 
 
