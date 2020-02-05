@@ -21,8 +21,3 @@ products:
     resource: App\Controller\ProductsController
     type: annotation
     prefix: /
-
-basket:
-    resource: App\Controller\BasketController
-    type: annotation
-    prefix: /basket

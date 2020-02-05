@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\ValueObject\SeoInfo;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -55,7 +56,7 @@ class NewsItem implements SeoPoweredInterface, ActivatedInterface
     private $preview;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\SeoInfo", cascade={"persist"}, orphanRemoval=true)
+     * @ORM\Embedded(class="App\Entity\ValueObject\SeoInfo")
      */
     private $seoInfo;
 

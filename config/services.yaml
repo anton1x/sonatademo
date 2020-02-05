@@ -5,6 +5,8 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     app.products.categories.context: products
+    sonata.classification.manager.category.class: App\Application\Sonata\ClassificationBundle\Entity\CategoryManager
+
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -26,22 +28,30 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
-#    App\Admin\CityAdmin:
-#        arguments: [~, App\Entity\City, ~]
-#        tags:
-#            - { name: sonata.admin, manager_type: orm, label: Город, group: География }
-#
-#
-#    App\Admin\AddressAdmin:
-#        arguments: [~, App\Entity\Address, ~]
-#        tags:
-#            - { name: sonata.admin, manager_type: orm, label: Адрес, group: География }
 
     app.admin.product_admin:
         class: App\Admin\ProductAdmin
         arguments: [~, App\Entity\Product,~]
         tags:
             - { name: sonata.admin, manager_type: orm, label: Продукт, group: Продукты }
+
+    app.admin.internet:
+        class: App\Admin\InternetAdmin
+        arguments: [~, App\Entity\InternetPlan,~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Интернет-тарифы, group: Продукты }
+
+    app.admin.tvplan:
+        class: App\Admin\TVPlanAdmin
+        arguments: [~, App\Entity\TVPlan,~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Тв-тарифы, group: Продукты }
+
+    app.admin.additional_service:
+        class: App\Admin\AdditionalServicePlanAdmin
+        arguments: [~, App\Entity\AdditionalServicePlan,~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Доп. Услуги, group: Продукты }
 
 
     sonata_category_selector:
@@ -52,11 +62,11 @@ services:
     app.admin.extension.seo_info_extension:
         class: App\Admin\Extension\SeoInfoExtension
 
-    App\Basket\BasketManager:
-        class: App\Basket\BasketManager
-        arguments: ['@session']
-        calls:
-            - [ 'initFromSession' ]
+#    App\Basket\BasketManager:
+#        class: App\Basket\BasketManager
+#        arguments: ['@session']
+#        calls:
+#            - [ 'initFromSession' ]
 
     mailer:
         alias: fos_user.mailer.noop
@@ -68,3 +78,26 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, label: "Новости" }
         public: true
+
+    app.admin.address_object:
+        class: App\Admin\AddressObjectAdmin
+        arguments: [~, App\Entity\AddressObject, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: "Адреса подключения" }
+        public: true
+
+    app.serializer.media_handler:
+        class: App\Application\Sonata\MediaBundle\Serializer\MediaSerializationHandler
+        tags:
+            - { name: jms_serializer.handler, type: 'media_links', direction: serialization, format: json, method: serializeMedia }
+        arguments: [ '@sonata.media.provider.image', '@sonata.media.provider.file' ]
+
+    app.serializer.adress_object_id_handler:
+        class: App\Serializer\ArrayIdsSerializationHandler
+        tags:
+            - { name: jms_serializer.handler, type: 'object_ids', direction: serialization, format: json, method: serialize }
+
+    app.serializer.category_code_handler:
+        class: App\Serializer\CategorySerializationHandler
+        tags:
+            - { name: jms_serializer.handler, type: 'category_code', direction: serialization, format: json, method: serialize }

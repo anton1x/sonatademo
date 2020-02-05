@@ -12,9 +12,6 @@
         name="App\Application\Sonata\MediaBundle\Entity\Media"
         table="media__media"
         >
-        <lifecycle-callbacks>
-            <lifecycle-callback type="preRemove" method="preRemove"/>
-        </lifecycle-callbacks>
         <id name="id" type="integer" column="id">
             <generator strategy="AUTO"/>
         </id>

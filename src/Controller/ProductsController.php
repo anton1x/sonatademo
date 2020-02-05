@@ -3,38 +3,43 @@
 
 namespace App\Controller;
 
-
-use App\Application\Sonata\ClassificationBundle\Entity\Category;
-use App\Basket\BasketAwareInterface;
-use App\Model\ProductsCategoryModel;
-use App\Repository\ProductsRepository;
-use Sonata\ClassificationBundle\Entity\CategoryManager;
-use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
+use App\Entity\AddressObject;
+use App\Entity\BaseProduct;
+use JMS\Serializer\SerializationContext;
+use JMS\Serializer\SerializerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class ProductsController extends AbstractController implements BasketAwareInterface
+class ProductsController extends AbstractController
 {
     
     /**
      * @Route(name="products_index", path="/")
      */
-//    public function indexAction()
-//    {
-//        return new Response('df');
-//    }
+    public function indexAction(SerializerInterface $serializer)
+    {
+        $repo = $this->getDoctrine()->getManager()->getRepository(AddressObject::class);
+
+        $items = $repo->findAll();
+        $result = $serializer->serialize($items, 'json', SerializationContext::create()->setGroups(['calculator']));
+
+        return new Response($result, Response::HTTP_OK, [
+            'Content-Type' => 'application/json'
+        ]);
+
+    }
 
     /**
-     * @Route(path="products/{path<[0-9A-Za-z\-\/]+>}", name="products_catalogue_list")
+     * @Route(name="test", path="/test")
      */
-    public function catalogListAction($path, ProductsRepository $productsRepository)
+    public function testAction(SerializerInterface $serializer)
     {
-        $items = $productsRepository->getProductsBySlugPath($path);
-        dump($items);
-        //throw new \Exception('324');
-        return $this->render('products_list.twig', [
-            'items' => $items,
+        $repo = $this->getDoctrine()->getRepository(BaseProduct::class);
+        $result = $serializer->serialize($repo->findAll([], ['type']), 'json');
+
+        return new Response($result, Response::HTTP_OK, [
+            'Content-Type' => 'application/json'
         ]);
     }
 

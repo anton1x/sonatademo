@@ -9,6 +9,10 @@ use Symfony\Component\OptionsResolver\Options;
 
 class CategorySelectorType extends BaseCategorySelectorType
 {
+
+    /**
+     * @return array
+     */
     public function getChoices(Options $options)
     {
         if (!$options['category'] instanceof CategoryInterface) {
@@ -32,6 +36,7 @@ class CategorySelectorType extends BaseCategorySelectorType
         return $choices;
     }
 
+
     /**
      * @param int $level
      */
@@ -43,10 +48,10 @@ class CategorySelectorType extends BaseCategorySelectorType
 
         foreach ($category->getChildren() as $child) {
             if ($options['category'] && $options['category']->getId() === $child->getId()) {
-                //continue;
+                continue;
             }
 
-            $choices[$child->getId()] = sprintf('%s %s', str_repeat('--', 1 * $level), $child);
+            $choices[$child->getId()] = sprintf('%s %s', str_repeat('-', 2 * $level), $child);
 
             $this->childWalker($child, $options, $choices, $level + 1);
         }

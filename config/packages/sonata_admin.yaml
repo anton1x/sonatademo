@@ -8,7 +8,10 @@ sonata_admin:
             Продукты:
                 keep_open: true
                 items:
-                    - app.admin.product_admin
+                    - app.admin.tvplan
+                    - app.admin.internet
+                    - app.admin.additional_service
+                    - app.admin.address_object
                     -
                         route: admin_sonata_classification_category_tree
                         label: "Категории"

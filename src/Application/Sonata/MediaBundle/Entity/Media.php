@@ -31,9 +31,5 @@ class Media extends BaseMedia
         return $this->id;
     }
 
-    public function preRemove(LifecycleEventArgs $eventArgs)
-    {
-        dump($eventArgs);
-    }
     
 }

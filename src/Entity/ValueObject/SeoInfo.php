@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Entity;
+namespace App\Entity\ValueObject;
 
 use App\Application\Sonata\MediaBundle\Entity\Media;
 use Doctrine\ORM\Mapping as ORM;
@@ -9,16 +9,10 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Class SeoInfo
  * @package App\Entity
- * @ORM\Entity()
+ * @ORM\Embeddable()
  */
 class SeoInfo
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(type="integer")
-     */
-    private $id;
 
     /**
      * @ORM\Column(type="string", length=1023, nullable=true)
@@ -29,14 +23,6 @@ class SeoInfo
      * @ORM\Column(type="string", length=1023, nullable=true)
      */
     private $description;
-
-    /**
-     * @return mixed
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 
 
     /**

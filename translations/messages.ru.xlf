@@ -13,6 +13,14 @@
         <source>Publish</source>
         <target>Опубликовать</target>
       </trans-unit>
+        <trans-unit id="0">
+            <source>Удалить</source>
+            <target>messages</target>
+        </trans-unit>
+      <trans-unit id="1">
+        <source>Удалить</source>
+        <target>messages</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

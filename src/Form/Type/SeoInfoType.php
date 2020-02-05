@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Form;
+namespace App\Form\Type;
 
-use App\Entity\SeoInfo;
+use App\Entity\ValueObject\SeoInfo;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

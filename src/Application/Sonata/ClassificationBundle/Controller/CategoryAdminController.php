@@ -4,6 +4,7 @@
 namespace App\Application\Sonata\ClassificationBundle\Controller;
 
 
+use App\Application\Sonata\ClassificationBundle\Entity\Category;
 use Symfony\Bridge\Twig\AppVariable;
 use Symfony\Bridge\Twig\Command\DebugCommand;
 use Symfony\Bridge\Twig\Extension\FormExtension;
@@ -58,6 +59,22 @@ class CategoryAdminController extends \Sonata\ClassificationBundle\Controller\Ca
             'current_context' => $currentContext,
         ]);
     }
+
+    protected function preCreate(Request $request, $object)
+    {
+        if(!$object instanceof Category)
+            throw new \InvalidArgumentException('Item should be instance of Category');
+
+        $parentCatId = $request->get('parent_cat');
+        if($request->get('parent_cat')){
+            $parentCat = $this->get('sonata.classification.manager.category')->find($parentCatId);
+            if($parentCat)
+                $object->setParent($parentCat, false);
+                $object->setCode($object->getParent()->getCode() . "_");
+        }
+        return parent::preCreate($request, $object);
+    }
+
 
     /**
      * @return Response
