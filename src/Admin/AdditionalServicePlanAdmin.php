@@ -14,5 +14,10 @@ class AdditionalServicePlanAdmin extends ProductAdmin
 
     }
 
+    protected function getRootCategoryCode()
+    {
+        return 'additional';
+    }
+
 
 }

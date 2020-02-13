@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AddressObjectRepository")
@@ -30,13 +31,41 @@ class AddressObject
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\InternetPlan", mappedBy="assignedAddressObjects").
-     * @JMS\Exclude()
+     * @JMS\Type("object_ids")
      */
     private $internetPlans;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\TVPlan", mappedBy="assignedAddressObjects")
+     * @JMS\Type("object_ids")
+     */
+    private $tvPlans;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\ConnectionType", inversedBy="addresses")
+     * @Assert\NotNull()
+     * @Assert\Valid()
+     */
+    private $connectionType;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $address;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\PricingType", inversedBy="addresses")
+     */
+    private $pricingType;
+
+
 
     public function __construct()
     {
         $this->internetPlans = new ArrayCollection();
+        $this->tvPlans = new ArrayCollection();
+        $this->connectionType = new ConnectionType();
+        $this->devices = new ArrayCollection();
     }
 
 
@@ -71,7 +100,6 @@ class AddressObject
     }
 
     /**
-     * @JMS\VirtualProperty()
      * @JMS\Groups(groups={"calculator"})
      */
     public function getInternetPlansIds()
@@ -103,4 +131,74 @@ class AddressObject
 
         return $this;
     }
+
+    /**
+     * @return Collection|TVPlan[]
+     */
+    public function getTvPlans(): Collection
+    {
+        return $this->tvPlans;
+    }
+
+    public function addTvPlan(TVPlan $tvPlan): self
+    {
+        if (!$this->tvPlans->contains($tvPlan)) {
+            $this->tvPlans[] = $tvPlan;
+        }
+
+        return $this;
+    }
+
+    public function removeTvPlan(TVPlan $tvPlan): self
+    {
+        if ($this->tvPlans->contains($tvPlan)) {
+            $this->tvPlans->removeElement($tvPlan);
+        }
+
+        return $this;
+    }
+
+    public function getConnectionType(): ?ConnectionType
+    {
+        return $this->connectionType;
+    }
+
+    public function setConnectionType(?ConnectionType $connectionType): self
+    {
+        $this->connectionType = $connectionType;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * @param mixed $address
+     */
+    public function setAddress($address): void
+    {
+        $this->address = $address;
+    }
+
+    public function getPricingType(): ?PricingType
+    {
+        return $this->pricingType;
+    }
+
+    public function setPricingType(?PricingType $pricingType): self
+    {
+        $this->pricingType = $pricingType;
+
+        return $this;
+    }
+
+
+
+
 }

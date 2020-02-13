@@ -12,6 +12,9 @@ sonata_admin:
                     - app.admin.internet
                     - app.admin.additional_service
                     - app.admin.address_object
+                    - app.admin.devices
+                    - app.admin.connection_type
+                    - app.admin.pricing_type
                     -
                         route: admin_sonata_classification_category_tree
                         label: "Категории"
@@ -35,6 +38,8 @@ sonata_admin:
             # DateTimePicker JS
             - bundles/sonatacore/vendor/moment/min/moment-with-locales.min.js
             - bundles/sonatacore/vendor/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js
+
+            - /js/admin/form/extension/select_all.js
 
 
         extra_stylesheets:

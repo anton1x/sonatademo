@@ -29,12 +29,6 @@ services:
     # please note that last definitions always *replace* previous ones
 
 
-    app.admin.product_admin:
-        class: App\Admin\ProductAdmin
-        arguments: [~, App\Entity\Product,~]
-        tags:
-            - { name: sonata.admin, manager_type: orm, label: Продукт, group: Продукты }
-
     app.admin.internet:
         class: App\Admin\InternetAdmin
         arguments: [~, App\Entity\InternetPlan,~]
@@ -53,10 +47,17 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, label: Доп. Услуги, group: Продукты }
 
+    app.admin.devices:
+        class: App\Admin\DeviceAdmin
+        arguments: [~, App\Entity\Device,~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Устройства, group: Продукты }
+
 
     sonata_category_selector:
         class: App\Application\Sonata\ClassificationBundle\Form\Type\CategorySelectorType
         arguments: ['@sonata.classification.manager.category']
+        public: true
 
 
     app.admin.extension.seo_info_extension:
@@ -101,3 +102,17 @@ services:
         class: App\Serializer\CategorySerializationHandler
         tags:
             - { name: jms_serializer.handler, type: 'category_code', direction: serialization, format: json, method: serialize }
+
+    app.admin.connection_type:
+        class: App\Admin\ConnectionTypeAdmin
+        arguments: [~, App\Entity\ConnectionType, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: 'Типы подключения' }
+        public: true
+
+    app.admin.pricing_type:
+        class: App\Admin\PricingTypeAdmin
+        arguments: [~, App\Entity\PricingType, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: PricingType }
+        public: true

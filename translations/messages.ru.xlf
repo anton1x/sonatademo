@@ -21,6 +21,14 @@
         <source>Удалить</source>
         <target>messages</target>
       </trans-unit>
+        <trans-unit id="2">
+            <source>select_all</source>
+            <target>Выбрать все</target>
+        </trans-unit>
+      <trans-unit id="3">
+        <source>unselect_all</source>
+        <target>Снять выбор</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -16,6 +16,7 @@ class InternetPlan extends BaseProduct
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\AddressObject", inversedBy="internetPlans")
      * @JMS\Type("object_ids")
+     * @JMS\Exclude()
      */
     private $assignedAddressObjects;
 
@@ -23,6 +24,12 @@ class InternetPlan extends BaseProduct
      * @ORM\Column(type="integer")
      */
     private $speed = 0;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\PricingType", inversedBy="internetPlans")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $pricingType;
 
     public function __construct()
     {
@@ -69,4 +76,26 @@ class InternetPlan extends BaseProduct
 
         return $this;
     }
+
+    /**
+     * @JMS\VirtualProperty(name="scale_title")
+     */
+    public function getScaleTitle()
+    {
+        return sprintf('%d мбит/c', $this->getSpeed());
+    }
+
+    public function getPricingType(): ?PricingType
+    {
+        return $this->pricingType;
+    }
+
+    public function setPricingType(?PricingType $pricingType): self
+    {
+        $this->pricingType = $pricingType;
+
+        return $this;
+    }
+
+
 }

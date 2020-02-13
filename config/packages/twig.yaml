@@ -6,3 +6,4 @@ twig:
         - '@SonataMedia/Form/media_widgets.html.twig'
         - '@SonataFormatter/Form/formatter.html.twig'
         - '@SonataCore/Form/datepicker.html.twig'
+        - 'admin/widgets/custom_widgets.html.twig'

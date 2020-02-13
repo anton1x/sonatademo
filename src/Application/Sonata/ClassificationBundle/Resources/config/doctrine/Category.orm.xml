@@ -11,7 +11,7 @@
     <entity
         name="App\Application\Sonata\ClassificationBundle\Entity\Category"
         table="classification__category"
-        repository-class="Doctrine\ORM\EntityRepository">
+        repository-class="App\Repository\CategoryRepository">
 
         <id name="id" type="integer" column="id">
             <generator strategy="AUTO"/>

@@ -35,10 +35,14 @@ class ProductsController extends AbstractController
      */
     public function testAction(SerializerInterface $serializer)
     {
-        $repo = $this->getDoctrine()->getRepository(BaseProduct::class);
-        $result = $serializer->serialize($repo->findAll([], ['type']), 'json');
+        $repoProduct = $this->getDoctrine()->getRepository(BaseProduct::class);
+        $repoAddress = $this->getDoctrine()->getRepository(AddressObject::class);
+        $result['addresses'] = $repoAddress->findAll();
+        $result['products'] = $repoProduct->getAllProductsGroupedByCategory();
 
-        return new Response($result, Response::HTTP_OK, [
+        $resultSerialized = $serializer->serialize($result, 'json');
+
+        return new Response($resultSerialized, Response::HTTP_OK, [
             'Content-Type' => 'application/json'
         ]);
     }

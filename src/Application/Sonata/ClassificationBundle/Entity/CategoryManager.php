@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Application\Sonata\ClassificationBundle\Entity;
 
+use App\Repository\CategoryRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\ClassificationBundle\Model\ContextInterface;
@@ -71,6 +72,33 @@ class CategoryManager extends BaseCategoryManager
         }
 
         $this->categories[$context->getId()] = $rootCategories;
+    }
+
+    public function loadCategoriesForAdminForm($context)
+    {
+        /**
+         * @var $repo CategoryRepository
+         */
+        $repo = $this->getRepository();
+
+        return $repo->getQueryBuilderForFilterCategoryByContext($context)
+            ->addOrderBy('parent.id')
+            ->getQuery()->execute();
+    }
+
+    public function loadChildrenCategoriesByParentCode($code, $context)
+    {
+        $repo = $this->getRepository();
+
+        $item = $repo->findOneBy([
+            'code' => $code,
+            'context' => $context,
+        ]);
+
+        if($item)
+            return $item->getChildren();
+
+        return [];
     }
 
 }

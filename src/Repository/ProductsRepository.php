@@ -5,6 +5,7 @@ namespace App\Repository;
 
 
 use App\Application\Sonata\ClassificationBundle\Entity\Category;
+use App\Entity\BaseProduct;
 use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
@@ -19,20 +20,48 @@ use Doctrine\ORM\Query\Expr\Join;
  */
 class ProductsRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(ManagerRegistry $registry, $class = null)
     {
-        parent::__construct($registry, Product::class);
+        if(null === $class){
+            parent::__construct($registry, BaseProduct::class);
+            return;
+        }
+        parent::__construct($registry, $class);
     }
 
-    public function getProductsBySlugPath($slugPath)
+    public function getAllProductsGroupedByCategory()
+    {
+        $iterator = $this->createQueryBuilder('p')
+            ->select('p')
+            ->leftJoin('p.category', 'category')
+            ->orderBy("category.id")
+            ->getQuery()
+            ->iterate();
+
+        $result = [];
+
+        foreach ($iterator as $key => $row) {
+            /**
+             * @var $productItem BaseProduct
+             */
+            $productItem = $row [0];
+            $result [$productItem->getCategory()->getCode()] [$productItem->getId()] = $productItem;
+        }
+
+
+        return $result;
+    }
+
+    public function createQueryBuilderFindByCategoryCode()
     {
         return $this->createQueryBuilder('p')
             ->select('p')
-            ->where('c.slugPath = :slugPath')
-            ->join(Category::class, 'c', Join::WITH, 'p.category = c')
-            ->setParameter('slugPath', $slugPath)
-            ->getQuery()
-            ->execute();
+            ->join('p.category', 'category')
+            ->join('category.parent', 'category_parent')
+            ->andWhere('category_parent.code = :code')
+            ->orderBy('p.category,p.sort')
+        ;
     }
+
 
 }

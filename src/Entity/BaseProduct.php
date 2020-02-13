@@ -3,6 +3,7 @@
 
 namespace App\Entity;
 
+use App\Application\Sonata\ClassificationBundle\Entity\Category;
 use App\Application\Sonata\MediaBundle\Entity\Media;
 use App\Entity\ValueObject\Price;
 use App\Entity\ValueObject\SeoInfo;
@@ -11,14 +12,15 @@ use JMS\Serializer\Annotation as JMS;
 
 /**
  * Class Product
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="App\Repository\ProductsRepository")
  * @ORM\InheritanceType(value="SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="type", type="string")
  * @ORM\DiscriminatorMap(
  *     {
  *     InternetPlan::type = "InternetPlan",
  *     TVPlan::type = "TVPlan",
- *     AdditionalServicePlan::type = "AdditionalServicePlan"
+ *     AdditionalServicePlan::type = "AdditionalServicePlan",
+ *     Device::type = "Device"
  *     }
  *    )
  */
@@ -44,13 +46,6 @@ abstract class BaseProduct
      */
     private $description;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Application\Sonata\MediaBundle\Entity\Media", fetch="LAZY", cascade={"persist"})
-     * @JMS\Groups({"calculator", "sonata_api_read"})
-     * @JMS\Type("media_links")
-     */
-    private $image;
-
 
 
     /**
@@ -68,12 +63,18 @@ abstract class BaseProduct
      */
     private $price;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $sort = 0;
+
+
 
     public function __construct()
     {
-        $this->image = new Media();
         $this->seoInfo = new SeoInfo();
         $this->price = new Price();
+        $this->category = new Category();
     }
 
     /**
@@ -118,23 +119,7 @@ abstract class BaseProduct
     }
 
     /**
-     * @return Media
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    /**
-     * @param Media $image
-     */
-    public function setImage($image): void
-    {
-        $this->image = $image;
-    }
-
-    /**
-     * @return mixed
+     * @return Category|null
      */
     public function getCategory()
     {
@@ -142,9 +127,9 @@ abstract class BaseProduct
     }
 
     /**
-     * @param mixed $category
+     * @param Category $category
      */
-    public function setCategory($category): void
+    public function setCategory(?Category $category): void
     {
         $this->category = $category;
     }
@@ -168,10 +153,21 @@ abstract class BaseProduct
 
 
 
-
     public function __toString():string
     {
         return $this->title;
+    }
+
+    public function getSort(): ?int
+    {
+        return $this->sort;
+    }
+
+    public function setSort(int $sort): self
+    {
+        $this->sort = $sort;
+
+        return $this;
     }
 
 

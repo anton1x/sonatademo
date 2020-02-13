@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace App\Admin;
 
+use App\Entity\ConnectionType;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\AdminBundle\Show\ShowMapper;
 
 final class AddressObjectAdmin extends AbstractAdmin
@@ -38,14 +40,11 @@ final class AddressObjectAdmin extends AbstractAdmin
     {
         $formMapper
             ->add('title')
+            ->add('address')
+            ->add('connectionType', ModelListType::class, [
+                'by_reference' => false,
+            ])
             ;
     }
 
-    protected function configureShowFields(ShowMapper $showMapper): void
-    {
-        $showMapper
-            ->add('id')
-            ->add('title')
-            ;
-    }
 }
