@@ -3,15 +3,13 @@
 
 namespace App\Admin;
 
-
-use App\Application\Sonata\ClassificationBundle\Entity\Category;
-use App\Entity\AddressObject;
 use App\Entity\InternetPlan;
 use App\Entity\PricingType;
-use App\Form\DataTransformer\HiddenEntityTransformer;
+use Sonata\AdminBundle\Datagrid\Datagrid;
+use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 class InternetAdmin extends ProductAdmin
@@ -23,9 +21,6 @@ class InternetAdmin extends ProductAdmin
         $formMapper->tab('Основное')
                 ->with('Product')
                     ->remove('category')
-                    ->add('category', HiddenType::class, [
-                        //'data' => $this->getCategoryManager()->findOneBy(['code' => 'internet_basic']),
-                    ])
                 ->end()
                 ->with('Интернет', ['class' => 'col-md-6'])
                     ->add('speed', IntegerType::class, [
@@ -44,7 +39,6 @@ class InternetAdmin extends ProductAdmin
                     ->add('pricingType', EntityType::class, [
                         'class' => PricingType::class,
                         'choice_label' => function ($item) {
-                            dump($item);
                             return $item->getName();
                         },
                     ])
@@ -52,19 +46,40 @@ class InternetAdmin extends ProductAdmin
             ->end()
         ;
 
-        dump($this->getSubject()->getPricingType());
 
-        $formMapper->get('category')
-            ->addModelTransformer(
-                new HiddenEntityTransformer(
-                    $this->getConfigurationPool()->getContainer()->get('doctrine.orm.entity_manager'),
-                    Category::class,
-                    'id'
-                )
-            )
-        ;
     }
 
+    protected function configureListFields(ListMapper $listMapper)
+    {
+
+        $listMapper
+            ->add('id')
+            ->addIdentifier('title')
+            ->add('pricing_type', null, [
+                'label' => 'Ценовая категория',
+            ])
+            ->add('_action', null, [
+                'actions' => [
+                    'edit' => [],
+                    'delete' => [],
+                ],
+                'label' => 'Действия',
+            ]);
+        ;
+
+    }
+
+    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+    {
+        $datagridMapper
+            ->add('title')
+            ->add('pricingType')
+            ;
+    }
+
+    /*
+     * Set default category for internet plan
+     */
     public function prePersist($object)
     {
         /**

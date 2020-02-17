@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PricingTypeRepository")
@@ -25,11 +26,13 @@ class PricingType
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\AddressObject", mappedBy="pricingType")
+     * @JMS\Exclude()
      */
     private $addresses;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\InternetPlan", mappedBy="pricingType")
+     * @JMS\Type("object_ids")
      */
     private $internetPlans;
 

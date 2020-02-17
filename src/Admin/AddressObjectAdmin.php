@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace App\Admin;
 
 use App\Entity\ConnectionType;
+use App\Entity\PricingType;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Form\Type\ModelListType;
-use Sonata\AdminBundle\Show\ShowMapper;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 final class AddressObjectAdmin extends AbstractAdmin
 {
@@ -20,6 +20,8 @@ final class AddressObjectAdmin extends AbstractAdmin
         $datagridMapper
             ->add('id')
             ->add('title')
+            ->add('pricingType')
+            ->add('connectionType')
             ;
     }
 
@@ -41,8 +43,14 @@ final class AddressObjectAdmin extends AbstractAdmin
         $formMapper
             ->add('title')
             ->add('address')
-            ->add('connectionType', ModelListType::class, [
-                'by_reference' => false,
+            ->add('connectionType', EntityType::class, [
+                'class' => ConnectionType::class,
+                'label' => 'Тип подключения',
+                //'by_reference' => false,
+            ])
+            ->add('pricingType', EntityType::class, [
+                'class' => PricingType::class,
+                'label' => 'Ценовая категория',
             ])
             ;
     }

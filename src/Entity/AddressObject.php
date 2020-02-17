@@ -6,10 +6,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AddressObjectRepository")
+ * @UniqueEntity(fields={"title"})
  */
 class AddressObject
 {
@@ -29,11 +31,6 @@ class AddressObject
      */
     private $title;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\InternetPlan", mappedBy="assignedAddressObjects").
-     * @JMS\Type("object_ids")
-     */
-    private $internetPlans;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\TVPlan", mappedBy="assignedAddressObjects")
@@ -55,6 +52,7 @@ class AddressObject
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\PricingType", inversedBy="addresses")
+     * @JMS\Exclude()
      */
     private $pricingType;
 
@@ -62,10 +60,8 @@ class AddressObject
 
     public function __construct()
     {
-        $this->internetPlans = new ArrayCollection();
         $this->tvPlans = new ArrayCollection();
         $this->connectionType = new ConnectionType();
-        $this->devices = new ArrayCollection();
     }
 
 
@@ -92,44 +88,13 @@ class AddressObject
     }
 
     /**
-     * @return Collection|InternetPlan[]
+     * @return InternetPlan[]|Collection
+     * @JMS\VirtualProperty(name="internet_plans")
+     * @JMS\Type("object_ids")
      */
-    public function getInternetPlans(): Collection
+    public function getInternetPlans()
     {
-        return $this->internetPlans;
-    }
-
-    /**
-     * @JMS\Groups(groups={"calculator"})
-     */
-    public function getInternetPlansIds()
-    {
-        $result = [];
-        $this->getInternetPlans()->forAll(function ($key, $item) use(&$result){
-            array_push($result, $item->getId());
-        });
-
-        return $result;
-    }
-
-    public function addInternetPlan(InternetPlan $internetPlan): self
-    {
-        if (!$this->internetPlans->contains($internetPlan)) {
-            $this->internetPlans[] = $internetPlan;
-            $internetPlan->addAssignedAddressObject($this);
-        }
-
-        return $this;
-    }
-
-    public function removeInternetPlan(InternetPlan $internetPlan): self
-    {
-        if ($this->internetPlans->contains($internetPlan)) {
-            $this->internetPlans->removeElement($internetPlan);
-            $internetPlan->removeAssignedAddressObject($this);
-        }
-
-        return $this;
+        return $this->getPricingType()->getInternetPlans();
     }
 
     /**

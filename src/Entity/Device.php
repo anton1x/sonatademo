@@ -28,6 +28,7 @@ class Device extends BaseProduct
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\ConnectionType", mappedBy="devices")
+     * @JMS\Exclude()
      */
     private $connectionTypes;
 

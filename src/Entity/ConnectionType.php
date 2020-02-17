@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ConnectionTypeRepository")
@@ -28,11 +29,13 @@ class ConnectionType
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Device", inversedBy="connectionTypes")
+     * @JMS\Type("object_ids")
      */
     private $devices;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\AddressObject", mappedBy="connectionType")
+     * @JMS\Exclude()
      */
     private $addresses;
 
