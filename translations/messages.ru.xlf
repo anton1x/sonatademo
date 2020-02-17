@@ -29,6 +29,42 @@
         <source>unselect_all</source>
         <target>Снять выбор</target>
       </trans-unit>
+      <trans-unit id="Title">
+        <source>Title</source>
+        <target>Название</target>
+      </trans-unit>
+      <trans-unit id="Address">
+        <source>Address</source>
+        <target>Адрес</target>
+      </trans-unit>
+      <trans-unit id="Address Object List">
+        <source>Address Object List</source>
+        <target>Список адресов</target>
+      </trans-unit>
+      <trans-unit id="Action">
+        <source>Action</source>
+        <target>Действия</target>
+      </trans-unit>
+      <trans-unit id="Category">
+        <source>Category</source>
+        <target>Категория</target>
+      </trans-unit>
+      <trans-unit id="Additional Service Plan List">
+        <source>Additional Service Plan List</source>
+        <target>Список доп. услуг</target>
+      </trans-unit>
+      <trans-unit id="Internet Plan List">
+        <source>Internet Plan List</source>
+        <target>Список интернет-тарифов</target>
+      </trans-unit>
+      <trans-unit id="T V Plan List">
+        <source>T V Plan List</source>
+        <target>Список ТВ-тарифов</target>
+      </trans-unit>
+      <trans-unit id="Pricing Type">
+        <source>Pricing Type</source>
+        <target>Ценовая группа</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

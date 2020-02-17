@@ -1,5 +1,7 @@
 sonata_admin:
-    title: 'Sonata Admin'
+    title: 'Росфондом'
+    title_logo: images/rfd_logo.png
+    show_mosaic_button: false
     dashboard:
         blocks:
            # - { type: sonata.admin.block.admin_list, position: left }
@@ -40,6 +42,7 @@ sonata_admin:
             - bundles/sonatacore/vendor/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js
 
             - /js/admin/form/extension/select_all.js
+            - /build/admin.js
 
 
         extra_stylesheets:
@@ -49,6 +52,7 @@ sonata_admin:
             - bundles/sonataformatter/markitup/sets/html/style.css
             - bundles/sonataformatter/markitup/sets/textile/style.css
             - bundles/sonatacore/vendor/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css
+            - /build/admin.css
 
     extensions:
         app.admin.extension.seo_info_extension:

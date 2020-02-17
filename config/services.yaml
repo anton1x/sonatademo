@@ -114,5 +114,5 @@ services:
         class: App\Admin\PricingTypeAdmin
         arguments: [~, App\Entity\PricingType, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: PricingType }
+            - { name: sonata.admin, manager_type: orm, group: admin, label: 'Ценовые категории' }
         public: true
