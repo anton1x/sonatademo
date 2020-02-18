@@ -5,6 +5,7 @@ namespace App\Admin;
 
 use App\Entity\InternetPlan;
 use App\Entity\PricingType;
+use App\Entity\ValueObject\Price;
 use Sonata\AdminBundle\Datagrid\Datagrid;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -57,6 +58,10 @@ class InternetAdmin extends ProductAdmin
             ->addIdentifier('title')
             ->add('pricing_type', null, [
                 'label' => 'Ценовая категория',
+            ])
+            ->add('price.monthlyPrice', 'currency', [
+                'label' => 'Цена ежемесячная',
+                'currency' => Price::currency,
             ])
             ->add('_action', null, [
                 'actions' => [

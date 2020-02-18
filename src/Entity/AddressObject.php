@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AddressObjectRepository")
- * @UniqueEntity(fields={"title"})
+ * @UniqueEntity(fields={"title", "address"})
  */
 class AddressObject
 {
@@ -61,7 +61,6 @@ class AddressObject
     public function __construct()
     {
         $this->tvPlans = new ArrayCollection();
-        $this->connectionType = new ConnectionType();
     }
 
 

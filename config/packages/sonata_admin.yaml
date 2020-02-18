@@ -9,12 +9,14 @@ sonata_admin:
             География: ~
             Продукты:
                 keep_open: true
+                label: Калькулятор
+                icon: '<i class="fa fa-calculator"></i>'
                 items:
-                    - app.admin.tvplan
                     - app.admin.internet
+                    - app.admin.tvplan
                     - app.admin.additional_service
-                    - app.admin.address_object
                     - app.admin.devices
+                    - app.admin.address_object
                     - app.admin.connection_type
                     - app.admin.pricing_type
                     -
@@ -23,6 +25,7 @@ sonata_admin:
                         #admin: sonata.classification.admin.category
                         route_params: { context: products, hide_context: true }
             Новости:
+#                icon: '<i class="fa fa-newspaper"></i>'
                 items:
                     - admin.news_item
 

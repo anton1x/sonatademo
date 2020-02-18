@@ -90,15 +90,23 @@ class CategoryManager extends BaseCategoryManager
     {
         $repo = $this->getRepository();
 
-        $item = $repo->findOneBy([
+        $result = [];
+
+        $items = $repo->findBy([
             'code' => $code,
             'context' => $context,
         ]);
 
-        if($item)
-            return $item->getChildren();
+        if (count($items) > 0) {
+            foreach ($items as $item) {
+                $children = $item->getChildren()->toArray();
+                if(count($children) > 0)
+                    $result =  array_merge($result, $children);
+            }
+        }
 
-        return [];
+
+        return $result;
     }
 
 }

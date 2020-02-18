@@ -25,6 +25,8 @@ class Price
      */
     private $monthlyPrice = 0;
 
+    public const currency = '₽';
+
     /**
      * @return mixed
      */
@@ -55,6 +57,11 @@ class Price
     public function setMonthlyPrice($monthlyPrice): void
     {
         $this->monthlyPrice = $monthlyPrice;
+    }
+
+    public function getFormattedMonthlyPrice()
+    {
+        return sprintf('%d %s', $this->getMonthlyPrice(), self::currency);
     }
 
 

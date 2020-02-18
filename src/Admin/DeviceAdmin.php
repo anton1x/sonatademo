@@ -29,6 +29,11 @@ class DeviceAdmin extends ProductAdmin
 
     protected function getRootCategoryCode()
     {
-        return ['devices_tv', 'devices_additional'];
+        return [
+            'devices_internet',
+            'devices_tv',
+            'devices_additional_phone',
+            'devices_additional_vision'
+        ];
     }
 }

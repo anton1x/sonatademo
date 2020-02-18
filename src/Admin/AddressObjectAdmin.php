@@ -30,6 +30,15 @@ final class AddressObjectAdmin extends AbstractAdmin
         $listMapper
             ->add('id')
             ->addIdentifier('title')
+            ->add('address', null, [
+                'label' => 'Адрес',
+            ])
+            ->add('pricingType.name', null, [
+                'sortable' => true,
+            ])
+            ->add('connectionType.name', null, [
+                'sortable' => true,
+            ])
             ->add('_action', null, [
                 'actions' => [
                     'edit' => [],

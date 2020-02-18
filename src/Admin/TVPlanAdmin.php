@@ -5,7 +5,6 @@ namespace App\Admin;
 
 use App\Entity\AddressObject;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\MediaBundle\Form\Type\MediaType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -22,7 +21,8 @@ class TVPlanAdmin extends ProductAdmin
                         'label' => 'Количество каналов'
                     ])
                     ->add('includeTheatres', CheckboxType::class, [
-                        'label' => 'Включает online-кинотеатры'
+                        'label' => 'Включает online-кинотеатры',
+                        'required' => false,
                     ])
                 ->end()
                 ->with('Адреса', ['class' => 'col-md-6'])

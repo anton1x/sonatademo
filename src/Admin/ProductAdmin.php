@@ -43,32 +43,32 @@ abstract class ProductAdmin extends AbstractAdmin
         $classInterfaces = class_implements($this->getClass());
         $formMapper
             ->tab('Основное')
-                ->with('Product', ['class' => 'col-md-6'])
+                ->with('Product', [
+                    'class' => 'col-md-6',
+                    'label' => 'Основное',
+                ])
                     ->add('title', TextType::class)
-                    ->add('category', CategorySelectorType::class, [
-                        'class' => Category::class,
-                        'required' => true,
-                        'by_reference' => false,
-                        'context' =>  $this->getConfigurationPool()->getContainer()->get('sonata.classification.manager.context')->find($this->context),
-                        'model_manager' => $this->getConfigurationPool()->getAdminByAdminCode('sonata.classification.admin.category')->getModelManager(),
-                        'category' => new Category(),
-                        'btn_add' => false,
-                    ])
-
-//                    ->add('category', ChoiceType::class, [
-//                        'choices' => $this->getConfigurationPool()
-//                            ->getContainer()
-//                            ->get('sonata.classification.manager.category')
-//                            ->findOneBy(['code' => 'internet'])
-//                            ->getChildren(),
-//                        'choice_label' => function (Category $category) {
-//                            return $category->getName();
-//                        },
-//                        'group_by' => function(Category $category, $key, $value) {
-//                            // randomly assign things into 2 groups
-//                            return $category->getParent()->getName();
-//                        },
+//                    ->add('category', CategorySelectorType::class, [
+//                        'class' => Category::class,
+//                        'required' => true,
+//                        'by_reference' => false,
+//                        'context' =>  $this->getConfigurationPool()->getContainer()->get('sonata.classification.manager.context')->find($this->context),
+//                        'model_manager' => $this->getConfigurationPool()->getAdminByAdminCode('sonata.classification.admin.category')->getModelManager(),
+//                        'category' => new Category(),
+//                        'btn_add' => false,
 //                    ])
+
+                    ->add('category', ChoiceType::class, [
+                        'choices' => $this
+                            ->getCategoryManager()
+                            ->loadChildrenCategoriesByParentCode($this->getRootCategoryCode(), $this->context),
+                        'choice_label' => function (Category $category) {
+                            return $category->getName();
+                        },
+                        'group_by' => function(Category $category, $key, $value) {
+                            return $category->getParent()->getName();
+                        },
+                    ])
 
                     ->add('description', SimpleFormatterType::class, [
                         'format' => 'richhtml',
@@ -133,6 +133,10 @@ abstract class ProductAdmin extends AbstractAdmin
             ]);
     }
 
+
+    /**
+     * @return array|string
+     */
     abstract protected function getRootCategoryCode();
 
 

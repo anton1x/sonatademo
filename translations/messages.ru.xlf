@@ -65,6 +65,71 @@
         <source>Pricing Type</source>
         <target>Ценовая группа</target>
       </trans-unit>
+      <trans-unit id="Address Object Create">
+        <source>Address Object Create</source>
+        <target>Создать адрес подключения</target>
+      </trans-unit>
+      <trans-unit id="Connection Type">
+        <source>Connection Type</source>
+        <target>Тип подключения</target>
+      </trans-unit>
+      <trans-unit id="Connection Type Name">
+        <source>Connection Type Name</source>
+        <target>Тип подключения</target>
+      </trans-unit>
+      <trans-unit id="Pricing Type Name">
+        <source>Pricing Type Name</source>
+        <target>Ценовая группа</target>
+      </trans-unit>
+      <trans-unit id="Description">
+        <source>Description</source>
+        <target>Описание</target>
+      </trans-unit>
+      <trans-unit id="Device List">
+        <source>Device List</source>
+        <target>Список устройств</target>
+      </trans-unit>
+      <trans-unit id="Device Create">
+        <source>Device Create</source>
+        <target>Создать устройство</target>
+      </trans-unit>
+      <trans-unit id="Image">
+        <source>Image</source>
+        <target>Картинка</target>
+      </trans-unit>
+      <trans-unit id="Additional Service Plan Create">
+        <source>Additional Service Plan Create</source>
+        <target>Создать доп. услугу</target>
+      </trans-unit>
+      <trans-unit id="Pricing Type List">
+        <source>Pricing Type List</source>
+        <target>Список ценовых категорий</target>
+      </trans-unit>
+      <trans-unit id="Pricing Type Create">
+        <source>Pricing Type Create</source>
+        <target>Создать ценовую категорию</target>
+      </trans-unit>
+      <trans-unit id="Name">
+        <source>Name</source>
+        <target>Наименование</target>
+      </trans-unit>
+      <trans-unit id="Devices">
+        <source>Devices</source>
+        <target>Устройства</target>
+      </trans-unit>
+      <trans-unit id="Addresses">
+        <source>Addresses</source>
+        <target>Адреса</target>
+      </trans-unit>
+      <trans-unit id="Connection Type List">
+        <source>Connection Type List</source>
+        <target>Список типов подключения</target>
+      </trans-unit>
+      <trans-unit id="Connection Type Create">
+        <source>Connection Type Create</source>
+        <target>Создать тип подключения</target>
+      </trans-unit>
+
     </body>
   </file>
 </xliff>
