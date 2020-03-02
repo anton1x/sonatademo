@@ -1,0 +1,218 @@
+html {
+    overflow-y:scroll;
+}
+
+html.boxed {
+    overflow:hidden !important;
+}
+
+.box_bluring.animate {
+    transition: filter 0.1s;
+}
+
+.box_bluring.go {
+    filter: blur(5px);
+}
+
+body.lock_position {
+    height:100%;
+    overflow:hidden;
+    width:100%;
+    position:fixed;
+}
+
+#all.boxed {
+    overflow-y:scroll;
+}
+
+#boxes_container_bg {
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:10000;
+    background:@color_1;
+    opacity:0.8;
+
+    &.touch_device {
+        opacity:1;
+    }
+
+    &.fade-enter{
+        opacity: 0;
+    }
+    
+    &.fade-enter-active {
+        transition: opacity 0.3s;
+    }
+    
+    &.fade-leave-active{
+        transition: opacity 0.3s;
+    }
+    
+    &.fade-leave-to{
+        opacity: 0;
+    }
+}
+
+
+.api_box_wrapper {
+    position:fixed;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	z-index:10001;
+	display:none;
+    overflow-y:scroll;
+    overflow-x:hidden;
+    -webkit-overflow-scrolling: touch;
+
+    > .table {
+        display:table;
+        width:100%;
+        table-layout:fixed;
+
+        > .td {
+            display:table-cell;
+            vertical-align:middle;
+            box-sizing: border-box;
+            padding:0;
+            font-size:0;
+            text-align:center;
+
+            > .container {
+                box-sizing: border-box;
+                display:inline-block;
+
+                > .box_item {
+                    font-size:14px;
+                    text-align:left;
+
+                    //Стандартная анимация появления окна
+
+                    &.fade-enter{
+                        opacity: 0.3;
+                        transform: scale(1) translateX(-500px);
+                    }
+                    
+                    &.fade-enter-active {
+                        transition: opacity 0.4s, transform 0.4s;
+                    }
+                    
+                    &.fade-leave-active{
+                        transition: opacity 0.4s, transform 0.4s;
+                    }
+
+                    &.fade-leave-to{
+                        opacity: 0;
+                        transform: scale(1.5) translateX(500px);
+                    }
+
+                    //Анимация загрузчика
+
+                    &.loader-enter{
+                        opacity: 0.3;
+                    }
+                    
+                    &.loader-enter-active {
+                        transition: opacity 0.1s;
+                    }
+                    
+                    &.loader-leave-active{
+                        transition: opacity 0.3s, transform 0.3s;
+                    }
+
+                    &.loader-leave-to{
+                        opacity: 0;
+                        transform: scale(3);
+                    }
+                    
+
+                    > .box_item_std_wrapper {
+                        background:#fff;
+                        border-radius:0px;
+                        box-shadow:0px 0px 20px rgba(0,0,0,0.2);
+
+                        > .top {
+                            display:flex;
+                            justify-content: flex-end;
+                            padding:0 0 2px 0;
+
+                            > .title {
+                                flex-basis:calc(100% - 60px);
+                                box-sizing: border-box;
+                                padding:20px 0 15px 60px;
+                                font-size:32px;
+                                line-height:36px;
+                                font-weight: 300;
+                                margin-top:32px;
+
+                                .sm-block({
+                                    font-size:24px;
+                                    line-height: 28px;
+                                    padding:10px 0 15px 40px;
+                                    flex-basis:calc(100% - 40px);
+                                });
+                            }
+
+                            > .close {
+                                flex-basis:60px;
+                                box-sizing: border-box;
+                                padding:20px 0 0 2px;
+                                
+                                .sm-block({
+                                    padding:10px 0 0 4px;
+                                    flex-basis:40px;
+                                });
+
+                                > a {
+                                    width:32px;
+                                    height:32px;
+                                    display:block;
+                                    cursor: pointer;
+                                    font-size:0;
+                                    background-position: center center;
+                                    background-repeat: no-repeat;
+                                    background-image:url(../images/awesome/close.svg);
+                                    background-size: 32px 32px;
+
+                                    @supports (mask-image: none) or (-webkit-mask-image: none) {
+                                        background-image:none;
+                                        background-color:@color_2;
+                                        mask-image: url(../images/awesome/close.svg);
+                                        -webkit-mask-image: url(../images/awesome/close.svg);
+                                        mask-size:32px 32px;
+                                        -webkit-mask-size:32px 32px;
+                                    }
+                                }
+                            }
+                        }
+
+                        > .content {
+                            padding:20px 60px 50px 60px;
+
+                            .sm-block({
+                                padding:10px 40px 30px 40px;
+                            });
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    &.not_touch_device {
+        > .table > .td {
+            height:100vh;
+        }
+    }
+
+    &.touch_device {
+        > .table > .td {
+            height: 100vh;
+            height:calc(var(--vh, 1vh) * 100);
+        }
+    }
+}
