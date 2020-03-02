@@ -14,4 +14,28 @@ class TextFunctions
         return sprintf($format, $number);
     }
 
+    public static function rusDate(\DateTime $date)
+    {
+        $months = [
+          1 => 'января',
+          2 => 'февраля',
+          3 => 'марта',
+          4 => 'апреля',
+          5 => 'мая',
+          6 => 'июня',
+          7 => 'июля',
+          8 => 'августа',
+          9 => 'сентября',
+          10 => 'октября',
+          11 => 'ноября',
+          12 => 'декабря'
+        ];
+
+        $day = $date->format('d');
+        $month = $months [$date->format('n')];
+        $year = $date->format('Y');
+
+        return sprintf('%d %s %d', $day, $month, $year);
+    }
+
 }

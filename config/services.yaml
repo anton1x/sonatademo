@@ -7,6 +7,24 @@ parameters:
     app.products.categories.context: products
     sonata.classification.manager.category.class: App\Application\Sonata\ClassificationBundle\Entity\CategoryManager
 
+    amocrm.cookie_path: '%kernel.project_dir%/var'
+    amocrm.login: '%env(AMO_LOGIN)%'
+    amocrm.password_hash: '%env(AMO_PASS)%'
+    amocrm.subdomain: '%env(AMO_SUBDOMAIN)%'
+
+    connection_order.mailing.from: ['antongaran@mail.ru']
+    connection_order.mailing.to: ['antongaran@mail.ru']
+
+    news.view.route: news_view
+    news.list.items_per_page: 1
+    news.root_category: news_news_offers
+    news.title: Новости и акции
+
+    blog.root_category: news_blog
+    blog.list.items_per_page: 1
+    blog.view.route: blog_view
+    google_recaptcha_site_key: '%env(GOOGLE_RECAPTCHA_SITE_KEY)%'
+    blog.title: Блог
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -25,31 +43,63 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
+    App\Controller\NewsController:
+        autoconfigure: false
+#        autowire: false
+
+    App\Service\AmoCRM\TonixAmoCrmClient:
+        arguments: ['%amocrm.login%', '%amocrm.password_hash%','%amocrm.subdomain%', '%amocrm.cookie_path%']
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    App\Service\ConnectionFormHandler:
+        calls:
+            - [ 'setOptions', [{ from: '%connection_order.mailing.from%', to: '%connection_order.mailing.to%' }]]
+
+    App\News\NewsItemTypeDetector:
+#        class: App\News\NewsItemTypeDetector
+        calls:
+            - ['addType', ['%news.root_category%', 'news']]
+            - ['addType', ['%blog.root_category%', 'blog']]
+
+
+    app.news.controller:
+        class: App\Controller\NewsController
+        arguments: ['news', '%news.title%']
+
+    app.blog.controller:
+        class: App\Controller\NewsController
+        arguments: ['blog', '%blog.title%']
+
+    App\EventListener\UrlAssigner:
+        tags:
+            -
+                name: 'doctrine.event_listener'
+                event: 'postLoad'
 
 
     app.admin.internet:
         class: App\Admin\InternetAdmin
-        arguments: [~, App\Entity\InternetPlan,~]
+        arguments: [~, App\Entity\InternetPlan, App\Admin\Controller\DefaultCRUDController]
         tags:
             - { name: sonata.admin, manager_type: orm, label: Интернет-тарифы, group: Продукты }
 
     app.admin.tvplan:
         class: App\Admin\TVPlanAdmin
-        arguments: [~, App\Entity\TVPlan,~]
+        arguments: [~, App\Entity\TVPlan, App\Admin\Controller\DefaultCRUDController]
         tags:
             - { name: sonata.admin, manager_type: orm, label: Тв-тарифы, group: Продукты }
 
     app.admin.additional_service:
         class: App\Admin\AdditionalServicePlanAdmin
-        arguments: [~, App\Entity\AdditionalServicePlan,~]
+        arguments: [~, App\Entity\AdditionalServicePlan, App\Admin\Controller\DefaultCRUDController]
         tags:
             - { name: sonata.admin, manager_type: orm, label: Доп. Услуги, group: Продукты }
 
     app.admin.devices:
         class: App\Admin\DeviceAdmin
-        arguments: [~, App\Entity\Device,~]
+        arguments: [~, App\Entity\Device, App\Admin\Controller\DefaultCRUDController]
         tags:
             - { name: sonata.admin, manager_type: orm, label: Устройства, group: Продукты }
 
@@ -87,11 +137,17 @@ services:
             - { name: sonata.admin, manager_type: orm, group: admin, label: "Адреса подключения" }
         public: true
 
-    app.serializer.media_handler:
+    app.serializer.media_handler_devices:
         class: App\Application\Sonata\MediaBundle\Serializer\MediaSerializationHandler
         tags:
-            - { name: jms_serializer.handler, type: 'media_links', direction: serialization, format: json, method: serializeMedia }
-        arguments: [ '@sonata.media.provider.image', '@sonata.media.provider.file' ]
+            - { name: jms_serializer.handler, type: 'media_links_devices', direction: serialization, format: json, method: serializeMedia }
+        arguments: [ '@sonata.media.provider.image', '@sonata.media.provider.file', 'devices', ['preview', 'reference'] ]
+
+    app.serializer.media_handler_news:
+        class: App\Application\Sonata\MediaBundle\Serializer\LinkMediaSerializationHandler
+        tags:
+            - { name: jms_serializer.handler, type: 'media_link_news', direction: serialization, format: json, method: serializeMedia }
+        arguments: ['@sonata.media.provider.image','news', 'preview']
 
     app.serializer.adress_object_id_handler:
         class: App\Serializer\ArrayIdsSerializationHandler
@@ -115,4 +171,37 @@ services:
         arguments: [~, App\Entity\PricingType, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, group: admin, label: 'Ценовые категории' }
+        public: true
+
+    app.admin.slide:
+        class: App\Admin\SlideAdmin
+        arguments: [~, App\Entity\Sliders\Slide, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: SlideAbstract }
+        public: true
+
+    app.admin.slide_gallery:
+        class: App\Admin\SlideGalleryAdmin
+        arguments: [~, App\Entity\Sliders\SlideGallery, ~]
+        calls:
+            - [addChild, ['@app.admin.slide', 'slideGallery']]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Слайдеры }
+        public: true
+
+    app.sonata.media.crop_resizer:
+        class: App\Application\Sonata\MediaBundle\Resizer\CropResizer
+        public: true
+        arguments:
+            - '@sonata.media.adapter.image.gd'
+            - '%sonata.media.resizer.square.adapter.mode%'
+            - '@sonata.media.metadata.proxy'
+        tags:
+            - 'sonata.media.resizer'
+
+    app.admin.developer:
+        class: App\Admin\DeveloperAdmin
+        arguments: [~, App\Entity\Developer, 'PixSortableBehaviorBundle:SortableAdmin']
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: 'Реализованные проекты' }
         public: true

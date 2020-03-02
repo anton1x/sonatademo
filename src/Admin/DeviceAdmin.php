@@ -4,6 +4,7 @@
 namespace App\Admin;
 
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\MediaBundle\Form\Type\MediaType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
@@ -18,7 +19,7 @@ class DeviceAdmin extends ProductAdmin
             ->tab('Основное')
                 ->with('Картинка', ['class' => 'col-md-6'])
                     ->add('image', MediaType::class, [
-                        'context' => 'default',
+                        'context' => 'devices',
                         'provider' => 'sonata.media.provider.image'
                     ])
                 ->end()

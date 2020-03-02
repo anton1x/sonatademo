@@ -129,7 +129,26 @@
         <source>Connection Type Create</source>
         <target>Создать тип подключения</target>
       </trans-unit>
-
+      <trans-unit id="4">
+          <source>clone</source>
+          <target>Клонировать</target>
+      </trans-unit>
+      <trans-unit id="html_slide">
+        <source>html_slide</source>
+        <target>HTML-слайд</target>
+      </trans-unit>
+      <trans-unit id="image_slide">
+        <source>image_slide</source>
+        <target>Картинка-слайд</target>
+      </trans-unit>
+      <trans-unit id="apartmentsCount">
+        <source>Apartments Count</source>
+        <target>Количество квартир</target>
+      </trans-unit>
+      <trans-unit id="builder">
+        <source>Builder</source>
+        <target>Застройщик</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

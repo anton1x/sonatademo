@@ -1,0 +1,380 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <div id="all">
+        <div id="header" class="box_bluring {{ header_options.classString }}">
+            <div id="header_top">
+                <div>
+                    <div class="menu" id="menu_top_wrapper">
+                        <a href="javascript://" class="mobile_burger" onclick="return projectApi.getUserInterface().toogleMenu();"><span>&nbsp;</span></a>
+                        <div class="list">
+                            <!--
+                            <div id="menu_top_list">
+                                <div><a href="javascript://" class="sel">Главная</a></div>
+                                <div><a href="javascript://"><span>Новости и акции</span></a></div>
+                                <div><a href="javascript://"><span>О нас</span></a></div>
+                                <div><a href="javascript://"><span>Блог</span></a></div>
+                            </div>
+                            -->
+                            {% block mobile_menu %}
+                                {{ knp_menu_render('mobile_main_menu', {depth: 1, template: 'menu/mobile_top_menu.html.twig'}) }}
+                            {% endblock mobile_menu %}
+                        </div>
+                    </div>
+                    <div class="logo"><a href="/">&nbsp;</a></div>
+                    <div class="left">
+                        <a href="tel:+74956459828" class="phone_connect" title="Подключение">
+                            <span class="icon"><span>&nbsp;</span></span>
+                            <span class="text">
+                  <span>Подключение:</span>
+                  +7 (495) 645-98-28
+                </span>
+                        </a>
+                        <a href="tel:+74995515331" class="phone_support" title="Техподдержка">
+                            <span class="icon"><span>&nbsp;</span></span>
+                            <span class="text">
+                  <span>Техподдержка:</span>
+                  +7 (499) 551-53-31
+                </span>
+                        </a>
+                    </div>
+                    <div class="right">
+                        <a href="javascript://" class="cabinet" title="Личный кабинет">
+                            <span class="icon"><span>&nbsp;</span></span>
+                            <span class="text">
+                  Личный кабинет
+                </span>
+                        </a>
+                        <a href="javascript://" class="pay" title="Оплатить">
+                            <span class="icon"><span>&nbsp;</span></span>
+                            <span class="text">
+                  Оплатить
+                </span>
+                        </a>
+                        <a href="javascript://" class="help" title="FAQ">
+                            <span class="icon"><span>&nbsp;</span></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div id="header_bottom">
+                <div id="header_content">
+                    <div>
+                        <div class="logo"><a href="/">&nbsp;</a></div>
+                        <div class="cnt">
+                            {% block top_menu %}
+                                {{ knp_menu_render('top_menu', {depth:1, template:'menu/mobile_top_menu.html.twig'}) }}
+                            {% endblock top_menu %}
+                            <!--
+                            <div class="menu">
+                                <div><a href="javascript://">Главная</a></div>
+                                <div><a href="javascript://">Новости и акции</a></div>
+                                <div><a class="sel">О нас</a></div>
+                                <div><a href="javascript://">Блог</a></div>
+                            </div>
+                            -->
+                            <div class="right">
+                                <div class="text">
+                                    <div class="b1">Оператор связи</div>
+                                    <div class="b2"><span>нашего</span> города</div>
+                                </div>
+                                <div class="button">
+                                    <a href="javascript://">Подключиться</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {% if header_options.options.banner %}
+                    <div id="header_image_wrapper">
+                        <div style="background-image:url({{ asset(header_options.options.banner) }});">
+                            <div class="button"><a href="javascript://">Подключиться</a></div>
+                        </div>
+                    </div>
+                {% endif %}
+
+
+                {% block sub_menu %}
+                    {% set selected = knp_menu_get_current_item('top_menu') %}
+                    {% set sub_menu = false %}
+                    {% if selected.parent is not null %}
+                        {% if selected.parent.name != 'root' %}
+                            {%- set sub_menu = knp_menu_get(selected.parent) %}
+                        {% elseif selected.parent.name == 'root' and selected.children %}
+                            {%- set sub_menu = knp_menu_get(selected) %}
+                        {% endif %}
+                    {% endif %}
+
+                    {% if sub_menu %}
+                        {{ knp_menu_render(sub_menu, {
+                            depth:1,
+                            template: 'menu/sub_menu.html.twig',
+                        }) }}
+                    {% endif %}
+                {% endblock sub_menu %}
+
+
+{#                <?php if (isset($header_params['sub_menu'])) { ?>#}
+{#                <div id="header_submenu_wrapper">#}
+{#                    <div>#}
+{#                        <div>#}
+{#                            <div>#}
+{#                                <?php foreach ($header_params['sub_menu'] as $sub_menu_id=>$sub_menu) { ?>#}
+{#                                <div><a href="javascript://" data-id="<?php echo $sub_menu_id; ?>"<?php if ($header_params['sub_menu_sel'] == $sub_menu_id) { echo 'class="sel"';} ?>sub_menu_sel><?php echo $sub_menu; ?></a></div>#}
+{#                                <?php } ?>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <?php } ?>#}
+
+                {% if header_options.options.slidered %}
+                    {% block main_slider %}
+                        {{ render_slider('main')|raw }}
+                    {% endblock %}
+
+                    <!--
+                <div id="header_slider_wrapper">
+                    <div>
+                        <items-slider-component class="vueInit">
+                            <div>
+                                <div class="std_header_slider_item_wrapper">
+                                    <div class="slide_1_b1">Внимание, акция!</div>
+                                    <div class="slide_1_b2">
+                                        <div class="left">
+                                            <div class="b1"><span class="orange">при подключении</span> <span class="bold">годового пакета</span> на любом тарифном плане до 20.01.20 <span class="orange">— скидка 20%</span></div>
+                                            <div class="b2">+ оптический Wi-Fi роутер в аренду за 100 р/мес.</div>
+                                        </div>
+                                        <div class="right"></div>
+                                    </div>
+                                    <div class="slide_1_b3"><a href="javascript://" class="button_1">Подробнее</a></div>
+                                </div>
+                            </div>
+                            <div class="absolute" data-min-height="300px" data-max-height="500px">
+                                <a href="https://yandex.ru/" target="_blank" class="absolute_image_link" style="background-image:url(/lion.jpg)">&nbsp;</a>
+                            </div>
+                            <div>
+                                <div class="std_header_slider_item_wrapper">
+                                    Слайд 3
+                                </div>
+                            </div>
+                            <div class="absolute" data-min-height="300px" data-max-height="500px">
+                                <a href="https://yandex.ru/" target="_blank" class="absolute_image_link" style="background-image:url(/tiger.jpg)">&nbsp;</a>
+                            </div>
+                            <div>
+                                <div class="std_header_slider_item_wrapper">
+                                    Слайд 5
+                                </div>
+                            </div>
+                            <div class="absolute" data-min-height="300px" data-max-height="500px">
+                                <a href="https://yandex.ru/" target="_blank" class="absolute_image_link" style="background-image:url(/cat.jpg)">&nbsp;</a>
+                            </div>
+                            <div>
+                                <div class="std_header_slider_item_wrapper">
+                                    Слайд 7
+                                </div>
+                            </div>
+                        </items-slider-component>
+
+                        <style type="text/css">
+
+                            /* Слайд #1 */
+                            .slide_1_b1 {
+                                font-weight:300;
+                                font-size:46px;
+                            }
+
+                            .slide_1_b2 {
+                                margin-top:30px;
+                                display:flex;
+                                justify-content:space-between;
+                            }
+
+                            .slide_1_b2 > .left {
+                                margin-right:20px;
+                                flex-basis:calc(100% - 232px);
+                            }
+
+                            .slide_1_b2 > .left > .b1 {
+                                font-size:24px;
+                                font-weight:300;
+                            }
+
+                            .slide_1_b2 > .left > .b1 .orange {
+                                font-weight:900;
+                                color:#f4811f;
+                            }
+
+                            .slide_1_b2 > .left > .b1 .bold {
+                                font-weight:900;
+                            }
+
+                            .slide_1_b2 > .left > .b2 {
+                                font-size:18px;
+                                font-weight:300;
+                                margin-top:20px;
+                            }
+
+                            .slide_1_b2 > .right {
+                                flex-shrink: 0;
+                                flex-basis:232px;
+                                height:128px;
+                                background:url({{ asset('/slide_1_img_1.png') }});
+                                background-size:232px 128px;
+                            }
+
+                            .slide_1_b3 {
+                                font-size:0;
+                                margin-top:30px;
+                            }
+
+                            @media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 140dpi) {
+                                .slide_1_b2 > .right {
+                                    background-image:url(/slide_1_img_1_x2.png);
+                                }
+                            }
+
+                            @media screen and (max-width: 750px){
+
+                                .slide_1_b1 {
+                                    font-size:26px;
+                                }
+
+                                .slide_1_b2 {
+                                    flex-wrap: wrap;
+                                    margin-top:10px;
+                                }
+
+                                .slide_1_b2 > .left {
+                                    flex-basis: 100%;
+                                    margin-right:0;
+                                }
+
+                                .slide_1_b2 > .left > .b1 {
+                                    font-size:18px;
+                                }
+
+                                .slide_1_b2 > .left > .b2 {
+                                    font-size:14px;
+                                    margin-top:10px;
+                                }
+
+                                .slide_1_b3 {
+                                    margin-top:20px;
+                                    text-align:center;
+                                }
+
+                                .slide_1_b2 > .right {
+                                    margin-top:20px;
+                                    flex-basis:143px;
+                                    height:79px;
+                                    background-size:143px 79px;
+                                    background-image:url(/slide_1_img_1_mobile_x2.png);
+                                }
+
+                                @media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 140dpi) {
+                                    .slide_1_b2 > .right {
+                                        background-image:url(/slide_1_img_1_mobile_x2.png);
+                                    }
+                                }
+                            }
+
+                        </style>
+                    </div>
+                </div>
+                -->
+                {% endif %}
+            </div>
+        </div>
+        <div id="content" class="box_bluring">
+            {% block inner %}
+            {% endblock inner %}
+            <div id="footer_spacer"></div>
+        </div>
+        <div id="footer" class="box_bluring">
+            <div>
+                <div class="left">
+                    <div class="logo"><a href="/">&nbsp;</a></div>
+                    <div class="copyrights">
+                        Росфондом — Оператор связи нашего города
+                        <br><br>
+                        &copy; 2020
+                    </div>
+                </div>
+                <div class="right">
+                    <div class="top">
+                        <div class="b1">
+                            <div class="icon"></div>
+                            <div class="title">Подключение:</div>
+                            <div class="val"><a href="tel:+74956459828">+7 (495) 645-98-28</a></div>
+                        </div>
+                        <div class="b2">
+                            <div class="icon"></div>
+                            <div class="title">Техподдержка:</div>
+                            <div class="val"><a href="tel:+74995515331">+7 (499) 551-53-31</a></div>
+                        </div>
+                        <div class="b3">
+                            <div class="icon"></div>
+                            <div class="title">Напишите нам:</div>
+                            <div class="val"><a href="mailto:rosfondom@rosfon.ru">rosfondom@rosfon.ru</a></div>
+                        </div>
+                    </div>
+                    <div class="bot">
+
+                        {% block bottom_menu %}
+                        {{ knp_menu_render('main_menu', {depth: 2}) }}
+                        {% endblock %}
+{#                        <div class="menu">#}
+{#                            <div>#}
+{#                                <div class="menu_title"><a href="javascript://"><span>Новости и акции</span></a></div>#}
+{#                            </div>#}
+{#                            <div>#}
+{#                                <div class="menu_title"><a href="javascript://" class="sel"><span>О нас</span></a></div>#}
+{#                                <div class="menu_subs">#}
+{#                                    <div><a href="javascript://">Документы</a></div>#}
+{#                                    <div><a href="javascript://">Реквизиты</a></div>#}
+{#                                    <div><a href="javascript://">Лицензии</a></div>#}
+{#                                    <div><a href="javascript://">Застройщикам и УК</a></div>#}
+{#                                    <div><a href="javascript://" class="sel">Контакты</a></div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <div>#}
+{#                                <div class="menu_title"><a href="javascript://"><span>Блог</span></a></div>#}
+{#                            </div>#}
+{#                            <div>#}
+{#                                <div class="menu_title"><a href="javascript://"><span>FAQ</span></a></div>#}
+{#                            </div>#}
+{#                            <div>#}
+{#                                <div class="icons"><a href="javascript://" class="vk">&nbsp;</a></div>#}
+{#                            </div>#}
+{#                        </div>#}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('main') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        window._initTplVars = {
+            selSubMenu : 0
+
+        };
+    </script>
+    <script type="text/javascript" src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" async onload="yMR.ready();"></script>
+    {{ encore_entry_script_tags('main') }}
+
+{% endblock %}

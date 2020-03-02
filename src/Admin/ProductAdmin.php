@@ -12,6 +12,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use App\Application\Sonata\ClassificationBundle\Form\Type\CategorySelectorType;
+use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\DoctrineORMAdminBundle\Filter\ChoiceFilter;
 use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
 use Sonata\DoctrineORMAdminBundle\Filter\ModelFilter;
@@ -90,6 +91,11 @@ abstract class ProductAdmin extends AbstractAdmin
 
     }
 
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection
+            ->add('clone', $this->getRouterIdParameter().'/clone');
+    }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
@@ -128,6 +134,7 @@ abstract class ProductAdmin extends AbstractAdmin
                 'actions' => [
                     'edit' => [],
                     'delete' => [],
+                    'clone' => [],
                 ],
                 'label' => 'Действия',
             ]);

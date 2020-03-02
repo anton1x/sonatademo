@@ -1,0 +1,16 @@
+{% for item in list %}
+    <div class="list_content_{{ context.type }}_item">
+        {% if useImages and item.image is not null %}
+            <div class="image"><a href="{{ path(context.routeCollection.view, { id: item.id }) }}" style="background-image:url({% path item.image, 'preview' %});">&nbsp;</a></div>
+        {% endif %}
+        <div class="date">{{ item.rusFormattedDate }}</div>
+        <div class="title"><a href="{{ path(context.routeCollection.view, { id: item.id }) }}">{{ item.title }}</a></div>
+        <div class="desc">
+            {% set preview = item.preview %}
+            {% if context.type == 'blog' %}
+                {% set preview = preview|truncate(200,true) %}
+            {% endif %}
+            {{ preview|raw }}
+        </div>
+    </div>
+{% endfor %}

@@ -1,0 +1,68 @@
+{% extends 'layout.html.twig' %}
+{% block inner %}
+    <div id="news_list_1">
+        <div class="title">{{ title }}</div>
+        <div id="news_list_1_content">
+            <div class="list_content_2">
+                {% for item in paginated.list %}
+                <div class="list_2_content_news_item">
+                    {% if item.image is not null %}
+                    <a href="{{ path(routes.view, { id: item.id }) }}" class="image"><span style="background-image:url({% path item.image, 'preview' %});">&nbsp;</span></a>
+                    {% endif %}
+                    <div class="date">{{ item.rusFormattedDate }}</div>
+                    <div class="title"><a href="{{ path(routes.view, { id: item.id }) }}">{{ item.title }}</a></div>
+                    <div class="desc">
+                        {{ item.preview|raw }}
+                    </div>
+                    <div class="but"><a href="{{ path(routes.view, { id: item.id }) }}" class="button_3">Читать далее</a></div>
+                </div>
+                {% endfor %}
+            </div>
+            {% set load_add_classes = [] %}
+            {% if not paginated.hasNextPage %}
+                {% set load_add_classes = load_add_classes|merge(['hide']) %}
+            {% endif %}
+            <div class="load_more {{ load_add_classes|join(' ') }}"><div><a href="javascript://" class="button_4">Показать еще</a></div></div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        window.jsReady(function() {
+
+            var list = new dynamicList({
+                nowPage : {{ paginated.currentPage }},
+                nextPage : {{ paginated.hasNextPage ? 'true' : 'false' }},
+                loadUrlPrefix : '{{ path(routes.list, {'_json': '1', 'page':''})|raw }}',
+                button : document.querySelector('#news_list_1_content > .load_more a'),
+                onLoad : function(data) {
+                    for (var i in data.list)
+                    {
+                        var item = document.createElement('div');
+                        item.setAttribute('class', 'list_2_content_news_item');
+                        var html = '';
+                        if (data.list[i].image != false)
+                        {
+                            html += '<a href="'+data.list[i].url+'" class="image"><span style="background-image:url('+data.list[i].image+');">&nbsp;</span></a>';
+                        }
+                        html += '<div class="date">'+data.list[i].date+'</div>\
+          <div class="title"><a href="'+data.list[i].url+'">'+data.list[i].name+'</a></div>\
+          <div class="desc">'+data.list[i].desc+'</div>\
+          <div class="but"><a href="'+data.list[i].url+'" class="button_3">Читать далее</a></div>';
+
+                        item.innerHTML = html;
+                        document.querySelector('#news_list_1_content > .list_content_2').appendChild(item);
+                    }
+                    if (data.nextPage == false)
+                    {
+                        document.querySelector('#news_list_1_content > .load_more').classList.add('hide');
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}

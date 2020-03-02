@@ -2,12 +2,18 @@
 
 namespace App\Entity;
 
+use App\Application\Sonata\ClassificationBundle\Entity\Category;
+use App\Application\Sonata\MediaBundle\Entity\Media;
 use App\Entity\ValueObject\SeoInfo;
+use App\Utils\TextFunctions;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\NewsItemRepository")
+ * @ORM\HasLifecycleCallbacks()
+ * @JMS\ExclusionPolicy("all")
  */
 class NewsItem implements SeoPoweredInterface, ActivatedInterface
 {
@@ -15,14 +21,54 @@ class NewsItem implements SeoPoweredInterface, ActivatedInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @JMS\Expose()
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank()
+     * @JMS\Expose()
+     * @JMS\SerializedName("name")
      */
     private $title;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Application\Sonata\MediaBundle\Entity\Media", fetch="LAZY", cascade={"persist"}, fetch="EAGER")
+     * @JMS\Expose()
+     * @JMS\Type("media_link_news")
+     */
+    private $image;
+
+    /**
+     * @JMS\Expose()
+     * @JMS\SerializedName("url")
+     */
+    private $systemURL;
+
+    /**
+     * @param mixed $systemURL
+     */
+    public function setSystemURL($systemURL): void
+    {
+        $this->systemURL = $systemURL;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImage(): ?Media
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param mixed $image
+     */
+    public function setImage(?Media $image): void
+    {
+        $this->image = $image;
+    }
 
     /**
      * @ORM\Column(type="datetime")
@@ -41,7 +87,6 @@ class NewsItem implements SeoPoweredInterface, ActivatedInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
-     * @Assert\NotNull()
      */
     private $author;
 
@@ -52,6 +97,8 @@ class NewsItem implements SeoPoweredInterface, ActivatedInterface
 
     /**
      * @ORM\Column(type="string", length=1023, nullable=true)
+     * @JMS\Expose()
+     * @JMS\SerializedName("desc")
      */
     private $preview;
 
@@ -64,6 +111,17 @@ class NewsItem implements SeoPoweredInterface, ActivatedInterface
      * @ORM\Column(type="boolean")
      */
     private $isActive;
+
+    /**
+     * @var Category $category
+     * @ORM\ManyToOne(targetEntity="App\Application\Sonata\ClassificationBundle\Entity\Category")
+     */
+    private $category;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $itemType;
 
 
     public function __construct()
@@ -152,6 +210,24 @@ class NewsItem implements SeoPoweredInterface, ActivatedInterface
     }
 
     /**
+     * @return Category
+     */
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param Category $category
+     */
+    public function setCategory(Category $category): void
+    {
+        $this->category = $category;
+    }
+
+
+
+    /**
      * @ORM\PrePersist()
      */
     public function prePersist()
@@ -205,5 +281,33 @@ class NewsItem implements SeoPoweredInterface, ActivatedInterface
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getItemType()
+    {
+        return $this->itemType;
+    }
+
+
+
+    /**
+     * @ORM\PreUpdate()
+     * @ORM\PrePersist()
+     */
+    public function assignItemType()
+    {
+        $this->itemType = $this->getCategory()->getContext()->getId();
+    }
+
+    /**
+     * @JMS\VirtualProperty()
+     * @JMS\SerializedName("date")
+     * @JMS\Expose()
+     */
+    public function getRusFormattedDate()
+    {
+        return TextFunctions::rusDate($this->getPublishedAt());
+    }
 
 }

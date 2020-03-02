@@ -1,6 +1,8 @@
 sonata_media:
     default_context: default
     force_disable_category: true
+    admin_format:
+        width: 200
     contexts:
         default:
             providers:
@@ -39,6 +41,33 @@ sonata_media:
                 preview: { width: 100, quality: 100}
                 wide:    { width: 820, quality: 100}
 
+        devices:
+            providers:
+                - sonata.media.provider.image
+
+            formats:
+                preview: { width: 160, quality: 100, format: png }
+                original: { width: 2000, quality: 100 }
+
+        slider:
+            providers:
+                - sonata.media.provider.image
+            formats:
+                preview: { width: 1960, height: 1000, quality: 100 }
+                original: { width: 2000, quality: 100 }
+
+        news:
+            providers:
+                - sonata.media.provider.image
+            formats:
+                preview: { width: 858, height: 504, quality: 100, resizer: app.sonata.media.crop_resizer }
+
+        developers:
+            providers:
+                - sonata.media.provider.image
+            formats:
+                preview: { width: 858, height: 504, quality: 100, resizer: app.sonata.media.crop_resizer }
+
     cdn:
         server:
             path: /upload/media
@@ -56,3 +85,7 @@ sonata_media:
         category: App\Application\Sonata\ClassificationBundle\Entity\Category
 
     db_driver: doctrine_orm
+
+    resizer:
+        simple:
+            mode: outbound

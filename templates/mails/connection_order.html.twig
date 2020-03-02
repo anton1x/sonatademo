@@ -1,0 +1,10 @@
+<h1>Данные заявки</h1>
+
+Имя: {{ item.name }} <br>
+Телефон: {{ item.phone }} <br>
+{% if item.email %}
+e-mail: {{ item.email }}<br>
+{% endif %}
+{% if item.note %}
+    Сообщение: {{ item.note }}
+{% endif %}

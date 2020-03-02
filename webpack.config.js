@@ -1,4 +1,5 @@
 var Encore = require('@symfony/webpack-encore');
+const { VueLoaderPlugin } = require('vue-loader');
 
 // Manually configure the runtime environment if not already configured yet by the "encore" command.
 // It's useful when you use tools that rely on webpack.config.js file.
@@ -23,8 +24,9 @@ Encore
      * Each entry will result in one JavaScript file (e.g. app.js)
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
-    .addEntry('app', './assets/js/app.js')
-    .addEntry('admin', './assets/js/admin.js')
+    .addStyleEntry('admin', './assets/css/admin.css')
+    .addStyleEntry('ckeditor', './assets/css/ckeditor.css')
+    .addEntry('main', './assets/js/main/main.js')
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')
 
@@ -49,13 +51,15 @@ Encore
     .enableVersioning(Encore.isProduction())
 
     // enables @babel/preset-env polyfills
-    .configureBabelPresetEnv((config) => {
-        config.useBuiltIns = 'usage';
-        config.corejs = 3;
-    })
+    // .configureBabelPresetEnv((config) => {
+    //     config.useBuiltIns = 'usage';
+    //     config.corejs = 3;
+    // })
+    .enableVueLoader()
 
     // enables Sass/SCSS support
-    //.enableSassLoader()
+    .enableSassLoader()
+    .enableLessLoader()
 
     // uncomment if you use TypeScript
     //.enableTypeScriptLoader()

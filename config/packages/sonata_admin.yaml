@@ -24,10 +24,17 @@ sonata_admin:
                         label: "Категории"
                         #admin: sonata.classification.admin.category
                         route_params: { context: products, hide_context: true }
+            Слайдеры:
+                items:
+                    - app.admin.slide_gallery
             Новости:
 #                icon: '<i class="fa fa-newspaper"></i>'
                 items:
                     - admin.news_item
+
+            Застройщикам и УК:
+                items:
+                    - app.admin.developer
 
     security:
              handler: sonata.admin.security.handler.role
@@ -45,7 +52,7 @@ sonata_admin:
             - bundles/sonatacore/vendor/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js
 
             - /js/admin/form/extension/select_all.js
-            - /build/admin.js
+            #- /build/admin.js
 
 
         extra_stylesheets:

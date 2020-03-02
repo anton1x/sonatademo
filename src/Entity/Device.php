@@ -22,7 +22,7 @@ class Device extends BaseProduct
     /**
      * @ORM\ManyToOne(targetEntity="App\Application\Sonata\MediaBundle\Entity\Media", fetch="LAZY", cascade={"persist"})
      * @JMS\Groups({"calculator", "sonata_api_read"})
-     * @JMS\Type("media_links")
+     * @JMS\Type("media_links_devices")
      */
     private $image;
 

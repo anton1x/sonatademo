@@ -17,10 +17,16 @@ class MediaSerializationHandler
 
     private $fileProvider;
 
-    public function __construct(ImageProvider $imageProvider, FileProvider $fileProvider)
+    private $context;
+
+    private $formats = [];
+
+    public function __construct(ImageProvider $imageProvider, FileProvider $fileProvider, string $context, array $formats)
     {
         $this->imageProvider = $imageProvider;
         $this->fileProvider = $fileProvider;
+        $this->context = $context;
+        $this->formats = $formats;
     }
 
     public function serializeMedia(JsonSerializationVisitor $visitor, Media $media, array $type, Context $context)
@@ -50,11 +56,25 @@ class MediaSerializationHandler
     {
         // here you can provide one ore more URLs based on your SonataMedia configuration
         // you can also add some more properties coming from the media entity based on your needs (e.g. authorName, description, copyright etc)
+        $urls = [];
+        $sizes = [];
+
+        foreach ($this->formats as $format) {
+            $urls [$format] = $this->imageProvider->generatePublicUrl(
+                $media,
+                $this->imageProvider->getFormatName($media, $format)
+            );
+
+            $helperProps = $this->imageProvider->getHelperProperties($media, $this->imageProvider->getFormatName($media, $format));
+
+            $sizes [$format] ['width'] = $helperProps['width'];
+            $sizes [$format] ['height'] = $helperProps['height'];
+        }
+
+
         return [
-            "url" => [
-                "small" => $this->imageProvider->generatePublicUrl($media, "default_small"),
-                "big" => $this->imageProvider->generatePublicUrl($media, "default_big"),
-            ]
+            "url" => $urls,
+            "sizes" => $sizes,
         ];
     }
 

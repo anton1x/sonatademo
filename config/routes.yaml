@@ -21,3 +21,16 @@ products:
     resource: App\Controller\ProductsController
     type: annotation
     prefix: /
+
+#news:
+#    resource: App\Controller\NewsController
+#    type: annotation
+#    prefix: /news
+
+news:
+    resource: 'routes/news.yaml'
+    prefix: /news
+
+blog:
+    resource: 'routes/blog.yaml'
+    prefix: /blog

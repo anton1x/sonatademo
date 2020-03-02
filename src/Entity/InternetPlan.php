@@ -23,7 +23,7 @@ class InternetPlan extends BaseProduct
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\PricingType", inversedBy="internetPlans")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinColumn(name="pricing_type_id", referencedColumnName="id", nullable=true)
      * @JMS\Exclude()
      */
     private $pricingType = null;

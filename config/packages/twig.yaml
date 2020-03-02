@@ -7,3 +7,5 @@ twig:
         - '@SonataFormatter/Form/formatter.html.twig'
         - '@SonataCore/Form/datepicker.html.twig'
         - 'admin/widgets/custom_widgets.html.twig'
+    globals:
+        header_options: '@App\ViewOptions\HeaderOptions'

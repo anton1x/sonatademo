@@ -32,6 +32,7 @@ class PricingType
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\InternetPlan", mappedBy="pricingType")
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
      * @JMS\Type("object_ids")
      */
     private $internetPlans;

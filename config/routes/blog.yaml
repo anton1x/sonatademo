@@ -1,0 +1,7 @@
+blog_list:
+  path: /
+  controller: app.blog.controller::list
+
+blog_view:
+  path: /view/{id}
+  controller: app.blog.controller::view

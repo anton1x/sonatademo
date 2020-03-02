@@ -67,6 +67,7 @@ class InternetAdmin extends ProductAdmin
                 'actions' => [
                     'edit' => [],
                     'delete' => [],
+                    'clone' => [],
                 ],
                 'label' => 'Действия',
             ]);
