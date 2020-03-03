@@ -160,10 +160,10 @@ body.lock_position {
                             > .close {
                                 flex-basis:60px;
                                 box-sizing: border-box;
-                                padding:20px 0 0 2px;
+                                padding:20px 0 0 6px;
                                 
                                 .sm-block({
-                                    padding:10px 0 0 4px;
+                                    padding:10px 0 0 0px;
                                     flex-basis:40px;
                                 });
 
@@ -175,17 +175,23 @@ body.lock_position {
                                     font-size:0;
                                     background-position: center center;
                                     background-repeat: no-repeat;
-                                    background-image:url(../images/awesome/close.svg);
+                                    background-image:url(../images/api/close.png);
                                     background-size: 32px 32px;
 
+                                    .x2({
+                                        background-image:url(../images/api/close_x2.png);
+                                    });
+
+                                    /*
                                     @supports (mask-image: none) or (-webkit-mask-image: none) {
                                         background-image:none;
                                         background-color:@color_2;
-                                        mask-image: url(../images/awesome/close.svg);
-                                        -webkit-mask-image: url(../images/awesome/close.svg);
-                                        mask-size:32px 32px;
-                                        -webkit-mask-size:32px 32px;
+                                        mask-image: url(../images/api/close_x1.png);
+                                        -webkit-mask-image: url(../images/api/close_x1.png);
+                                        mask-size:24px 24px;
+                                        -webkit-mask-size:24px 24px;
                                     }
+                                    */
                                 }
                             }
                         }

@@ -74,7 +74,10 @@ sonata_admin:
             - bundles/sonataformatter/markitup/sets/html/style.css
             - bundles/sonataformatter/markitup/sets/textile/style.css
             - bundles/sonatacore/vendor/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css
-            - /build/admin.css
+#            - /build/admin.css
+
+    templates:
+        layout: 'admin/standard_layout.html.twig'
 
     extensions:
         app.admin.extension.seo_info_extension:

@@ -1,42 +1,11 @@
 {% extends '@KnpMenu/menu.html.twig' %}
-
 {% block list %}
     {% if item.hasChildren and options.depth is not same as(0) and item.displayChildren %}
-        {% set dataId = 0 %}
-{#        {% set selectedId = 0 %}#}
         {% import _self as knp_menu %}
-        <div id="header_submenu_wrapper">
-            <div>
-                <div>
-                    <div>
-                        {{ block('children') }}
-                    </div>
-                </div>
-            </div>
+        <div{{ knp_menu.attributes(listAttributes) }}>
+            {{ block('children') }}
         </div>
-
     {% endif %}
-{% endblock %}
-
-{% block children %}
-    {# save current variables #}
-    {% set currentOptions = options %}
-    {% set currentItem = item %}
-    {# update the depth for children #}
-    {% if options.depth is not none %}
-        {% set options = options|merge({'depth': currentOptions.depth - 1}) %}
-    {% endif %}
-    {# update the matchingDepth for children #}
-    {% if options.matchingDepth is not none and options.matchingDepth > 0 %}
-        {% set options = options|merge({'matchingDepth': currentOptions.matchingDepth - 1}) %}
-    {% endif %}
-    {% for item in currentItem.children %}
-        {%- set dataId = dataId + 1 %}
-        {{ block('item') }}
-    {% endfor %}
-    {# restore current variables #}
-    {% set item = currentItem %}
-    {% set options = currentOptions %}
 {% endblock %}
 
 {% block linkElement %}
@@ -55,20 +24,15 @@
 
     {%- set linkAttributes = item.linkAttributes %}
     {%- set linkClasses = linkAttributes.class is defined ? [linkAttributes.class] : []  %}
-        {%- if matcher.isCurrent(item) or isAttachedRoute %}
+        {%- if matcher.isCurrent(item) or matcher.isAncestor(item, options.matchingDepth) or isAttachedRoute %}
             {%- set linkClasses = linkClasses|merge([options.currentClass]) %}
-            {% block sub_menu_select_id %}
-                {%- set selectedId = dataId %}
-                <script type="text/javascript">
-                    window._initTplVars.selSubMenu = {{ selectedId }}
-                </script>
-            {% endblock %}
         {% endif %}
+{#        {%- if matcher.isAncestor(item, options.matchingDepth) %}#}
+{#                {%- set linkClasses = linkClasses|merge([options.currentClass]) %}#}
+{#        {%- endif %}#}
         {%- if linkClasses is not empty %}
             {%- set linkAttributes = linkAttributes|merge({'class': linkClasses|join(' ')}) %}
         {%- endif %}
-
-    {%- set linkAttributes = linkAttributes|merge({'data-id': dataId}) %}
     <a href="{{ item.uri }}"{{ knp_menu.attributes(linkAttributes) }}>{{ block('label') }}</a>
 {% endblock %}
 
@@ -99,6 +63,7 @@
         {# displaying the item #}
         {% import _self as knp_menu %}
         <div>
+
             {%- if item.uri is not empty and (not matcher.isCurrent(item) or options.currentAsLink) %}
                 {{ block('linkElement') }}
             {%- else %}
@@ -113,3 +78,4 @@
         </div>
     {% endif %}
 {% endblock %}
+

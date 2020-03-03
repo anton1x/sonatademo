@@ -292,7 +292,7 @@
                 <div class="form">
                     <form action="{{ path('connection_form') }}" id="main_form_make_connect_order" method="post" class="recaptcha-form">
 
-                        <div class="form_fields" id="main_form_make_connect_order__step_1">
+                        <div class="form_fields">
                             <div>
                                 <div class="title"><span class="star">*</span> Имя:</div>
                                 <div class="input"><input type="text" name="name"></div>
@@ -308,10 +308,6 @@
                         </div>
 
 
-                        <div class="form_fields hidden" id="main_form_make_connect_order__step_2">
-                            {% form_theme form '@EWZRecaptcha/Form/ewz_recaptcha_widget.html.twig' %}
-                            {{ form_widget(form.recaptcha) }}
-                        </div>
                         <input type="hidden" value="{{ form.type.vars.value }}" name="{{ form.type.vars.name }}">
                         <input type="hidden" name="_token" value="{{ csrf_token('connection_order') }}">
 
@@ -320,95 +316,64 @@
                 </div>
             </div>
 
+
             <script>
                 window.jsReady(function() {
                     var phoneInput = document.querySelector('#main_form_make_connect_order input[name=phone]');
                     var inputmask_phone = new Inputmask("+7 (999) 999-99-99", {clearIncomplete: true, onincomplete : function(){ phoneInput.setAttribute('value', ''); }});
                     inputmask_phone.mask(phoneInput);
-                    var changeStep = function (step) {
-                        var stepElement = document.getElementById('main_form_make_connect_order__step_' + currentStep);
-                        stepElement.classList.add('hidden');
-
-                        currentStep = step;
-                        document.getElementById('main_form_make_connect_order__step_' + currentStep).classList.remove('hidden');
-                    }
-
-                    var currentStep=1;
-
-
-
-
 
                     projectApi.getFuncs().validateForm(
                         document.getElementById('main_form_make_connect_order'),
                         function(data, formdata, form)
                         {
+                            eApi.getInterface().showCaptcha('Для отправки Вашей заявки необходимо подтверждение', function(captchaResponse) {
+                                data['g-recaptcha-response'] = captchaResponse;
 
-                            function throwRequestError() {
-                                projectApi.getFuncs().showErrorsInBox(['Ошибка соединения. Попробуйте позже.']);
-                            }
+                                eApi.getFuncs().sendData('{{ path('connection_form') }}', data)
+                                    .then(function(response) {
 
-                            function onRequestSuccess() {
-                                projectApi.getFuncs().showErrorsInBox(['Ваша заявка успешно отправлена!']);
-                                form.reset();
-                                grecaptcha.reset();
-                                changeStep(1);
-                            }
+                                        if (response.data.success) {
+                                            eApi.getFuncs().alert('Заявка отправлена', {
+                                                box_destroy : function() {
+                                                    //Можно перезагрузить страницу если надо
+                                                    //document.location.reload();
+                                                }
+                                            });
+                                        }
+                                        else {
+                                            eApi.getFuncs().alert('Произошла ошибка в ходе отправки формы');
+                                        }
 
-                            //console.log('Форма проверена, оправляй куда надо', data, formdata, form);
 
-                            if(currentStep === 1) {
-                                changeStep(2);
-                            }
-                            else if(currentStep === 2) {
-                                var xhr = new XMLHttpRequest();
-                                xhr.open('POST', '{{ path('connection_form') }}', true);
-                                xhr.responseType = 'json';
-                                xhr.onerror = throwRequestError;
-                                xhr.onload = function () {
-                                    var response = xhr.response;
-                                    if (response.success) {
-                                        onRequestSuccess();
-                                    }
-                                    else {
-                                        throwRequestError();
-                                    }
-                                };
 
-                                xhr.send(formdata);
-                            }
 
-                            //form.submit();
+                                    })
+                                    .catch(function() {
 
+                                        eApi.getFuncs().alert('Произошла ошибка в ходе отправки формы');
+
+                                    });
+                            });
                         },
                         function(data, form)
                         {
                             var errors = [];
 
-                            if (currentStep === 1) {
-                                if (data.name.length === 0)
-                                {
-                                    errors.push('Поле имя не заполнено');
-                                }
 
-                                if (data.phone.length === 0)
-                                {
-                                    errors.push('Поле телефон не заполнено');
-                                }
-
-                                if (data.email.length > 0 && eApi.getFuncs().checkIsEmail(data.email) === false)
-                                {
-                                    errors.push('Поле e-mail заполнено некорректно');
-                                }
+                            if (data.name.length == 0)
+                            {
+                                errors.push('Поле имя не заполнено');
                             }
-                            else if (currentStep === 2) {
-                                if (
-                                    typeof data['g-recaptcha-response'] !== 'undefined' &&
-                                    data['g-recaptcha-response'].length === 0
-                                )
-                                {
-                                    errors.push('CAPTCHA не заполнена');
-                                }
+
+                            if (data.phone.length == 0)
+                            {
+                                errors.push('Поле телефон не заполнено');
+                            }
+
+                            if (data.email.length > 0 && eApi.getFuncs().checkIsEmail(data.email) == false)
+                            {
+                                errors.push('Поле e-mail заполнено некорректно');
                             }
 
 

@@ -40,7 +40,7 @@ export default class extends controller {
     //Алерт
     alert(text, options = {})
     {
-        let html = `<div style="padding:20px 0 0 0; font-size:18px;">${text}</div><div style="font-size:0; text-align:center; padding-top:30px;"><a href="javascript://" class="button_2" onclick="eApi.getBoxes().getBoxById('alert').close(); return false;">OK</a>`;
+        let html = `<div class="box_alert_wrapper"><div class="text">${text}</div><div class="but"><a href="javascript://" class="button_3" onclick="eApi.getBoxes().getBoxById('alert').close(); return false;">OK</a></div></div>`;
 
         options = Object.assign({
             id : 'alert',
@@ -62,17 +62,10 @@ export default class extends controller {
         {
             axios.post(url, data).then((response) =>
             {
-                if (response.data.error == 0)
-                {
-                    resolve(response.data.settings);
-                }
-                else
-                {
-                    reject({code : -1, error_list : response.data.error_list, error_extra_list : response.data.error_extra_list}); 
-                }
+                resolve(response);
 
             }).catch(()=> {
-                reject({code : -100, error_list : [], error_extra_list : []});
+                reject();
             });
         });
     }

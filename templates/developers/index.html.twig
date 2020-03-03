@@ -212,22 +212,6 @@
                                     <div class="input"><textarea name="note"></textarea></div>
                                 </div>
                             </div>
-                            <div class="line x1">
-                                <div class="title">&nbsp;</div>
-                                <div class="input recaptcha_wrap">
-                                    {% form_theme form '@EWZRecaptcha/Form/ewz_recaptcha_widget.html.twig' %}
-                                    {{ form_widget(form.recaptcha, {
-                                        'attr': {
-                                            'options': {
-                                                'theme': 'light',
-                                                'type': 'image',
-                                                'size': 'normal'
-                                            }
-                                        }
-                                    }) }}
-                                </div>
-
-                            </div>
                         </div>
                         <input type="hidden" value="{{ form.type.vars.value }}" name="{{ form.type.vars.name }}">
                         <input type="hidden" name="_token" value="{{ csrf_token('connection_order') }}">
@@ -248,59 +232,55 @@
                 document.getElementById('about_developers_contact_form'),
                 function(data, formdata, form)
                 {
-                    function throwRequestError() {
-                        projectApi.getFuncs().showErrorsInBox(['Ошибка соединения. Попробуйте позже.']);
-                    }
+                    eApi.getInterface().showCaptcha('Для отправки Вашей заявки необходимо подтверждение', function(captchaResponse) {
+                        data['g-recaptcha-response'] = captchaResponse;
 
-                    function onRequestSuccess() {
-                        projectApi.getFuncs().showErrorsInBox(['Ваша заявка успешно отправлена!']);
-                        form.reset();
-                        grecaptcha.reset();
-                        changeStep(1);
-                    }
+                        eApi.getFuncs().sendData('{{ path('connection_form') }}', data)
+                            .then(function(response) {
 
-                    var xhr = new XMLHttpRequest();
-                    xhr.open('POST', '{{ path('connection_form') }}', true);
-                    xhr.responseType = 'json';
-                    xhr.onerror = throwRequestError;
-                    xhr.onload = function () {
-                        var response = xhr.response;
-                        if (response.success) {
-                            onRequestSuccess();
-                        }
-                        else {
-                            throwRequestError();
-                        }
-                    };
+                                if (response.data.success) {
+                                    eApi.getFuncs().alert('Заявка отправлена', {
+                                        box_destroy : function() {
+                                            //Можно перезагрузить страницу если надо
+                                            //document.location.reload();
+                                        }
+                                    });
+                                }
+                                else {
+                                    eApi.getFuncs().alert('Произошла ошибка в ходе отправки формы');
+                                }
 
-                    xhr.send(formdata);
 
+
+
+                            })
+                            .catch(function() {
+
+                                eApi.getFuncs().alert('Произошла ошибка в ходе отправки формы');
+
+                            });
+                    });
                 },
                 function(data, form)
                 {
-
-                    console.log(data['g-recaptcha-response']);
                     var errors = [];
 
-                    if (data.name.length === 0)
+
+                    if (data.name.length == 0)
                     {
                         errors.push('Поле имя не заполнено');
                     }
 
-                    if (data.phone.length === 0)
+                    if (data.phone.length == 0)
                     {
                         errors.push('Поле телефон не заполнено');
                     }
 
-                    if (data.email.length > 0 && eApi.getFuncs().checkIsEmail(data.email) === false)
+                    if (data.email.length > 0 && eApi.getFuncs().checkIsEmail(data.email) == false)
                     {
                         errors.push('Поле e-mail заполнено некорректно');
                     }
 
-                    if (typeof data['g-recaptcha-response'] !== 'undefined' && data['g-recaptcha-response'].length === 0)
-                    {
-                        errors.push('CAPTCHA не заполнена');
-                    }
 
                     return errors;
                 },
@@ -311,6 +291,80 @@
             );
         });
     </script>
+
+{#    <script>#}
+{#        window.jsReady(function() {#}
+{#            var phoneInput = document.querySelector('#about_developers_contact_form input[name=phone]');#}
+{#            var inputmask_phone = new Inputmask("+7 (999) 999-99-99", {clearIncomplete: true, onincomplete : function(){ phoneInput.setAttribute('value', ''); }});#}
+{#            inputmask_phone.mask(phoneInput);#}
+
+{#            projectApi.getFuncs().validateForm(#}
+{#                document.getElementById('about_developers_contact_form'),#}
+{#                function(data, formdata, form)#}
+{#                {#}
+{#                    function throwRequestError() {#}
+{#                        projectApi.getFuncs().showErrorsInBox(['Ошибка соединения. Попробуйте позже.']);#}
+{#                    }#}
+
+{#                    function onRequestSuccess() {#}
+{#                        projectApi.getFuncs().showErrorsInBox(['Ваша заявка успешно отправлена!']);#}
+{#                        form.reset();#}
+{#                        grecaptcha.reset();#}
+{#                        changeStep(1);#}
+{#                    }#}
+
+{#                    var xhr = new XMLHttpRequest();#}
+{#                    xhr.open('POST', '{{ path('connection_form') }}', true);#}
+{#                    xhr.responseType = 'json';#}
+{#                    xhr.onerror = throwRequestError;#}
+{#                    xhr.onload = function () {#}
+{#                        var response = xhr.response;#}
+{#                        if (response.success) {#}
+{#                            onRequestSuccess();#}
+{#                        }#}
+{#                        else {#}
+{#                            throwRequestError();#}
+{#                        }#}
+{#                    };#}
+
+{#                    xhr.send(formdata);#}
+
+{#                },#}
+{#                function(data, form)#}
+{#                {#}
+
+{#                    console.log(data['g-recaptcha-response']);#}
+{#                    var errors = [];#}
+
+{#                    if (data.name.length === 0)#}
+{#                    {#}
+{#                        errors.push('Поле имя не заполнено');#}
+{#                    }#}
+
+{#                    if (data.phone.length === 0)#}
+{#                    {#}
+{#                        errors.push('Поле телефон не заполнено');#}
+{#                    }#}
+
+{#                    if (data.email.length > 0 && eApi.getFuncs().checkIsEmail(data.email) === false)#}
+{#                    {#}
+{#                        errors.push('Поле e-mail заполнено некорректно');#}
+{#                    }#}
+
+{#                    if (typeof data['g-recaptcha-response'] !== 'undefined' && data['g-recaptcha-response'].length === 0)#}
+{#                    {#}
+{#                        errors.push('CAPTCHA не заполнена');#}
+{#                    }#}
+
+{#                    return errors;#}
+{#                },#}
+{#                function(errors, form)#}
+{#                {#}
+{#                    projectApi.getFuncs().showErrorsInBox(errors);#}
+{#                }#}
+{#            );#}
+{#        });#}
+{#    </script>#}
 {% endblock %}
 
 {% block stylesheets %}

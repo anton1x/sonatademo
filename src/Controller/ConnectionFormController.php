@@ -25,9 +25,10 @@ class ConnectionFormController extends AbstractController
         $form->submit(
             array_merge(
                 ['email' => null, 'name' => null, 'phone' => null, 'type' => ConnectionFormOrder::TYPE_INDEX, 'note' => null],
-                $request->request->all()
+                json_decode($request->getContent(), true)
             ),
             false);
+
 
         if ($form->isSubmitted() && $form->isValid()) {
            $data = $form->getData();
@@ -35,7 +36,7 @@ class ConnectionFormController extends AbstractController
            return $this->makeSuccessRequest();
         }
 
-        return $this->makeFailRequest();
+        return $this->makeFailRequest($form->getErrors());
 
     }
 
@@ -44,8 +45,8 @@ class ConnectionFormController extends AbstractController
         return $this->json(['success' => true]);
     }
 
-    private function makeFailRequest()
+    private function makeFailRequest($errors)
     {
-        return $this->json(['success' => false]);
+        return $this->json(['success' => false, 'errors' => $errors]);
     }
 }

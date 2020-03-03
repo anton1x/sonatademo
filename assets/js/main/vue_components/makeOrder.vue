@@ -48,14 +48,6 @@
                                 </template>   
                             </ui-select>
                         </div>
-                        <div class="simple">
-                            <block-fading :datacontent="{}">
-                                <template v-slot:icon>ИКА</template>
-                                <template v-slot:content="data">
-                                    !!!!
-                                </template>  
-                            </block-fading>
-                        </div>
                     </div>
                 </div>
             </template>
@@ -180,11 +172,11 @@
                             </div>
                         </div>
                         <div class="simple">
-                            <block-fading :datacontent="{t:dataStep3.tvPlan}">
-                                <template v-slot:icon>ИКА</template>
+                            <block-fading :datacontent="{}" title="Online кинотеатры">
+                                <template v-slot:icon><div id="make_order_app_step_3_icon_theaters"></div></template>
                                 <template v-slot:content="data">
-                                    !!!! {{data.t}} ! {{dataStep3.tvPlan}}
-                                    <ui-switcher v-model="dataStep3.t"></ui-switcher>
+                                    !!!!<br>
+                                    GABELSON
                                 </template>  
                             </block-fading>
                         </div>
