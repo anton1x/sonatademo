@@ -35,7 +35,7 @@ class MenuBuilder
             'attributes' => [
                 'class' => 'menu_title',
             ],
-            'route' => 'documents',
+            'route' => 'contacts',
             'children' => [
                  [
                      'label' => 'Документы',
