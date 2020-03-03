@@ -8,7 +8,6 @@ sonata_admin:
         groups:
             География: ~
             Продукты:
-                keep_open: true
                 label: Калькулятор
                 icon: '<i class="fa fa-calculator"></i>'
                 items:
@@ -19,22 +18,35 @@ sonata_admin:
                     - app.admin.address_object
                     - app.admin.connection_type
                     - app.admin.pricing_type
-                    -
-                        route: admin_sonata_classification_category_tree
-                        label: "Категории"
-                        #admin: sonata.classification.admin.category
-                        route_params: { context: products, hide_context: true }
+#                    -
+#                        route: admin_sonata_classification_category_tree
+#                        label: "Категории"
+#                        #admin: sonata.classification.admin.category
+#                        route_params: { context: products, hide_context: true }
             Слайдеры:
+                icon: '<i class="fa fa-image"></i>'
                 items:
                     - app.admin.slide_gallery
             Новости:
-#                icon: '<i class="fa fa-newspaper"></i>'
+                icon: '<i class="fa fa-newspaper-o"></i>'
                 items:
                     - admin.news_item
 
             Застройщикам и УК:
+                icon: '<i class="fa fa-building"></i>'
                 items:
                     - app.admin.developer
+
+            Документы:
+                icon: '<i class="fa fa-file-archive-o"></i>'
+                items:
+                    - app.admin.document_group
+                    - app.admin.document
+
+            Лицензии:
+                icon: '<i class="fa fa-legal"></i>'
+                items:
+                    - app.admin.license
 
     security:
              handler: sonata.admin.security.handler.role
@@ -68,6 +80,11 @@ sonata_admin:
         app.admin.extension.seo_info_extension:
             implements:
                 - App\Entity\SeoPoweredInterface
+        app.admin.extension.sortable_list_extension:
+            admins:
+#                - app.admin.document
+            implements:
+                - App\Entity\Addons\SortableList
 
 
 

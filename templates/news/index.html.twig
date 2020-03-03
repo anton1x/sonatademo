@@ -6,7 +6,7 @@
             <div class="list_content_2">
                 {% for item in paginated.list %}
                 <div class="list_2_content_news_item">
-                    {% if item.image is not null %}
+                    {% if item.image is not empty %}
                     <a href="{{ path(routes.view, { id: item.id }) }}" class="image"><span style="background-image:url({% path item.image, 'preview' %});">&nbsp;</span></a>
                     {% endif %}
                     <div class="date">{{ item.rusFormattedDate }}</div>

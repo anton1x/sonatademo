@@ -29,6 +29,11 @@ class SlideGallery
      */
     private $code;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $title;
+
     public function __construct()
     {
         $this->slides = new ArrayCollection();
@@ -57,7 +62,7 @@ class SlideGallery
 
     public function __toString()
     {
-        return $this->getCode();
+        return $this->getTitle();
     }
 
     /**
@@ -90,4 +95,22 @@ class SlideGallery
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param mixed $title
+     */
+    public function setTitle($title): void
+    {
+        $this->title = $title;
+    }
+
+
 }

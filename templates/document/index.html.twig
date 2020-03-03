@@ -1,0 +1,59 @@
+{% extends 'layout.html.twig' %}
+
+{% block inner %}
+    <div id="about_docs_1">
+        <div>
+            {% for group in groups %}
+            <div>
+                <div class="block_title">{{ group.title }}</div>
+                {% if group.description is not empty %}
+                <div class="desc">{{ group.description }}</div>
+                {% endif %}
+                <div class="content">
+                    {% for parentFile in group.documents %}
+                    <div>
+                        <div class="file_item">
+                            <a href="{% path parentFile.file, 'reference' %}">
+                              <span>
+                                <span class="icon"><span class="file_icon {{ parentFile.fileExtension }} s54 sm27">&nbsp;</span></span>
+                                <span class="title">{{ parentFile.name }}</span>
+                              </span>
+                            </a>
+                        </div>
+
+                        {% if parentFile.children is not empty %}
+                            {% for child in parentFile.children %}
+                            <div class="sub_files">
+                                <div class="sub_file_item">
+                                    <a href="{% path child.file, 'reference' %}">
+                                        <span>
+                                          <span class="icon"><span class="file_icon {{ child.fileExtension }} s42 sm18">&nbsp;</span></span>
+                                          <span class="title">{{ child.name }}</span>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        {% endif %}
+
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div id="about_docs_2">
+        <div>
+            <div class="title">Вниманию абонентов!</div>
+            <div id="main_4_content" class="list_content_1">
+                {{ news_widget(3, false, 'news', 'news_attention')|raw }}
+            </div>
+        </div >
+    </div>
+{% endblock %}
+
+{% block huy %}
+    HUY!@!@!@
+{% endblock %}

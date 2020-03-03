@@ -47,7 +47,7 @@ class ProductsController extends AbstractController
         $result['addresses'] = $repoAddress->findAll();
         $result['products'] = $repoProduct->getAllProductsGroupedByCategory();
 
-        $resultSerialized = $serializer->serialize($result, 'json');
+        $resultSerialized = $serializer->serialize($result, 'json', SerializationContext::create()->setSerializeNull(true));
 
         return new Response($resultSerialized, Response::HTTP_OK, [
             'Content-Type' => 'application/json'

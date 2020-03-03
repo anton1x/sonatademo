@@ -5,7 +5,7 @@
         <div class="title"><a href="{{ path(routes.list) }}">{{ title }}</a></div>
         <div id="news_item_1_content">
             <div class="list_2_content_news_item">
-                {% if item.image is defined %}
+                {% if item.image is not empty %}
                 <div class="image"><span style="background-image:url({% path item.image, 'preview' %});">&nbsp;</span></div>
                 {% endif %}
                 <div class="date">{{ item.rusFormattedDate }}</div>

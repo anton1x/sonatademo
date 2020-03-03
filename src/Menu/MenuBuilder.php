@@ -35,30 +35,45 @@ class MenuBuilder
             'attributes' => [
                 'class' => 'menu_title',
             ],
-            'route' => 'docs',
+            'route' => 'documents',
             'children' => [
                  [
                      'label' => 'Документы',
-                    'route' => 'docs',
+                    'route' => 'documents',
+                    'children' => false,
+                ],
+                [
+                  'label' => 'Реквизиты',
+                  'route' => 'requisites',
+                  'children' => false,
+                ],
+                [
+                    'label' => 'Лицензии',
+                    'route' => 'license',
                     'children' => false,
                 ],
                 [
                     'label' => 'Застройщикам и УК',
                     'route' => 'about_developers',
                     'children' => false,
+                ],
+                [
+                    'label' => 'Контакты',
+                    'route' => 'contacts',
+                    'children' => false,
                 ]
             ],
         ],
-        ['label' => 'Блог',
-            'attributes' => [
-                'class' => 'menu_title',
-            ],
-            'route' => 'blog_list',
-            'extras' => [
-                'attached_routes' => ['blog_view'],
-            ],
-            'children' => false,
-        ],
+//        ['label' => 'Блог',
+//            'attributes' => [
+//                'class' => 'menu_title',
+//            ],
+//            'route' => 'blog_list',
+//            'extras' => [
+//                'attached_routes' => ['blog_view'],
+//            ],
+//            'children' => false,
+//        ],
         [
             'label' => '',
             'attributes' => [

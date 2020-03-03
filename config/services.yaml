@@ -78,6 +78,9 @@ services:
                 name: 'doctrine.event_listener'
                 event: 'postLoad'
 
+    App\EventListener\InjectViewOptions404:
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller_arguments, method: onKernelControllerArguments }
 
     app.admin.internet:
         class: App\Admin\InternetAdmin
@@ -112,6 +115,9 @@ services:
 
     app.admin.extension.seo_info_extension:
         class: App\Admin\Extension\SeoInfoExtension
+
+    app.admin.extension.sortable_list_extension:
+        class: App\Admin\Extension\SortableListExtension
 
 #    App\Basket\BasketManager:
 #        class: App\Basket\BasketManager
@@ -204,4 +210,25 @@ services:
         arguments: [~, App\Entity\Developer, 'PixSortableBehaviorBundle:SortableAdmin']
         tags:
             - { name: sonata.admin, manager_type: orm, group: admin, label: 'Реализованные проекты' }
+        public: true
+
+    app.admin.document_group:
+        class: App\Admin\DocumentGroupAdmin
+        arguments: [~, App\Entity\DocumentGroup, 'PixSortableBehaviorBundle:SortableAdmin']
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Группы }
+        public: true
+
+    app.admin.document:
+        class: App\Admin\DocumentAdmin
+        arguments: [~, App\Entity\Document, 'PixSortableBehaviorBundle:SortableAdmin']
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Файлы }
+        public: true
+
+    app.admin.license:
+        class: App\Admin\LicenseAdmin
+        arguments: [~, App\Entity\License, 'PixSortableBehaviorBundle:SortableAdmin']
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Лицензии }
         public: true

@@ -1,3 +1,11 @@
+parameters:
+    sonata_media:
+        providers:
+            file:
+                allowed_extensions:
+                    - pdf
+                    - rar
+#    sonata_media.providers.file.allowed_mime_types:
 sonata_media:
     default_context: default
     force_disable_category: true
@@ -67,6 +75,16 @@ sonata_media:
                 - sonata.media.provider.image
             formats:
                 preview: { width: 858, height: 504, quality: 100, resizer: app.sonata.media.crop_resizer }
+
+        documents:
+            providers:
+                - sonata.media.provider.file
+
+        license:
+            providers:
+                - sonata.media.provider.image
+            formats:
+                preview: { width: 693, height: 980, quality: 70}
 
     cdn:
         server:

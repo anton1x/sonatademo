@@ -109,7 +109,7 @@ class TVPlan extends BaseProduct
         );
 
         if ($this->getIncludeTheatres()) {
-            $scaleTitle .= " + кино";
+            $scaleTitle .= " + кинотеатры";
         }
 
 

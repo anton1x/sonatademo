@@ -149,6 +149,46 @@
         <source>Builder</source>
         <target>Застройщик</target>
       </trans-unit>
+      <trans-unit id="Document Group List">
+        <source>Document Group List</source>
+        <target>Список групп</target>
+      </trans-unit>
+      <trans-unit id="Document Group Create">
+        <source>Document Group Create</source>
+        <target>Создать группу</target>
+      </trans-unit>
+      <trans-unit id="Document List">
+        <source>Document List</source>
+        <target>Список документов</target>
+      </trans-unit>
+      <trans-unit id="Document Create">
+        <source>Document Create</source>
+        <target>Создать документ</target>
+      </trans-unit>
+      <trans-unit id="Developer List">
+        <source>Developer List</source>
+        <target>Список реализованных проектов</target>
+      </trans-unit>
+      <trans-unit id="Developer Create">
+        <source>Developer Create</source>
+        <target>Создать</target>
+      </trans-unit>
+      <trans-unit id="Slide Gallery List">
+        <source>Slide Gallery List</source>
+        <target>Список галерей</target>
+      </trans-unit>
+      <trans-unit id="Slide Gallery Create">
+        <source>Slide Gallery Create</source>
+        <target>Создать галерею</target>
+      </trans-unit>
+      <trans-unit id="License List">
+        <source>License List</source>
+        <target>Список лицензий</target>
+      </trans-unit>
+      <trans-unit id="License Create">
+        <source>License Create</source>
+        <target>Создать лицензию</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

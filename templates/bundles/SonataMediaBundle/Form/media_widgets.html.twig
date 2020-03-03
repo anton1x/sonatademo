@@ -1,10 +1,20 @@
 {% block sonata_media_type_widget %}
 
     <div class="row">
-        <div class="col-md-4 pull-left">
+        <div class="col-md-6 pull-left">
             {% if value is not empty and value.providerReference %}
                 <div class="pull-left" style="margin-right: 5px">
-                    {% thumbnail value, 'admin' with {'class': 'img-polaroid media-object'} %}
+                    {% if value.providerName == 'sonata.media.provider.image' %}
+                        {% thumbnail value, 'admin' with {'class': 'img-polaroid media-object'} %}
+                    {% elseif value.providerName == 'sonata.media.provider.file' %}
+                        <div style="margin-top: 10px; text-align: center;">
+                            <div>
+                                <span class="fa fa-file-pdf-o fa-3x py-1"></span><br>
+                                <a style="padding-top: 10px; display: block;" href="{% path value, 'reference' %}" target="_blank">{{ value.name }}</a>
+                            </div>
+
+                        </div>
+                    {% endif %}
                 </div>
             {% else %}
                 <div class="pull-left" style="margin-right: 5px">
