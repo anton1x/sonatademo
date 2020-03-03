@@ -39,21 +39,24 @@ export default class extends projectController {
     {
         let a = document.querySelector('#header_submenu_wrapper a[data-id="'+v+'"]');
 
-        if (v != this.sel_sub_menu_value)
+        if (a !== null)
         {
-            document.querySelectorAll('#header_submenu_wrapper a').forEach((a) => {
-                a.classList.remove('sel');
-            });
-            a.classList.add('sel');
-            this.sel_sub_menu_value = v;
-        }
+            if (v != this.sel_sub_menu_value)
+            {
+                document.querySelectorAll('#header_submenu_wrapper a').forEach((a) => {
+                    a.classList.remove('sel');
+                });
+                a.classList.add('sel');
+                this.sel_sub_menu_value = v;
+            }
 
-        if (window.innerWidth <= 1000)
-        {
-            let sp = window.innerWidth <= 580 ? 15 : 30;
-            let c = document.querySelector('#header_submenu_wrapper > div');
-            let m = a.getBoundingClientRect().left - c.getBoundingClientRect().left - sp;
-            document.querySelector('#header_submenu_wrapper > div').scrollLeft = m;
+            if (window.innerWidth <= 1000)
+            {
+                let sp = window.innerWidth <= 580 ? 15 : 30;
+                let c = document.querySelector('#header_submenu_wrapper > div');
+                let m = a.getBoundingClientRect().left - c.getBoundingClientRect().left - sp;
+                document.querySelector('#header_submenu_wrapper > div').scrollLeft = m;
+            }
         }
     }
 
