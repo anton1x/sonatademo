@@ -48,6 +48,14 @@
                                 </template>   
                             </ui-select>
                         </div>
+                        <div class="simple">
+                            <block-fading :datacontent="{}">
+                                <template v-slot:icon>ИКА</template>
+                                <template v-slot:content="data">
+                                    !!!!
+                                </template>  
+                            </block-fading>
+                        </div>
                     </div>
                 </div>
             </template>
@@ -172,8 +180,8 @@
                             </div>
                         </div>
                         <div class="simple">
-                            {{dataStep3.t}}
                             <block-fading :datacontent="{t:dataStep3.tvPlan}">
+                                <template v-slot:icon>ИКА</template>
                                 <template v-slot:content="data">
                                     !!!! {{data.t}} ! {{dataStep3.tvPlan}}
                                     <ui-switcher v-model="dataStep3.t"></ui-switcher>

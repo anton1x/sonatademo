@@ -194,6 +194,10 @@ export default class extends controller {
             }
             else
             {
+                document.body.classList.remove('lock_position');
+                this.#boxes_bg.classList.remove('touch_device');
+                
+                /*
                 if (document.scrollingElement)
                 {
                     document.scrollingElement.scrollTop = this.#body_scroll_value;
@@ -202,8 +206,12 @@ export default class extends controller {
                 {
                     window.document.body.scrollTop = this.#body_scroll_value;
                 }
-                document.body.classList.remove('lock_position');
-                this.#boxes_bg.classList.remove('touch_device');
+                */
+                
+                window.scrollTo({ top: this.#body_scroll_value});
+
+                //document.body.classList.remove('lock_position');
+                //this.#boxes_bg.classList.remove('touch_device');
             }
         }
     }

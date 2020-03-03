@@ -1,6 +1,12 @@
 <template>
-<div class="block_fading" ref="block_fading">
-    <slot name="content" v-bind="datacontent"></slot>
+<div class="block_fading opened" ref="block_fading">
+    <div class="bar" ref="bar">
+        <div class="icon"><slot name="icon"></slot></div>
+        <div class="title">{{title}}</div>
+    </div>
+    <div class="content" ref="content">
+        <slot name="content" v-bind="datacontent"></slot>
+    </div>
 </div>
 </template>
 
@@ -13,6 +19,10 @@ export default {
             default: function() {
                 return {};
             },
+        },
+        title : {
+            type: String,
+            default: 'Смотреть'
         },
     },
     data () {

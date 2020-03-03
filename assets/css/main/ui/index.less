@@ -678,3 +678,44 @@ textarea {
         }
     }
 }
+
+.block_fading {
+    padding:30px 0;
+    border:1px solid #eee;
+    background: #fff;
+    border-radius: 5px;
+
+    > .bar {
+        display:flex;
+        align-items: center;
+
+        > .icon {
+            margin-left:30px;
+            flex-basis: 50px;
+        }
+
+        > .title {
+            flex-basis: calc(100% - 130px);
+            font-size:40px;
+        }
+
+        &::after {
+            content:'';
+            display:block;
+            flex-basis: 30px;
+            margin-left:20px;
+            flex-shrink:0;
+            height:7px;
+            background:url(../images/ui/select_ug.png) no-repeat left top;
+            background-size:12px 7px;
+
+            .x2({
+                background-image:url(../images/ui/select_ug_x2.png);
+            });
+        }
+    }
+
+    > .content {
+        display:none;
+    }
+}
