@@ -5,6 +5,7 @@ namespace App\Admin;
 
 use App\Entity\AddressObject;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\MediaBundle\Form\Type\MediaType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -16,6 +17,12 @@ class TVPlanAdmin extends ProductAdmin
         parent::configureFormFields($formMapper);
 
         $formMapper->tab('Основное')
+                ->with('Картинка', ['class' => 'col-md-6'])
+                    ->add('image', MediaType::class, [
+                        'context' => 'tv_plan',
+                        'provider' => 'sonata.media.provider.image',
+                    ])
+                ->end()
                 ->with('Настройки ТВ', ['class' => 'col-md-6'])
                     ->add('channelCount', IntegerType::class, [
                         'label' => 'Количество каналов'

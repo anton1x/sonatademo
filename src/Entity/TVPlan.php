@@ -3,6 +3,7 @@
 
 namespace App\Entity;
 
+use App\Application\Sonata\MediaBundle\Entity\Media;
 use App\Utils\TextFunctions;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -33,6 +34,13 @@ class TVPlan extends BaseProduct
      */
     private $includeTheatres = false;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Application\Sonata\MediaBundle\Entity\Media", fetch="LAZY", cascade={"persist"})
+     * @JMS\Groups({"calculator", "sonata_api_read"})
+     * @JMS\Type("media_links_tv_plans")
+     */
+    private $image;
+
     public function __construct()
     {
         parent::__construct();
@@ -40,6 +48,22 @@ class TVPlan extends BaseProduct
     }
 
     public const type = "tv_plan";
+
+    /**
+     * @return Media
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param Media $image
+     */
+    public function setImage($image): void
+    {
+        $this->image = $image;
+    }
 
     /**
      * @return int
