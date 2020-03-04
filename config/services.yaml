@@ -38,22 +38,6 @@ services:
         resource: '../src/*'
         exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Application,Kernel.php}'
 
-    ewz_recaptcha.validator.true:
-        class: App\Validator\RecaptchaValidatorCustom
-        public: true
-        arguments:
-            - '%ewz_recaptcha.enabled%'
-            - '%ewz_recaptcha.private_key%'
-            - '@request_stack'
-            - '%ewz_recaptcha.http_proxy%'
-            - '%ewz_recaptcha.verify_host%'
-            - '@?security.authorization_checker'
-            - '%ewz_recaptcha.trusted_roles%'
-            - '%ewz_recaptcha.api_host%'
-            - '%ewz_recaptcha.timeout%'
-        tags:
-            - { name: validator.constraint_validator, alias: 'ewz_recaptcha.true' }
-
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
     App\Controller\:
@@ -63,6 +47,9 @@ services:
     App\Controller\NewsController:
         autoconfigure: false
 #        autowire: false
+
+    App\Validator\RecaptchaValidatorCustom:
+        autoconfigure: false
 
     App\Service\AmoCRM\TonixAmoCrmClient:
         arguments: ['%amocrm.login%', '%amocrm.password_hash%','%amocrm.subdomain%', '%amocrm.cookie_path%']
@@ -165,6 +152,12 @@ services:
         tags:
             - { name: jms_serializer.handler, type: 'media_links_devices', direction: serialization, format: json, method: serializeMedia }
         arguments: [ '@sonata.media.provider.image', '@sonata.media.provider.file', 'devices', ['preview', 'reference'] ]
+
+    app.serializer.media_handler_tv_plans:
+        class: App\Application\Sonata\MediaBundle\Serializer\MediaSerializationHandler
+        tags:
+            - { name: jms_serializer.handler, type: 'media_links_tv_plans', direction: serialization, format: json, method: serializeMedia }
+        arguments: [ '@sonata.media.provider.image', '@sonata.media.provider.file', 'tv_plan', ['reference'] ]
 
     app.serializer.media_handler_news:
         class: App\Application\Sonata\MediaBundle\Serializer\LinkMediaSerializationHandler

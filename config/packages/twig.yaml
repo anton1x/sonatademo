@@ -10,4 +10,3 @@ twig:
     globals:
         header_options: '@App\ViewOptions\HeaderOptions'
         google_recaptcha_site_key: '%google_recaptcha_site_key%'
-        sub_menu_sel: 0

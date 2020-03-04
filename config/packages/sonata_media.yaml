@@ -54,8 +54,11 @@ sonata_media:
                 - sonata.media.provider.image
 
             formats:
-                preview: { width: 160, quality: 100, format: png }
-                original: { width: 2000, quality: 100 }
+                preview: { width: 320, quality: 100, format: png }
+
+        tv_plan:
+            providers:
+                - sonata.media.provider.image
 
         slider:
             providers:
