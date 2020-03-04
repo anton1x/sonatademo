@@ -1,4 +1,5 @@
 var Encore = require('@symfony/webpack-encore');
+var CompressionPlugin = require('compression-webpack-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
 
 // Manually configure the runtime environment if not already configured yet by the "encore" command.
@@ -60,6 +61,10 @@ Encore
     // enables Sass/SCSS support
     .enableSassLoader()
     .enableLessLoader()
+
+    .addPlugin(new CompressionPlugin({
+        compressionOptions: {level: 9}
+    }))
 
     // uncomment if you use TypeScript
     //.enableTypeScriptLoader()
