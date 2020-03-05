@@ -55,8 +55,8 @@ class ConnectionFormHandler
     private function createMessage(ConnectionFormOrder $order)
     {
         $message = (new \Swift_Message($order->getHeaderText()))
-            ->setFrom(['antongaran@mail.ru'])
-            ->setTo(['antongaran@mail.ru'])
+            ->setFrom($this->options['from'])
+            ->setTo($this->options['to'])
             ->setBody(
                 $this->twig->render('mails/connection_order.html.twig', ['item' => $order]),
                 'text/html'
