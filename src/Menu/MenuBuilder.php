@@ -20,6 +20,7 @@ class MenuBuilder
             ],
           'route' => 'index',
           'children' => false,
+            'show_in_menus' => ['top_menu'],
         ],
         ['label' => 'Новости и акции',
             'attributes' => [
