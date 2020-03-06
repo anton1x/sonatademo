@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ContactsController extends AbstractController
 {
     /**
-     * @Route("/about/contacts", name="contacts")
+     * @Route("/about/contacts", name="contacts", options={"_menu_managed" = true})
      */
     public function index(HeaderOptions $headerOptions)
     {

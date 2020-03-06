@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class LicenseController extends AbstractController
 {
     /**
-     * @Route("/about/license", name="license")
+     * @Route("/about/license", name="license", options={"_menu_managed" = true})
      * @param HeaderOptions $headerOptions
      * @return Response
      */

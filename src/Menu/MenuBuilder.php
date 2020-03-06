@@ -90,7 +90,8 @@ class MenuBuilder
     ];
 
     public function __construct(
-        FactoryInterface $factory
+        FactoryInterface $factory,
+        DbMenuProvider $menuProvider
     )
     {
         $this->factory = $factory;

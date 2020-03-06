@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class DocumentController extends AbstractController
 {
     /**
-     * @Route("/about/documents", name="documents")
+     * @Route("/about/documents", name="documents", options={"_menu_managed" = true})
      */
     public function index(HeaderOptions $viewHeaderOptions)
     {

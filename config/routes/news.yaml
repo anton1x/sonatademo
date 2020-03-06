@@ -1,7 +1,11 @@
 news_list:
   path: /
   controller: app.news.controller::list
+  options:
+    _menu_managed: true
 
 news_view:
   path: /view/{id}
   controller: app.news.controller::view
+  options:
+    _menu_managed: true

@@ -1,7 +1,11 @@
 blog_list:
   path: /
   controller: app.blog.controller::list
+  options:
+    _menu_managed: true
 
 blog_view:
   path: /view/{id}
   controller: app.blog.controller::view
+  options:
+    _menu_managed: true

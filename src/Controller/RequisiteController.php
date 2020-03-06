@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class RequisiteController extends AbstractController
 {
     /**
-     * @Route("/about/requisites", name="requisites")
+     * @Route("/about/requisites", name="requisites", options={"_menu_managed" = true})
      * @param HeaderOptions $headerOptions
      * @return Response
      */

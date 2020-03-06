@@ -48,6 +48,10 @@ sonata_admin:
                 items:
                     - app.admin.license
 
+            Меню:
+                items:
+                    - app.admin.menu_schema_item
+
     security:
              handler: sonata.admin.security.handler.role
 

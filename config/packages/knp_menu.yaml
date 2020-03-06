@@ -27,3 +27,4 @@ services:
     arguments: ["top_menu"]
     tags:
       - { name: knp_menu.menu, alias: top_menu }
+

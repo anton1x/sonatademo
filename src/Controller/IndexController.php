@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class IndexController extends AbstractController
 {
     /**
-     * @Route("/", name="index")
+     * @Route("/", name="index", options={"_menu_managed" = true})
      */
     public function index(HeaderOptions $viewHeaderOptions)
     {

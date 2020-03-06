@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class DevelopersController extends AbstractController
 {
     /**
-     * @Route("/about/developers", name="about_developers")
+     * @Route("/about/developers", name="about_developers", options={"_menu_managed" = true})
      * @param HeaderOptions $viewHeaderOptions
      * @return Response
      */

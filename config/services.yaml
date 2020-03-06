@@ -48,6 +48,8 @@ services:
         autoconfigure: false
 #        autowire: false
 
+
+
     App\Validator\RecaptchaValidatorCustom:
         autoconfigure: false
 
@@ -241,4 +243,11 @@ services:
         arguments: [~, App\Entity\License, 'PixSortableBehaviorBundle:SortableAdmin']
         tags:
             - { name: sonata.admin, manager_type: orm, group: admin, label: Лицензии }
+        public: true
+
+    app.admin.menu_schema_item:
+        class: App\Admin\MenuSchemaItemAdmin
+        arguments: [~, App\Entity\MenuSchemaItem, App\Controller\MenuSchemaItemAdminController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: MenuSchemaItem }
         public: true
