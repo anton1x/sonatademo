@@ -19,6 +19,19 @@ doctrine:
         auto_generate_proxy_classes: true
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
+        # cache start
+#        second_level_cache:
+#            regions:
+#                entity_that_rarely_changes:
+#                    lifetime: 86400 # 1 day
+#                    cache_driver:
+#                        type: service
+#                        id: doctrine.result_cache_provider
+#
+#        result_cache_driver:
+#            type: service
+#            id: doctrine.result_cache_provider
+        # cache end
         mappings:
             App:
                 is_bundle: false
@@ -33,3 +46,18 @@ doctrine:
             SonataClassificationBundle: ~
             ApplicationSonataClassificationBundle: ~
 
+services:
+    doctrine.result_cache_provider:
+        class: Symfony\Component\Cache\DoctrineProvider
+        public: false
+        arguments:
+            - '@doctrine.result_cache_pool'
+
+#doctrine_cache:
+#    providers:
+#        metadata_cache_driver:
+#            type: apc
+#        query_cache_driver:
+#            type: apc
+#        result_cache_driver:
+#            type: apc

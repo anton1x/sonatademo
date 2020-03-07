@@ -5,10 +5,14 @@ namespace App\Controller;
 
 use App\Entity\AddressObject;
 use App\Entity\BaseProduct;
+use App\Entity\MenuSchemaItem;
 use App\Entity\NewsItem;
 use App\Pagination\PaginatedItemsList;
 use App\ViewOptions\HeaderOptions;
+use JMS\Serializer\ArrayTransformerInterface;
 use JMS\Serializer\SerializationContext;
+use JMS\Serializer\Serializer;
+use JMS\Serializer\SerializerBuilder;
 use JMS\Serializer\SerializerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -33,6 +37,21 @@ class ProductsController extends AbstractController
         ;
         return $this->render('layout.html.twig', []);
 
+    }
+
+    /**
+     * @Route(name="test3", path="/test3")
+     */
+    public function test3(ArrayTransformerInterface $serializer)
+    {
+        $rep = $this->getDoctrine()->getRepository(MenuSchemaItem::class);
+        $list = $rep->findBy(['level' => 1], ['left' => 'asc']);
+
+
+        $result = $serializer->toArray($list);
+
+
+        return $this->render('layout.html.twig', []);
     }
 
 

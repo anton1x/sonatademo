@@ -189,6 +189,27 @@
         <source>License Create</source>
         <target>Создать лицензию</target>
       </trans-unit>
+      <trans-unit id="Show In Menus">
+        <source>Show In Menus</source>
+        <target>Отображать элемент</target>
+      </trans-unit>
+      <trans-unit id="MenuSchemaItem">
+        <source>MenuSchemaItem</source>
+        <target>Структура меню</target>
+      </trans-unit>
+      <trans-unit id="Menu Schema Item List">
+        <source>Menu Schema Item List</source>
+        <target>Список элементов</target>
+      </trans-unit>
+      <trans-unit id="Menu Schema Item Create">
+        <source>Menu Schema Item Create</source>
+        <target>Создать элемент</target>
+      </trans-unit>
+      <trans-unit id="Code">
+        <source>Code</source>
+        <target>Символьный код</target>
+      </trans-unit>
+
     </body>
   </file>
 </xliff>

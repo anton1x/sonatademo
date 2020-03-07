@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="ru" target-language="ru" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="news_list">
+        <source>news_list</source>
+        <target>Новости: список</target>
+      </trans-unit>
+      <trans-unit id="news_view">
+        <source>news_view</source>
+        <target>Новости: просмотр</target>
+      </trans-unit>
+      <trans-unit id="blog_list">
+        <source>blog_list</source>
+        <target>Блог: список</target>
+      </trans-unit>
+      <trans-unit id="blog_view">
+        <source>blog_view</source>
+        <target>Блог: просмотр</target>
+      </trans-unit>
+      <trans-unit id="contacts">
+        <source>contacts</source>
+        <target>Контакты</target>
+      </trans-unit>
+      <trans-unit id="documents">
+        <source>documents</source>
+        <target>Документы</target>
+      </trans-unit>
+      <trans-unit id="about_developers">
+        <source>about_developers</source>
+        <target>Застройщикам и УК</target>
+      </trans-unit>
+      <trans-unit id="index">
+        <source>index</source>
+        <target>Главная</target>
+      </trans-unit>
+      <trans-unit id="license">
+        <source>license</source>
+        <target>Лицензии</target>
+      </trans-unit>
+      <trans-unit id="requisites">
+        <source>requisites</source>
+        <target>Реквизиты</target>
+      </trans-unit>
+
+    </body>
+  </file>
+</xliff>

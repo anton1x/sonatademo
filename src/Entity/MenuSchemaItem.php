@@ -5,12 +5,20 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Tree\Traits\NestedSetEntity;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MenuSchemaItemRepository")
+ * @Gedmo\Tree(type="nested")
+ * @JMS\ExclusionPolicy(policy="all")
  */
 class MenuSchemaItem
 {
+
+    use NestedSetEntity;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -20,42 +28,69 @@ class MenuSchemaItem
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @JMS\Expose()
      */
     private $label;
 
     /**
      * @ORM\Column(type="array")
+     * @JMS\Expose()
      */
     private $attributes = [];
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="array")
+     * @JMS\Expose()
+     * @JMS\SerializedName("linkAttributes")
+     */
+    private $linkAttributes = [];
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @JMS\Expose()
      */
     private $route;
 
     /**
      * @ORM\Column(type="array")
+     * @JMS\Expose()
      */
     private $extras = [];
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\MenuSchemaItem", inversedBy="children")
+     * @ORM\ManyToOne(targetEntity="App\Entity\MenuSchemaItem", inversedBy="children", fetch="LAZY")
+     * @Gedmo\TreeParent
      */
     private $parent;
 
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\MenuSchemaItem", mappedBy="parent")
+     * @ORM\OneToMany(targetEntity="App\Entity\MenuSchemaItem", mappedBy="parent", fetch="LAZY")
+     * @ORM\OrderBy({"left" = "ASC"})
+     * @JMS\Expose()
      */
     private $children;
+
+    /**
+     * @ORM\Column(type="array")
+     * @JMS\Expose()
+     */
+    private $showInMenus = [];
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @JMS\Expose()
+     */
+    private $uri = '';
 
 
     public function __construct()
     {
         $this->children = new ArrayCollection();
         $this->attributes = [
-            'class' => '',
+            'class' => 'menu_title',
         ];
+
     }
 
     public function getId(): ?int
@@ -83,6 +118,18 @@ class MenuSchemaItem
     public function setAttributes(array $attributes): self
     {
         $this->attributes = $attributes;
+
+        return $this;
+    }
+
+    public function getLinkAttributes(): ?array
+    {
+        return $this->linkAttributes;
+    }
+
+    public function setLinkAttributes(array $attributes): self
+    {
+        $this->linkAttributes = $attributes;
 
         return $this;
     }
@@ -153,6 +200,64 @@ class MenuSchemaItem
         }
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->getLabel();
+    }
+
+    public function getShowInMenus(): ?array
+    {
+        return $this->showInMenus;
+    }
+
+    public function setShowInMenus(array $showInMenus): self
+    {
+        $this->showInMenus = $showInMenus;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUri(): string
+    {
+        return $this->uri;
+    }
+
+    /**
+     * @param string $uri
+     */
+    public function setUri(string $uri): void
+    {
+        $this->uri = $uri;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLeft(): int
+    {
+        return $this->left;
+    }
+
+    /**
+     * @return int
+     */
+    public function getRight(): int
+    {
+        return $this->right;
+    }
+
+
+
+
+
+    public function getLeveledLabel()
+    {
+        return str_repeat('---', $this->level - 1) . ' ' . $this->getLabel();
     }
 
 

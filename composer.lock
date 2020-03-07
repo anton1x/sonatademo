@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4cb72879f0683f7b42dbaa7320b4e5ce",
+    "content-hash": "e4a880b309cd0990ce653d24f20050b8",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -602,6 +602,97 @@
                 "persistence"
             ],
             "time": "2020-01-18T11:56:15+00:00"
+        },
+        {
+            "name": "doctrine/doctrine-cache-bundle",
+            "version": "1.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/DoctrineCacheBundle.git",
+                "reference": "6bee2f9b339847e8a984427353670bad4e7bdccb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/doctrine/DoctrineCacheBundle/zipball/6bee2f9b339847e8a984427353670bad4e7bdccb",
+                "reference": "6bee2f9b339847e8a984427353670bad4e7bdccb",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/cache": "^1.4.2",
+                "doctrine/inflector": "^1.0",
+                "php": "^7.1",
+                "symfony/doctrine-bridge": "^3.4|^4.0"
+            },
+            "require-dev": {
+                "instaclick/coding-standard": "~1.1",
+                "instaclick/object-calisthenics-sniffs": "dev-master",
+                "instaclick/symfony2-coding-standard": "dev-remaster",
+                "phpunit/phpunit": "^7.0",
+                "predis/predis": "~0.8",
+                "satooshi/php-coveralls": "^1.0",
+                "squizlabs/php_codesniffer": "~1.5",
+                "symfony/console": "^3.4|^4.0",
+                "symfony/finder": "^3.4|^4.0",
+                "symfony/framework-bundle": "^3.4|^4.0",
+                "symfony/phpunit-bridge": "^3.4|^4.0",
+                "symfony/security-acl": "^2.8",
+                "symfony/validator": "^3.4|^4.0",
+                "symfony/yaml": "^3.4|^4.0"
+            },
+            "suggest": {
+                "symfony/security-acl": "For using this bundle to cache ACLs"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.4.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Doctrine\\Bundle\\DoctrineCacheBundle\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Benjamin Eberlei",
+                    "email": "kontakt@beberlei.de"
+                },
+                {
+                    "name": "Fabio B. Silva",
+                    "email": "fabio.bat.silva@gmail.com"
+                },
+                {
+                    "name": "Guilherme Blanco",
+                    "email": "guilhermeblanco@hotmail.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+                },
+                {
+                    "name": "Doctrine Project",
+                    "homepage": "http://www.doctrine-project.org/"
+                }
+            ],
+            "description": "Symfony Bundle for Doctrine Cache",
+            "homepage": "https://www.doctrine-project.org",
+            "keywords": [
+                "cache",
+                "caching"
+            ],
+            "time": "2019-11-29T11:22:01+00:00"
         },
         {
             "name": "doctrine/doctrine-migrations-bundle",
@@ -3211,6 +3302,61 @@
                 "markdown"
             ],
             "time": "2019-12-02T02:32:27+00:00"
+        },
+        {
+            "name": "mikeevstropov/sortable-tree-bundle",
+            "version": "v1.1",
+            "target-dir": "Mev/SortableTreeBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mikeevstropov/mevSortableTreeBundle.git",
+                "reference": "7fb736b740a0c7d6f5d85a927934044fe210f546"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mikeevstropov/mevSortableTreeBundle/zipball/7fb736b740a0c7d6f5d85a927934044fe210f546",
+                "reference": "7fb736b740a0c7d6f5d85a927934044fe210f546",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "symfony/form": ">=2.1",
+                "symfony/framework-bundle": ">=2.1"
+            },
+            "require-dev": {
+                "gedmo/doctrine-extensions": ">=2.2"
+            },
+            "suggest": {
+                "sonata-project/admin-bundle": "Can be easily integrated with Sonata Admin bundle",
+                "stof/doctrine-extensions-bundle": "1.1.*@dev"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "Mev\\SortableTreeBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mike Evstropov",
+                    "email": "mike.evstropov@gmail.com"
+                }
+            ],
+            "description": "Offers a sortable feature for your Symfony2/3 admin tree listing",
+            "homepage": "https://github.com/mikeevstropov/mevSortableTreeBundle",
+            "keywords": [
+                "admin",
+                "sonata",
+                "sortable",
+                "symfony",
+                "tree"
+            ],
+            "abandoned": true,
+            "time": "2016-08-09T07:55:57+00:00"
         },
         {
             "name": "nikic/php-parser",

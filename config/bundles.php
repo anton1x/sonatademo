@@ -34,4 +34,6 @@ return [
     Pix\SortableBehaviorBundle\PixSortableBehaviorBundle::class => ['all' => true],
     Knp\Bundle\MarkdownBundle\KnpMarkdownBundle::class => ['all' => true],
     Sonata\FormatterBundle\SonataFormatterBundle::class => ['all' => true],
+    Mev\SortableTreeBundle\MevSortableTreeBundle::class => ['all' => true],
+    Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle::class => ['all' => true],
 ];

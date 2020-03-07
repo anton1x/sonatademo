@@ -44,6 +44,9 @@
             "./src/Repository/.gitignore"
         ]
     },
+    "doctrine/doctrine-cache-bundle": {
+        "version": "1.4.0"
+    },
     "doctrine/doctrine-migrations-bundle": {
         "version": "1.2",
         "recipe": {
@@ -215,6 +218,9 @@
     },
     "michelf/php-markdown": {
         "version": "1.9.0"
+    },
+    "mikeevstropov/sortable-tree-bundle": {
+        "version": "v1.1"
     },
     "monolog/monolog": {
         "version": "1.25.1"

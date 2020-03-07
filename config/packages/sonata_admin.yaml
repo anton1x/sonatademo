@@ -49,6 +49,7 @@ sonata_admin:
                     - app.admin.license
 
             Меню:
+                icon: '<i class="fa fa-bars"></i>'
                 items:
                     - app.admin.menu_schema_item
 
