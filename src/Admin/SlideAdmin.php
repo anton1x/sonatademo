@@ -51,9 +51,12 @@ final class SlideAdmin extends AbstractAdmin
             'label' => 'Тип',
         ]);
 
+        $fileManagerHref = $this->getConfigurationPool()->getContainer()->get('router')->generate('file_manager', ['conf' => 'default']);
+
         $formMapper->add('body', TextareaType::class, [
             'label' => 'HTML-код',
             'required' => false,
+            'help' => sprintf('Для загрузки файлов используйте <a href="%s" target="_blank">файл-менеджер</a>', $fileManagerHref),
             'attr' => [
                 'rows' => 5
             ],

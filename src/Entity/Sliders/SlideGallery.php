@@ -2,6 +2,8 @@
 
 namespace App\Entity\Sliders;
 
+use App\Application\Sonata\MediaBundle\Entity\Gallery;
+use App\Application\Sonata\MediaBundle\Entity\Media;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -34,9 +36,22 @@ class SlideGallery
      */
     private $title;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Application\Sonata\MediaBundle\Entity\Media", cascade={"persist"}, inversedBy="slideGalleries")
+     */
+    private $additionalImages;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Application\Sonata\MediaBundle\Entity\Gallery", cascade={"persist", "remove"})
+     */
+    private $additionalGallery;
+
+
     public function __construct()
     {
         $this->slides = new ArrayCollection();
+        $this->additionalImages = new ArrayCollection();
+        $this->additionalGallery = new Gallery();
     }
 
     public function getId(): ?int
@@ -111,6 +126,53 @@ class SlideGallery
     {
         $this->title = $title;
     }
+
+    /**
+     * @return Collection|Media[]
+     */
+    public function getAdditionalImages(): Collection
+    {
+        return $this->additionalImages;
+    }
+
+    public function addAdditionalImage(Media $additionalImage): self
+    {
+        if (!$this->additionalImages->contains($additionalImage)) {
+            $this->additionalImages[] = $additionalImage;
+        }
+
+        return $this;
+    }
+
+    public function removeAdditionalImage(Media $additionalImage): self
+    {
+        if ($this->additionalImages->contains($additionalImage)) {
+            $this->additionalImages->removeElement($additionalImage);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Gallery
+     */
+    public function getAdditionalGallery(): Gallery
+    {
+        if (null === $this->additionalGallery)
+            $this->additionalGallery = new Gallery();
+        return $this->additionalGallery;
+    }
+
+    /**
+     * @param Gallery $additionalGallery
+     */
+    public function setAdditionalGallery(Gallery $additionalGallery): void
+    {
+        $this->additionalGallery = $additionalGallery;
+    }
+
+
+
 
 
 }

@@ -251,3 +251,10 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, group: admin, label: MenuSchemaItem }
         public: true
+
+    app.admin.custom_view:
+        class: App\Admin\CustomViewAdmin
+        arguments: [~, '', App\Admin\Controller\CustomViewCRUDController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: CustomFM }
+        public: true

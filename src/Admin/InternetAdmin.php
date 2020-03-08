@@ -54,7 +54,6 @@ class InternetAdmin extends ProductAdmin
     {
 
         $listMapper
-            ->add('id')
             ->addIdentifier('title')
             ->add('pricing_type', null, [
                 'label' => 'Ценовая категория',

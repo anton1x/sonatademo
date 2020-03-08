@@ -15,6 +15,12 @@
         <id name="id" type="integer" column="id">
             <generator strategy="AUTO"/>
         </id>
+
+        <many-to-many field="slideGalleries" target-entity="App\Entity\Sliders\SlideGallery"  mapped-by="additionalImages">
+            <cascade>
+                <cascade-persist/>
+            </cascade>
+        </many-to-many>
     </entity>
     
     

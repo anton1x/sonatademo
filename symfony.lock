@@ -1,9 +1,15 @@
 {
+    "artgris/filemanager-bundle": {
+        "version": "1.6.4"
+    },
     "behat/transliterator": {
         "version": "v1.3.0"
     },
     "cocur/slugify": {
         "version": "v3.2"
+    },
+    "composer/installers": {
+        "version": "v1.8.0"
     },
     "doctrine/annotations": {
         "version": "1.0",
@@ -219,9 +225,6 @@
     "michelf/php-markdown": {
         "version": "1.9.0"
     },
-    "mikeevstropov/sortable-tree-bundle": {
-        "version": "v1.1"
-    },
     "monolog/monolog": {
         "version": "1.25.1"
     },
@@ -233,6 +236,9 @@
     },
     "ocramius/proxy-manager": {
         "version": "2.2.3"
+    },
+    "oomphinc/composer-installers-extender": {
+        "version": "v1.1.2"
     },
     "php": {
         "version": "7.2"

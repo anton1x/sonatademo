@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Admin;
 
+use App\Application\Sonata\MediaBundle\Entity\Media;
 use App\Entity\Sliders\SlideAbstract;
 use Knp\Menu\ItemInterface as MenuItemInterface;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
@@ -67,6 +68,18 @@ final class SlideGalleryAdmin extends AbstractAdmin
                 ])
             ->end()
             ;
+    }
+
+
+    private function getAdditionalImagesChoices()
+    {
+        $result = [];
+
+        foreach ($this->getSubject()->getAdditionalImages() as $image) {
+            $result [ $image->getName() ] = $image;
+        }
+
+        return $result;
     }
 
 }

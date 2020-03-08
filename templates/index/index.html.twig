@@ -238,11 +238,11 @@
                     <form action="/" id="main_form_make_payment">
                         <div class="form_fields">
                             <div>
-                                <div class="title">Логин:</div>
+                                <div class="title"><span class="star">*</span> Логин:</div>
                                 <div class="input"><input type="text" name="login"></div>
                             </div>
                             <div>
-                                <div class="title">Сумма:</div>
+                                <div class="title"><span class="star">*</span> Сумма:</div>
                                 <div class="input"><input type="text" name="sum"></div>
                             </div>
                         </div>
@@ -257,7 +257,8 @@
                         document.getElementById('main_form_make_payment'),
                         function(data, formdata, form)
                         {
-                            console.log('Форма проверена, оправляй куда надо', data, formdata);
+                            pay(data.login, parseInt(data.sum));
+                            //console.log('Форма проверена, оправляй куда надо', data, formdata);
                         },
                         function(data, form)
                         {
@@ -398,4 +399,30 @@
             display: none !important;
         }
     </style>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://widget.cloudpayments.ru/bundles/cloudpayments"></script>
+    <script type="text/javascript">
+
+        window.pay = function (login, amount) {
+            var widget = new cp.CloudPayments();
+            widget.charge({ // options
+                    publicId: 'test_api_00000000000000000000001',  //id из личного кабинета
+                    description: 'Пополнение счета для клиента ' + login, //назначение
+                    amount: amount, //сумма
+                    currency: 'RUB', //валюта
+                    accountId: login, //идентификатор плательщика (необязательно)
+                    skin: "modern" //дизайн виджета
+                },
+                function (options) { // success
+                    //действие при успешной оплате
+                },
+                function (reason, options) { // fail
+                    //действие при неуспешной оплате
+                });
+        };
+
+    </script>
 {% endblock %}
