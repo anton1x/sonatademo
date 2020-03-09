@@ -15,6 +15,12 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 final class AddressObjectAdmin extends AbstractAdmin
 {
 
+    protected $datagridValues = [
+        '_page' => 1,
+        '_sort_order' => 'ASC',
+        '_sort_by' => 'position',
+    ];
+
     protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
     {
         $datagridMapper

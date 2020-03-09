@@ -144,7 +144,7 @@ services:
 
     app.admin.address_object:
         class: App\Admin\AddressObjectAdmin
-        arguments: [~, App\Entity\AddressObject, ~]
+        arguments: [~, App\Entity\AddressObject, 'PixSortableBehaviorBundle:SortableAdmin']
         tags:
             - { name: sonata.admin, manager_type: orm, group: admin, label: "Адреса подключения" }
         public: true

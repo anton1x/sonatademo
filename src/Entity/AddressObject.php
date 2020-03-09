@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Entity\Addons\SortableList;
+use App\Entity\Addons\SortableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -13,8 +15,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="App\Repository\AddressObjectRepository")
  * @UniqueEntity(fields={"title", "address"})
  */
-class AddressObject
+class AddressObject implements SortableList
 {
+    use SortableTrait;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
