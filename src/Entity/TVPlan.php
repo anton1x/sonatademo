@@ -12,7 +12,7 @@ use JMS\Serializer\Annotation as JMS;
 
 /**
  * Class TVPlan
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="App\Repository\TVPlanRepository")
  */
 class TVPlan extends BaseProduct
 {
@@ -40,6 +40,11 @@ class TVPlan extends BaseProduct
      * @JMS\Type("media_links_tv_plans")
      */
     private $image;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $smotreshkaId = 0;
 
     public function __construct()
     {
@@ -120,6 +125,26 @@ class TVPlan extends BaseProduct
 
         return $this;
     }
+
+    /**
+     * @return int
+     */
+    public function getSmotreshkaId()
+    {
+        return $this->smotreshkaId;
+    }
+
+    /**
+     * @param int $smotreshkaId
+     * @return TVPlan
+     */
+    public function setSmotreshkaId($smotreshkaId): self
+    {
+        $this->smotreshkaId = $smotreshkaId;
+        return $this;
+    }
+
+
 
     /**
      * @JMS\VirtualProperty(name="scale_title")

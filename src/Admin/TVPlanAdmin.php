@@ -4,6 +4,8 @@
 namespace App\Admin;
 
 use App\Entity\AddressObject;
+use App\Entity\TVPlan;
+use App\Repository\TVPlanRepository;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\MediaBundle\Form\Type\MediaType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -29,6 +31,10 @@ class TVPlanAdmin extends ProductAdmin
                     ])
                     ->add('includeTheatres', CheckboxType::class, [
                         'label' => 'Включает online-кинотеатры',
+                        'required' => false,
+                    ])
+                    ->add('smotreshkaId', IntegerType::class, [
+                        'label' => 'ID в сервисе Смотрешка',
                         'required' => false,
                     ])
                 ->end()

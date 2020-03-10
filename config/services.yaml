@@ -26,6 +26,7 @@ parameters:
     google_recaptcha_site_key: '%env(GOOGLE_RECAPTCHA_SITE_KEY)%'
     blog.title: Блог
 
+
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -36,7 +37,8 @@ services:
     # this creates a service per class whose id is the fully-qualified class name
     App\:
         resource: '../src/*'
-        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Application,Kernel.php}'
+        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Application,Service/Smotreshka,Kernel.php}'
+
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
@@ -134,6 +136,8 @@ services:
     mailer:
         alias: fos_user.mailer.noop
         public: true
+
+
 
     admin.news_item:
         class: App\Admin\NewsItemAdmin
@@ -258,3 +262,7 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, group: admin, label: CustomFM }
         public: true
+
+
+imports:
+    - { resource: 'services/smotreshka.yaml' }
