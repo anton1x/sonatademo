@@ -14,9 +14,14 @@ framework:
         # APCu (not recommended with heavy random-write workloads as memory fragmentation can cause perf issues)
         app: cache.adapter.apcu
 
+
+
         # Namespaced pools use the above "app" backend by default
         #pools:
             #my.dedicated.cache: null
         pools: #        <==== new
             doctrine.result_cache_pool:
-                adapter: cache.adapter.array
+                adapter: cache.adapter.apcu
+            app.global_settings.cache:
+                adapter: cache.adapter.filesystem
+                default_lifetime: 0

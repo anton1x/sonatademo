@@ -57,7 +57,8 @@ export default class extends controller {
         maxWidth : 'none',
         minWidth : 0,
         maximaze_width : false,
-        close_on_bg_click : true
+        close_on_bg_click : true,
+        wrapper_extra_classes : '',
     };
 
     constructor(api, id, options)
@@ -69,6 +70,7 @@ export default class extends controller {
 
         this.is_showing = false;
 
+        //this.clearSelection();
         this.#wrapper = document.createElement('DIV');
 
         this.#DLAnimate = new DLAnimate();
@@ -97,6 +99,7 @@ export default class extends controller {
         this.#container.classList.add('container');
         this.#box_item = document.createElement('DIV');
         this.#box_item.classList.add('box_item');
+        //this.#box_item.tabIndex = 1;
 
         this.#container.appendChild(this.#box_item);
         td.appendChild(this.#container);
@@ -115,7 +118,7 @@ export default class extends controller {
         if (this.#options.type == 'box')
         {
             this.#box_item.innerHTML = `
-                <div class="box_item_std_wrapper">
+                <div class="box_item_std_wrapper ${this.#options.wrapper_extra_classes}">
                     <div class="top">
                         `+ (this.#options.title.length > 0 ? `<div class="title">${this.#options.title}</div>` : ``) +`
                         <div class="close"><a href="javascript://" title="Закрыть"><span>&nbsp;</span></a></div>
@@ -138,6 +141,10 @@ export default class extends controller {
             this.#content_item.innerHTML = this.#options.content;
         }
 
+        this.#content_item.querySelectorAll(`:scope .close_this_box`).forEach((a) => {
+            a.addEventListener('click', this.#on_close);
+        });
+
         this.#on_bg_click = (e) =>
         {
             if (this.getApi().getFuncs().isTouchDevice() == false && e.target.querySelector('.box_item') !== null)
@@ -149,6 +156,7 @@ export default class extends controller {
             }
         };
         this.#wrapper.addEventListener('click', this.#on_bg_click);
+        
 
         this.#options.box_init(this, this.#content_item);
 
@@ -189,11 +197,13 @@ export default class extends controller {
                 return new Promise((ar) => {
                     if (is_animate)
                     {
+                        this.#wrapper.classList.add('animating');
                         this.#DLAnimate.show(this.#box_item, {
                             name: this.#options.animate_class_prefix,
                             afterEnter : () => {
                                 ar();
                                 this.execEvent('box_ready');
+                                this.#wrapper.classList.remove('animating');
                             }
                         });
                     }
@@ -271,6 +281,7 @@ export default class extends controller {
                         {
                             if (this.#options.animate_settings.multiple_show.mode == 'together')
                             {
+                                
                                 last_box.hideWrapper(false).then(() => {
                                     p2r();
                                     this.execEvent('bg_ready');
@@ -389,11 +400,13 @@ export default class extends controller {
                 return new Promise((ar) => {
                     if (is_animate)
                     {
+                        this.#wrapper.classList.add('animating');
                         this.#DLAnimate.hide(this.#box_item, {
                             name: this.#options.animate_class_prefix,
                             afterLeave : (e) => {
                                 ar();
                                 this.execEvent('box_hidden');
+                                this.#wrapper.classList.add('animating');
                             }
                         });
                     }
@@ -532,6 +545,11 @@ export default class extends controller {
         {
             this.#box_item.querySelector(`.box_item_std_wrapper > .top > .close > a`).removeEventListener('click', this.#on_close);
         }
+
+        this.#content_item.querySelectorAll(`.close_this_box`).forEach((a) => {
+            a.removeEventListener('click', this.#on_close);
+        });
+
         this.#wrapper.removeEventListener('click', this.#on_bg_click);
 
         this.#options.box_destroy(this, this.#content_item, full);
@@ -576,7 +594,14 @@ export default class extends controller {
 
     scrollToTop()
     {
-        this.#wrapper.scrollTop = 0;
+        if (this.getApi().getFuncs().isTouchDevice())
+        {
+            window.scrollTo({ top: 0 });
+        }
+        else
+        {
+            this.#wrapper.scrollTop = 0;
+        }
     }
 
     assingOptions(options)
@@ -608,6 +633,21 @@ export default class extends controller {
     {
         return this.#animation_end_promise;
     }
+
+    /*
+    clearSelection()
+    {
+        if (window.getSelection) {
+            if (window.getSelection().empty) {
+                window.getSelection().empty();
+            } else if (window.getSelection().removeAllRanges) {
+                window.getSelection().removeAllRanges();
+            }
+        } else if (document.selection) {
+            document.selection.empty();
+        }
+    }
+    */
 
     #bg_ready_ft = true;
     execEvent(event)

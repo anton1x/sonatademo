@@ -63,6 +63,11 @@ class SmotreshkaHelper
         });
     }
 
+    public function clearCache()
+    {
+        $this->cache->delete($this->getKey('list'));
+    }
+
     protected function processData($data)
     {
         $result = [];
@@ -72,5 +77,16 @@ class SmotreshkaHelper
         return $result;
     }
 
+    public function getFormattedInfo(TVPlan $plan)
+    {
+        $channels = $this->loadInfo()[$plan->getId()] ?? [];
+
+        $result = [
+            'name' => $plan->getTitle(),
+            'channels' => array_values($channels),
+        ];
+
+        return $result;
+    }
 
 }

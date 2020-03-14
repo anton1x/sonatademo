@@ -22,10 +22,10 @@
             <template v-for="(i,c) in options">
                 <div :style="countTitleDivStyle(i, c)" :class="{sel : i.value == selectedVal}">
                     <div>
-                        <a href="javascript://">
+                        <div class="title">
                             <span class="help"><span class="q" @click="showHelpBlock(i.value)">&nbsp;</span></span>
                             <span class="text" @click="selOption(i.value)"><slot name="title" v-bind="i">{{i.text}}</slot></span>
-                        </a>
+                        </div>
                         <div v-if="showingHelpBlock == i.value && helpBlocksMode == 1" class="title_help_wrapper">
                             <div class="arrow"></div>
                             <div class="content">

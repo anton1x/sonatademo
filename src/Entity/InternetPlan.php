@@ -22,7 +22,7 @@ class InternetPlan extends BaseProduct
     private $speed = 0;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\PricingType", inversedBy="internetPlans")
+     * @ORM\ManyToOne(targetEntity="App\Entity\PricingType", inversedBy="internetPlans", fetch="LAZY")
      * @ORM\JoinColumn(name="pricing_type_id", referencedColumnName="id", nullable=true)
      * @JMS\Exclude()
      */

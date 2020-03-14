@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "eb6603922a558eeee1ce80e2e69c97dc",
+    "content-hash": "a779b97f5e1221bd502c6aa4b54704e6",
     "packages": [
         {
             "name": "artgris/filemanager-bundle",
@@ -3953,6 +3953,91 @@
                 "psr-3"
             ],
             "time": "2019-11-01T11:05:21+00:00"
+        },
+        {
+            "name": "purplebooth/htmlstrip",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PurpleBooth/htmlstrip.git",
+                "reference": "ce28341a264537f4266067f9f75a4ce3a880e61b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PurpleBooth/htmlstrip/zipball/ce28341a264537f4266067f9f75a4ce3a880e61b",
+                "reference": "ce28341a264537f4266067f9f75a4ce3a880e61b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "henrikbjorn/phpspec-code-coverage": "^2.1",
+                "phpspec/phpspec": "^2.0.0",
+                "satooshi/php-coveralls": "^1.0",
+                "sllh/php-cs-fixer-styleci-bridge": "^2.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Billie Alice Thompson",
+                    "email": "billie@billiecodes.com"
+                }
+            ],
+            "description": "Convert a small subset of html into something reasonable you can put in plain text email, or SMS.",
+            "time": "2017-08-29T16:21:07+00:00"
+        },
+        {
+            "name": "purplebooth/twig-htmlstrip",
+            "version": "v1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PurpleBooth/twig-htmlstrip.git",
+                "reference": "980063928d7e5b15e50ae0c0ec0e567197f1106a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PurpleBooth/twig-htmlstrip/zipball/980063928d7e5b15e50ae0c0ec0e567197f1106a",
+                "reference": "980063928d7e5b15e50ae0c0ec0e567197f1106a",
+                "shasum": ""
+            },
+            "require": {
+                "purplebooth/htmlstrip": "^1.0.0",
+                "twig/twig": "^1.12.0|^2.0.0"
+            },
+            "require-dev": {
+                "henrikbjorn/phpspec-code-coverage": "^2.1",
+                "phpspec/phpspec": "2.0.*@dev",
+                "satooshi/php-coveralls": "^1.0",
+                "sllh/php-cs-fixer-styleci-bridge": "^2.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Billie Alice Thompson",
+                    "email": "billie@billiecodes.com"
+                }
+            ],
+            "description": "Convert a small subset of html into something reasonable you can put in plain text email, or SMS.",
+            "time": "2017-07-21T10:39:51+00:00"
         },
         {
             "name": "ralouphie/getallheaders",

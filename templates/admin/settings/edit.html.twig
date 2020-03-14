@@ -1,0 +1,24 @@
+{% extends '@SonataAdmin/CRUD/base_edit.html.twig' %}
+
+{% block navbar_title %}
+    Настройки системы
+{% endblock %}
+
+{% block sonata_form_actions %}
+<button type="submit" class="btn btn-success" name="btn_create_and_create"><i class="fa fa-save"></i> <i class="fa fa-list" aria-hidden="true"></i> {{ 'Сохранить' }}</button>
+{% endblock %}
+
+{% block sonata_breadcrumb %}
+    <div class="hidden-xs">
+        <ol class="nav navbar-top-links breadcrumb">
+            <li>
+                <a href="/admin">
+                    <i class="fa fa-home"></i>
+                </a>
+            </li>
+            <li class="active">
+                <span>Настройки системы</span>
+            </li>
+        </ol>
+    </div>
+{% endblock sonata_breadcrumb %}

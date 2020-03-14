@@ -284,7 +284,7 @@ export default {
 
             if (h > 0)
 			{
-				let p = Math.round(this.$refs['scroll_box_w'].offsetHeight / this.$refs['scroll_box_w'].scrollHeight * 100);
+                let p = Math.round(this.$refs['scroll_box_w'].offsetHeight / this.$refs['scroll_box_w'].scrollHeight * 100);
 				if (p < 20)
 				{
 					p = 20;
@@ -300,24 +300,16 @@ export default {
         },
         countScrollerPosition()
         {
-            let max_h = this.$refs['scroller_c'].offsetHeight;
-			var tp = Math.round(this.$refs['scroll_box_w'].scrollTop / this.$refs['scroll_box_w'].scrollHeight * max_h);
-			if (tp < 0)
-			{
-				tp = 0;
-			}
-			else if ((tp + this.$refs['scroller'].offsetHeight) > max_h)
-			{
-				tp = max_h - this.$refs['scroller'].offsetHeight;
-            }
+            let max_h = this.$refs['scroller_c'].offsetHeight - this.$refs['scroller'].offsetHeight;
+            var tp = Math.round(this.$refs['scroll_box_w'].scrollTop / (this.$refs['scroll_box_w'].scrollHeight - this.$refs['scroll_box_w'].offsetHeight) * max_h);
             this.scrollerTP = tp;
             this.$refs['scroller'].style.top = tp+'px';
         },
         countScrollerPositionByTP()
         {
-            let scroll_top = Math.round((this.scrollerTP / (this.$refs['scroller_c'].offsetHeight - this.$refs['scroller'].offsetHeight)) * (this.$refs['scroll_box_w'].scrollHeight - this.$refs['scroll_box_w'].offsetHeight));
-            this.$refs['scroll_box_w'].scrollTop = scroll_top;
-			this.$refs['scroller'].style.top = this.scrollerTP+'px';
+            let pr = this.scrollerTP / (this.$refs['scroller_c'].offsetHeight - this.$refs['scroller'].offsetHeight);
+            this.$refs['scroll_box_w'].scrollTop = Math.round((this.$refs['scroll_box_w'].scrollHeight - this.$refs['scroll_box_w'].offsetHeight) * pr);
+            this.$refs['scroller'].style.top = this.scrollerTP+'px';
         },
         scrollerTouchStart(e)
         {
@@ -335,16 +327,19 @@ export default {
 				this.mouseMovingX = e.pageX;
 				this.mouseMovingY = e.pageY;
 
-				this.scrollerTP += dY;
-				var max_h = this.$refs['scroller_c'].offsetHeight;
-				if (this.scrollerTP < 0)
+                let tp = this.scrollerTP + dY;
+                var max_h = this.$refs['scroller_c'].offsetHeight  - this.$refs['scroller'].offsetHeight;
+
+                if (tp < 0)
 				{
-					this.scrollerTP = 0;
+					tp = 0;
 				}
-				else if ((this.scrollerTP + this.$refs['scroller'].offsetHeight) > max_h)
+				else if (tp > max_h)
 				{
-					this.scrollerTP = max_h - this.$refs['scroller'].offsetHeight;
-				}
+					tp = max_h;
+                }
+
+                this.scrollerTP = tp;
 				this.countScrollerPositionByTP();
 
 			}
@@ -384,7 +379,7 @@ export default {
     created() {
         this.selectedVal = this.value;
         this.selectItemVal = this.selectedOption.value;
-        this.mode = this.custom == 'always' ? 1 : (eApi.getFuncs().isTouchDevice() == true ? 2 : 1);
+        this.mode = this.custom == 'always' ? 1 : (eApi.getFuncs().isTouchDevice() == true && navigator.userAgent.match(/iPhone|iPad|iPod/i) ? 2 : 1);
         this.mouseMoving = false;
         this.mouseMovingX = 0;
         this.mouseMovingY = 0;

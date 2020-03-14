@@ -1,7 +1,7 @@
 <template>
 <div class="block_fading" ref="block_fading">
     <div class="bar" ref="bar" @click="barClick">
-        <div class="icon"><slot name="icon"></slot></div>
+        <div class="icon" v-if="$slots.icon !== undefined"><slot name="icon"></slot></div>
         <div class="title">{{title}}</div>
         <div class="arrow"></div>
     </div>
@@ -15,6 +15,10 @@
 
 export default {
     props : {
+        value : {
+            type: Boolean,
+            default: false
+        },
         datacontent : {
             type: Object,
             default: function() {
@@ -139,10 +143,42 @@ export default {
                 });
                 
             }
+        },
+        updatePosition()
+        {
+            if (this.isOpened == false && this.$refs['content'].classList.contains('show'))
+            {
+                this.$refs['block_fading'].classList.remove('opened');
+                this.$refs['content'].classList.remove('animating-hide');
+                this.$refs['content'].classList.remove('animating-enter');
+                this.$refs['content'].style.removeProperty('max-height');
+                this.$refs['content'].classList.remove('hid');
+                this.$refs['content'].classList.remove('show');
+            }
+            else if (this.isOpened && this.$refs['content'].classList.contains('show') == false)
+            {
+                this.$refs['block_fading'].classList.add('opened');
+                this.$refs['content'].classList.remove('animating-hide');
+                this.$refs['content'].classList.remove('animating-enter');
+                this.$refs['content'].style.removeProperty('max-height');
+                this.$refs['content'].classList.remove('hid');
+                this.$refs['content'].classList.add('show');
+            }
         }
     },
     watch : {
-        
+        value : function(v)
+        {
+            if (v != this.isOpened)
+            {
+                this.isOpened = v;
+                this.updatePosition();
+            }
+        },
+        isOpened : function(v)
+        {
+            this.$emit('input', v);
+        }
     },
     created() {
         
@@ -152,6 +188,12 @@ export default {
     },
     mounted() {
         this.$refs['content'].addEventListener('transitionend', this.endF);
+        this.isOpened = this.value;
+        this.updatePosition();
+    },
+    updated() {
+        this.isOpened = this.value;
+        this.updatePosition();
     },
     beforeDestroy() {
         this.$refs['content'].removeEventListener('transitionend', this.endF);

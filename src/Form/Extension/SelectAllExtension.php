@@ -18,7 +18,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class SelectAllExtension extends AbstractTypeExtension
 {
-    public function getExtendedTypes()
+    public static function getExtendedTypes()
     {
         return [EntityType::class];
     }

@@ -5,6 +5,15 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     app.products.categories.context: products
+
+    app.products.categories.sale_list:
+      - internet_basic
+      - tv_basic
+      - additional_phone
+      - additional_vision_home
+      - additional_vision_parking
+
+
     sonata.classification.manager.category.class: App\Application\Sonata\ClassificationBundle\Entity\CategoryManager
 
     amocrm.cookie_path: '%kernel.project_dir%/var'
@@ -25,6 +34,8 @@ parameters:
     blog.view.route: blog_view
     google_recaptcha_site_key: '%env(GOOGLE_RECAPTCHA_SITE_KEY)%'
     blog.title: Блог
+
+
 
 
 services:
@@ -64,6 +75,11 @@ services:
     App\Service\ConnectionFormHandler:
         calls:
             - [ 'setOptions', [{ from: '%connection_order.mailing.from%', to: '%connection_order.mailing.to%' }]]
+
+    App\Service\Products\ProductsHandler:
+        calls:
+            - [ 'setOptions', [{ from: '%connection_order.mailing.from%', to: '%connection_order.mailing.to%' }]]
+
 
     App\News\NewsItemTypeDetector:
 #        class: App\News\NewsItemTypeDetector
@@ -256,13 +272,54 @@ services:
             - { name: sonata.admin, manager_type: orm, group: admin, label: MenuSchemaItem }
         public: true
 
-    app.admin.custom_view:
-        class: App\Admin\CustomViewAdmin
-        arguments: [~, '', App\Admin\Controller\CustomViewCRUDController]
+#    app.admin.custom_view:
+#        class: App\Admin\CustomViewAdmin
+#        arguments: [~, '', App\Admin\Controller\CustomViewCRUDController]
+#        tags:
+#            - { name: sonata.admin, manager_type: orm, group: admin, label: CustomFM }
+#        public: true
+
+    app.admin.global_settings:
+        class: App\Admin\GlobalSettingsAdmin
+        arguments: [~, App\Entity\GlobalSettings, App\Admin\Controller\GlobalSettingsController]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: CustomFM }
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Настройки }
+        public: true
+        calls:
+            - [ setTemplate, [edit, 'admin/settings/edit.html.twig']]
+
+    App\GlobalSettings\GlobalSettingsManager:
+        arguments: ['@kernel', '@app.global_settings.cache']
+        calls:
+            - [ 'loadOptions' ]
         public: true
 
+    App\Admin\Controller\GlobalSettingsController:
+        arguments: ['@App\GlobalSettings\GlobalSettingsManager']
+        calls:
+            - [setContainer, ['@service_container']]
+        tags: ['controller.service_arguments']
+
+    app.admin.menu_listener:
+        class: App\Admin\EventListener\MenuBuilderListener
+        tags:
+            - { name: kernel.event_listener, event: sonata.admin.event.configure.menu.sidebar, method: addMenuItems }
+
+    App\Service\Products\Calculator:
+        arguments: ['@App\Repository\AddressObjectRepository', '@App\Repository\ProductsRepository', !tagged_iterator 'app.products.data_reducer', '@App\Service\Products\ProductsHandler']
+        public: true
+
+    App\Service\Products\Reducers\PriceReducer:
+      autoconfigure: false
+      tags:
+        - { name: app.products.data_reducer, priority: -1}
+      calls:
+        - [ 'setSaleCats', ['%app.products.categories.sale_list%']]
+
+    purplebooth.twig.html_stripper_extension:
+        class: PurpleBooth\HtmlStripperExtension
+        tags:
+            - { name: twig.extension }
 
 imports:
     - { resource: 'services/smotreshka.yaml' }

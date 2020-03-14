@@ -21,6 +21,19 @@
     }
 }
 
+.touch-dev(@content) {
+    @media (pointer:coarse) {
+        @content();
+    }
+}
+
+.not-touch-dev(@content) {
+    @media not (pointer:coarse) {
+        @content();
+    }
+}
+
+
 .x2(@content){
     @media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 140dpi) {
         @content();
@@ -49,4 +62,10 @@
 .weight-light(){
     font-weight:300;
     //font-family: 'Roboto Light';
+}
+
+.sm-block-min(@content){
+    @media screen and (min-width: @break_sm + 1px){
+        @content();
+    }
 }

@@ -6,7 +6,9 @@ namespace App\Repository;
 
 use App\Application\Sonata\ClassificationBundle\Entity\Category;
 use App\Entity\BaseProduct;
+use App\Entity\Device;
 use App\Entity\Product;
+use App\Entity\TVPlan;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManagerInterface;
@@ -22,7 +24,7 @@ class ProductsRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry, $class = null)
     {
-        if(null === $class){
+        if (null === $class) {
             parent::__construct($registry, BaseProduct::class);
             return;
         }
@@ -31,23 +33,44 @@ class ProductsRepository extends ServiceEntityRepository
 
     public function getAllProductsGroupedByCategory()
     {
-        $iterator = $this->createQueryBuilder('p')
-            ->select('p')
-            ->leftJoin('p.category', 'category')
-            ->orderBy("category.id")
-            ->getQuery()
-            ->iterate();
+        $list = $this->getAllProducts();
 
+        return $this->groupListByCategoryCode($list);
+    }
+
+    public function groupListByCategoryCode($list)
+    {
         $result = [];
 
-        foreach ($iterator as $key => $row) {
+        foreach ($list as $row) {
             /**
              * @var $productItem BaseProduct
              */
-            $productItem = $row [0];
+            $productItem = $row;
             $result [$productItem->getCategory()->getCode()] [$productItem->getId()] = $productItem;
         }
 
+
+        return $result;
+    }
+
+    public function getAllProducts()
+    {
+        $list = $this->createQueryBuilder('p')
+            ->select('p, category')
+            ->leftJoin('p.category', 'category')
+            ->orderBy("category.id")
+            ->getQuery()
+            ->getResult();
+
+        $result = [];
+
+        foreach ($list as $productItem) {
+            /**
+             * @var $productItem BaseProduct
+             */
+            $result [$productItem->getId()] = $productItem;
+        }
 
         return $result;
     }
@@ -59,8 +82,7 @@ class ProductsRepository extends ServiceEntityRepository
             ->join('p.category', 'category')
             ->join('category.parent', 'category_parent')
             ->andWhere('category_parent.code = :code')
-            ->orderBy('p.category,p.sort')
-        ;
+            ->orderBy('p.category,p.sort');
     }
 
 

@@ -39,6 +39,7 @@ class AddressObject implements SortableList
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\TVPlan", mappedBy="assignedAddressObjects")
      * @JMS\Type("object_ids")
+     * @ORM\Cache()
      */
     private $tvPlans;
 

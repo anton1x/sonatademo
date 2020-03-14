@@ -20,7 +20,7 @@ class Device extends BaseProduct
     public const type = "device";
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Application\Sonata\MediaBundle\Entity\Media", fetch="LAZY", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="App\Application\Sonata\MediaBundle\Entity\Media", fetch="EAGER", cascade={"persist"})
      * @JMS\Groups({"calculator", "sonata_api_read"})
      * @JMS\Type("media_links_devices")
      */

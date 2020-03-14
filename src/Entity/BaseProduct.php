@@ -170,5 +170,10 @@ abstract class BaseProduct
         return $this;
     }
 
+    public function canBeDiscounted()
+    {
+        return true;
+    }
+
 
 }

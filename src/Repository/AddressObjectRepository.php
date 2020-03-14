@@ -19,6 +19,21 @@ class AddressObjectRepository extends ServiceEntityRepository
         parent::__construct($registry, AddressObject::class);
     }
 
+    public function getSortedList()
+    {
+        return $this->createQueryBuilder('a')
+            ->select('a, tvplans, connection_type, pricing_type')
+            ->leftJoin('a.tvPlans', 'tvplans')
+            ->join('a.connectionType', 'connection_type')
+            ->join('a.pricingType', 'pricing_type')
+            //->leftJoin('pricing_type.internetPlans', 'internet_plans')
+            //->leftJoin('connection_type.devices', 'devices')
+            ->orderBy('a.position', 'asc')
+            ->getQuery()
+            ->execute()
+            ;
+    }
+
     // /**
     //  * @return AddressObject[] Returns an array of AddressObject objects
     //  */

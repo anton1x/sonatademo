@@ -140,6 +140,7 @@ export default class extends controller {
             {
                 box_options = Object.assign(box_options, result[0]);
             }
+            //console.log(box_options);
             let box = this.getApi().getBoxes().create(box_options);
 
         }).catch((e) => {

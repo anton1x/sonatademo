@@ -8,6 +8,7 @@ use App\Entity\BaseProduct;
 use App\Entity\MenuSchemaItem;
 use App\Entity\NewsItem;
 use App\Pagination\PaginatedItemsList;
+use App\Service\Products\Calculator;
 use App\ViewOptions\HeaderOptions;
 use JMS\Serializer\ArrayTransformerInterface;
 use JMS\Serializer\SerializationContext;
@@ -22,21 +23,44 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ProductsController extends AbstractController
 {
-    
-    /**
-     * @Route(name="test2", path="/test2")
-     * @Route(name="docs", path="/docs")
-     */
-    public function indexAction(HeaderOptions $viewHeaderOptions)
-    {
-        $viewHeaderOptions
-            ->setSlidered()
-            //->setFullInner()
-            //->setOption('banner', '/files/headers/docs.jpg')
-            ->setOption('body_class', 'geralt')
-        ;
-        return $this->render('layout.html.twig', []);
 
+    /**
+     * @Route(name="calculator_index", path="/connect")
+     * @param Calculator $calculator
+     * @param HeaderOptions $viewHeaderOptions
+     * @param SerializerInterface $serializer
+     * @return Response
+     */
+    public function indexAction(Calculator $calculator, HeaderOptions $viewHeaderOptions, SerializerInterface $serializer)
+    {
+
+        $resultSerialized = $serializer->serialize($calculator->getCalculatorData(), 'json', SerializationContext::create()->setSerializeNull(true));
+
+        $viewHeaderOptions
+            ->setShortInner()
+        ;
+
+        return $this->render('products/index.html.twig', [
+            'jsonList' => $resultSerialized,
+        ]);
+
+    }
+
+    /**
+     * @param Request $request
+     * @param SerializerInterface $serializer
+     * @param Calculator $calculator
+     * @Route(name="calculator_send", path="/connect/send")
+     * @return Response
+     */
+    public function sendAction(Request $request, SerializerInterface $serializer, Calculator $calculator)
+    {
+
+        $data = $serializer->deserialize($request->getContent(), 'array', 'json');
+
+        dump($calculator->parseCalculatorAnswer($data));
+
+        $this->createAccessDeniedException();
     }
 
     /**

@@ -14,11 +14,37 @@ html.boxed {
     filter: blur(5px);
 }
 
+/*
+html.lock_position {
+    overflow:hidden;
+}
+
 body.lock_position {
     height:100%;
     overflow:hidden;
     width:100%;
-    position:fixed;
+    position:absolute;
+}
+*/
+
+.boxed_hidden {
+    position: absolute !important;
+    top:0 !important;
+    left:0 !important;
+    width:100% !important;
+    height:1px !important;
+    z-index:0 !important;
+    min-height:0 !important;
+    overflow: hidden !important;
+    opacity:0.1 !important;
+}
+
+#boxes_container_all {
+    &.touch_device {
+        position: relative;
+        min-height: 100vh;
+        min-height: calc(var(--vh, 1vh) * 100);
+    }
 }
 
 #all.boxed {
@@ -37,6 +63,7 @@ body.lock_position {
 
     &.touch_device {
         opacity:1;
+        position: absolute;
     }
 
     &.fade-enter{
@@ -67,7 +94,6 @@ body.lock_position {
 	display:none;
     overflow-y:scroll;
     overflow-x:hidden;
-    -webkit-overflow-scrolling: touch;
 
     > .table {
         display:table;
@@ -107,7 +133,7 @@ body.lock_position {
 
                     &.fade-leave-to{
                         opacity: 0;
-                        transform: scale(1.5) translateX(500px);
+                        transform: scale(1) translateX(500px);
                     }
 
                     //Анимация загрузчика
@@ -128,82 +154,7 @@ body.lock_position {
                         opacity: 0;
                         transform: scale(3);
                     }
-                    
-
-                    > .box_item_std_wrapper {
-                        background:#fff;
-                        border-radius:0px;
-                        box-shadow:0px 0px 20px rgba(0,0,0,0.2);
-
-                        > .top {
-                            display:flex;
-                            justify-content: flex-end;
-                            padding:0 0 2px 0;
-
-                            > .title {
-                                flex-basis:calc(100% - 60px);
-                                box-sizing: border-box;
-                                padding:20px 0 15px 60px;
-                                font-size:32px;
-                                line-height:36px;
-                                font-weight: 300;
-                                margin-top:32px;
-
-                                .sm-block({
-                                    font-size:24px;
-                                    line-height: 28px;
-                                    padding:10px 0 15px 40px;
-                                    flex-basis:calc(100% - 40px);
-                                });
-                            }
-
-                            > .close {
-                                flex-basis:60px;
-                                box-sizing: border-box;
-                                padding:20px 0 0 6px;
-                                
-                                .sm-block({
-                                    padding:10px 0 0 0px;
-                                    flex-basis:40px;
-                                });
-
-                                > a {
-                                    width:32px;
-                                    height:32px;
-                                    display:block;
-                                    cursor: pointer;
-                                    font-size:0;
-                                    background-position: center center;
-                                    background-repeat: no-repeat;
-                                    background-image:url(../images/api/close.png);
-                                    background-size: 32px 32px;
-
-                                    .x2({
-                                        background-image:url(../images/api/close_x2.png);
-                                    });
-
-                                    /*
-                                    @supports (mask-image: none) or (-webkit-mask-image: none) {
-                                        background-image:none;
-                                        background-color:@color_2;
-                                        mask-image: url(../images/api/close_x1.png);
-                                        -webkit-mask-image: url(../images/api/close_x1.png);
-                                        mask-size:24px 24px;
-                                        -webkit-mask-size:24px 24px;
-                                    }
-                                    */
-                                }
-                            }
-                        }
-
-                        > .content {
-                            padding:20px 60px 50px 60px;
-
-                            .sm-block({
-                                padding:10px 40px 30px 40px;
-                            });
-                        }
-                    }
+                
                 }
             }
         }
@@ -216,9 +167,106 @@ body.lock_position {
     }
 
     &.touch_device {
-        > .table > .td {
-            height: 100vh;
-            height:calc(var(--vh, 1vh) * 100);
+        position: relative;
+        height:auto;
+        min-height: 100vh;
+        min-height: calc(var(--vh, 1vh) * 100);
+        overflow-y:visible;
+        //-webkit-overflow-scrolling: touch;
+        //scroll-behavior: auto;
+
+        &.animating {
+            position: absolute;
         }
+
+        > .table {
+            display:flex;
+            align-items: center;
+            min-height: 100vh;
+            min-height: calc(var(--vh, 1vh) * 100);
+
+            > .td {
+                display:block;
+                width:100%;
+                //height: 100vh;
+                //height:calc(var(--vh, 1vh) * 100);
+            }
+        }
+    }
+}
+
+
+.box_item_std_wrapper {
+    background:#fff;
+    border-radius:0px;
+    box-shadow:0px 0px 20px rgba(0,0,0,0.2);
+
+    > .top {
+        display:flex;
+        justify-content: flex-end;
+        padding:0 0 2px 0;
+
+        > .title {
+            flex-basis:calc(100% - 60px);
+            box-sizing: border-box;
+            padding:20px 0 15px 60px;
+            font-size:32px;
+            line-height:36px;
+            font-weight: 300;
+            margin-top:32px;
+
+            .sm-block({
+                font-size:24px;
+                line-height: 28px;
+                padding:10px 0 15px 40px;
+                flex-basis:calc(100% - 40px);
+            });
+        }
+
+        > .close {
+            flex-basis:60px;
+            box-sizing: border-box;
+            padding:20px 0 0 6px;
+            
+            .sm-block({
+                padding:10px 0 0 0px;
+                flex-basis:40px;
+            });
+
+            > a {
+                width:32px;
+                height:32px;
+                display:block;
+                cursor: pointer;
+                font-size:0;
+                background-position: center center;
+                background-repeat: no-repeat;
+                background-image:url(../images/api/close.png);
+                background-size: 32px 32px;
+
+                .x2({
+                    background-image:url(../images/api/close_x2.png);
+                });
+
+                /*
+                @supports (mask-image: none) or (-webkit-mask-image: none) {
+                    background-image:none;
+                    background-color:@color_2;
+                    mask-image: url(../images/api/close_x1.png);
+                    -webkit-mask-image: url(../images/api/close_x1.png);
+                    mask-size:24px 24px;
+                    -webkit-mask-size:24px 24px;
+                }
+                */
+            }
+        }
+    }
+
+    > .content {
+        padding:20px 60px 50px 60px;
+
+        .sm-block({
+            padding:10px 40px 30px 40px;
+        });
     }
 }

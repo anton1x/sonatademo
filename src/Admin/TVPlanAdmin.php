@@ -6,6 +6,7 @@ namespace App\Admin;
 use App\Entity\AddressObject;
 use App\Entity\TVPlan;
 use App\Repository\TVPlanRepository;
+use App\Service\Smotreshka\SmotreshkaHelper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\MediaBundle\Form\Type\MediaType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -54,6 +55,18 @@ class TVPlanAdmin extends ProductAdmin
     protected function getRootCategoryCode()
     {
         return 'tv';
+    }
+
+    public function postUpdate($object)
+    {
+        $smotreshkaHelper = $this->getConfigurationPool()->getContainer()->get(SmotreshkaHelper::class);
+        $smotreshkaHelper->clearCache();
+    }
+
+    public function postPersist($object)
+    {
+        $smotreshkaHelper = $this->getConfigurationPool()->getContainer()->get(SmotreshkaHelper::class);
+        $smotreshkaHelper->clearCache();
     }
 
 

@@ -1,0 +1,71 @@
+{% import _self as utils %}
+{% set basket = data.basket %}
+{%- block body %}
+    {%- apply replace({ "\t":'' }) %}
+        {%- block details %}
+            {{-'Детали заказа'|upper}}
+            Итоговая стоимость: {{- utils.show_price_with_discount(basket) }}
+                {%- if basket.discount.percentage > 0 %}
+                    Примененная скидка: {{- basket.discount.percentage }} %
+                {% endif %}
+                К оплате: {{- basket.discountedPrice.summarizedValue }} р.
+        {% endblock %}
+        {%- block internet %}
+            {{- utils.show_section(basket, 'Интернет', 'internet_basic', 'additional_internet', ['devices_internet_ont', 'devices_internet_wifi']) }}
+        {% endblock %}
+
+        {%- block tv %}
+            {{- utils.show_section(basket, 'ТВ', 'tv_basic', ['tv_addons', 'tv_theatres'], 'devices_tv_box') }}
+        {% endblock %}
+
+        {%- if basket.itemsByProductCategoryCode(['additional_phone', 'additional_vision_home', 'additional_vision_parking'])|length > 0 %}
+            {%- block additional %}
+                {{- utils.show_section(basket, 'Телефония', 'additional_phone', false, ['devices_additional_phone_dect', 'devices_additional_phone_table']) }}
+                {{- utils.show_section(basket, 'Домашнее видеонаблюдение', 'additional_vision_home', false, ['devices_additional_vision_home']) }}
+                {{- utils.show_section(basket, 'Видеонаблюдение на парковке', 'additional_vision_parking', 'additional_vision_poe', ['devices_additional_vision_parking']) }}
+            {% endblock %}
+        {% endif %}
+    {% endapply %}
+{% endblock %}
+
+{%- macro show_price_with_discount(basketItem) %}
+    {% if basketItem.discountedPrice.connectionPrice > 0 %}
+        {{- basketItem.discountedPrice.connectionPrice|localizedcurrency('RUB') }} +
+    {% endif %}
+    {% if basketItem.discountedPrice.monthlyPrice != basketItem.price.monthlyPrice  %}
+        {{- basketItem.price.monthlyPrice|localizedcurrency('RUB') }}->
+    {% endif %}
+    {{- basketItem.discountedPrice.monthlyPrice|localizedcurrency('RUB') }}/мес.
+{% endmacro %}
+
+{%- macro show_connection_price(basketItem) %}
+    {{- basketItem.discountedPrice.connectionPrice|localizedcurrency('RUB') }}
+{% endmacro %}
+
+{%- macro show_section(basket, title, plan_cat, additional_cats, devices_cats) %}
+    {%- set plan =  basket.itemsByProductCategoryCode(plan_cat) %}
+    {%- if plan is not empty %}
+        {% set item = plan|first %}
+        {{-title|upper}}
+        Тариф: {{- item.product.title }} ... {{- utils.show_price_with_discount(item) }}
+
+        {%- set additional = basket.itemsByProductCategoryCode(additional_cats) %}
+        {%- if additional is not empty %}
+            {{- 'Дополнительно'|upper }}
+
+            {%- for item in additional %}
+                - "{{- item.product.title }}" ... {{- utils.show_price_with_discount(item) }}
+            {%- endfor %}
+
+
+        {% endif %}
+
+        {%- set devices = basket.itemsByProductCategoryCode(devices_cats) %}
+        {%- if devices is not empty %}
+            {{-'Устройства'|upper}}
+            {% for item in devices %}
+                - "{{- item.product.title }}" x {{- item.count }} шт. ... {{- utils.show_connection_price(item) }}
+            {% endfor %}
+        {%- endif %}
+    {% endif %}
+{% endmacro %}

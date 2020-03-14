@@ -27,6 +27,7 @@ export default class extends controller {
         this.makeMobileDeviceFixes();
 
         this.#boxes_container = document.createElement('DIV');
+        this.#boxes_container.setAttribute('id', 'boxes_container_all');
         this.#boxes_bg = document.createElement('DIV');
         this.#boxes_bg.setAttribute('id', 'boxes_container_bg');
         this.#boxes_bg.style.display = 'none';
@@ -166,8 +167,22 @@ export default class extends controller {
             else
             {
                 this.#body_scroll_value = document.scrollingElement ? document.scrollingElement.scrollTop : window.document.body.scrollTop;
-                document.body.classList.add('lock_position');
+                this.#boxes_container.classList.add('touch_device');
                 this.#boxes_bg.classList.add('touch_device');
+
+                /*
+                document.documentElement.classList.add('lock_position');
+                document.body.classList.add('lock_position');
+                */
+
+                document.querySelectorAll('body > div').forEach((e) => {
+                    if (e != this.#boxes_container)
+                    {
+                        e.classList.add('boxed_hidden');
+                    }
+                });
+
+                window.scrollTo({ top: 0 });
             }
         }
     }
@@ -194,9 +209,17 @@ export default class extends controller {
             }
             else
             {
-                document.body.classList.remove('lock_position');
+                document.querySelectorAll('body > div').forEach((e) => {
+                    if (e != this.#boxes_container)
+                    {
+                        e.classList.remove('boxed_hidden');
+                    }
+                });
+                //document.documentElement.classList.remove('lock_position');
+                //document.body.classList.remove('lock_position');
                 this.#boxes_bg.classList.remove('touch_device');
-                
+                this.#boxes_container.classList.remove('touch_device');
+
                 /*
                 if (document.scrollingElement)
                 {

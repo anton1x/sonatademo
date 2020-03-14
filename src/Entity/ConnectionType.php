@@ -30,6 +30,7 @@ class ConnectionType
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Device", inversedBy="connectionTypes")
      * @JMS\Type("object_ids")
+     * @ORM\Cache()
      */
     private $devices;
 

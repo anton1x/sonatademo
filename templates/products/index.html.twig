@@ -1,0 +1,19 @@
+{% extends 'layout.html.twig' %}
+
+{% block inner %}
+    <div id="app_page_wrapper">
+        <div class="title">Подключиться</div>
+        <div id="app_page">
+            <script>
+                window.order_form_callback = '{{ path('calculator_send')|raw }}';
+                window.channel_list_callback = function(id) {
+                    return '/channel_list/' + id;
+                };
+                window.order_form_data = {{ jsonList|raw }}
+                ;
+            </script>
+            <make-order-component class="vueInit"></make-order-component>
+        </div>
+    </div>
+
+{% endblock %}

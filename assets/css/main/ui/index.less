@@ -70,6 +70,10 @@ textarea {
             //width:calc(100% - 41px);
             //max-width:200px;
 
+            .sm-block({
+                flex-basis:calc(100% - 31px);
+            });
+
             > .value {
                 height:38px;
                 line-height:28px;
@@ -103,6 +107,10 @@ textarea {
 
             .x2({
                 background-image:url(../images/ui/select_ug_x2.png);
+            });
+
+            .sm-block({
+                flex-basis:31px;
             });
         }
     }
@@ -182,7 +190,7 @@ textarea {
                             width: 8px;
                             background: @color_2;
                             opacity: 0.8;
-                            border-radius: 5px;
+                            border-radius:5px;
                             cursor: pointer;
                         }
                     }
@@ -248,6 +256,8 @@ textarea {
             border:1px solid @color_2;
 
             &::after {
+                
+
                 @supports (mask-image: none) or (-webkit-mask-image: none) {
                     background:@color_2;
                     mask-image:url(../images/ui/select_ug.png);
@@ -436,7 +446,7 @@ textarea {
                     text-align: center;
                     position: relative;
 
-                    > a {
+                    > .title {
                         display:flex;
                         text-decoration: none;
 
@@ -456,6 +466,7 @@ textarea {
                                 margin:0 auto;
                                 font-size:0;
                                 -webkit-tap-highlight-color: rgba(0,0,0,0);
+                                cursor: pointer;
 
                                 background:url(../images/icons/question.png) no-repeat left top;
                                 background-size:16px 16px;
@@ -472,12 +483,15 @@ textarea {
                             box-sizing: border-box;
                             font-weight:500;
                             font-size:11px;
-                            padding:2px 0 0 5px;
+                            padding:2px 0 0 0;
+                            margin-left:5px;
                             text-align: left;
                             -webkit-tap-highlight-color: rgba(0,0,0,0);
+                            cursor: pointer;
 
                             .sm-block({
                                 padding:8px 0 0 0;
+                                margin-left:0;
                                 text-align: center;
                             });
 
@@ -492,7 +506,7 @@ textarea {
 
                 &.sel {
                     > div {
-                        > a {
+                        > .title {
                             > .help {
                                 .q {
                                     @supports (mask-image: none) or (-webkit-mask-image: none) {
@@ -683,7 +697,7 @@ textarea {
     padding:30px 0;
     border:1px solid #eee;
     background: #fff;
-    border-radius: 5px;
+    border-radius:7px;
 
     .sm-block({
         padding:15px 0;
@@ -694,24 +708,28 @@ textarea {
         align-items: center;
         cursor: pointer;
         -webkit-tap-highlight-color: rgba(0,0,0,0);
+        padding-left:30px;
+
+        .sm-block({
+            padding-left:15px;
+        });
 
         > .icon {
-            margin-left:30px;
             flex-basis: 50px;
+            flex-shrink: 0;
 
             .sm-block({
-                margin-left:15px;
                 flex-basis:40px;
             });
         }
 
         > .title {
-            flex-basis: calc(100% - 125px);
+            flex-basis:100%;
             font-size:24px;
             .weight-light();
 
             .sm-block({
-                flex-basis: calc(100% - 100px);
+                flex-basis:100%;
                 font-size:12px;
                 font-weight: 700;
             });
@@ -776,4 +794,122 @@ textarea {
         }
     }
     
+}
+
+.block_taps {
+
+    > .bar {
+        display:flex;
+        border-bottom:1px solid #eee;
+        
+        > div {
+            border:1px solid #eee;
+            position: relative;
+            top:1px;
+            padding:20px 29px;
+            font-size:24px;
+            .weight-light();
+            border-radius: 7px 7px 0 0;
+            cursor: pointer;
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+
+            .sm-block({
+                padding:20px 19px;
+                font-size:12px;
+                font-weight: 700;
+            });
+
+            &.sel {
+                border-bottom:1px solid #fff;
+                background:linear-gradient(to bottom, #fafafa, #fff);
+            }
+        }
+    }
+
+    > .content {
+        > div {
+            display:none;
+            padding:40px 0 0 30px;
+
+            .sm-block({
+                padding:20px 0 0 0;
+            });
+
+            &.show {
+                display:block;
+            }
+
+            &.animating-hide, &.animating-show {
+                transition: opacity 0.15s;
+            }
+        }
+    }
+
+    &.nohp {
+        > .content {
+            > div {
+                padding-left:0 !important;
+            }
+        }
+    }
+}
+
+.ui_counter {
+    display:inline-block;
+
+    > div {
+        display:flex;
+
+        > .minus {
+            display:block;
+            width:34px;
+            height:38px;
+            line-height:38px;
+            font-size:16px;
+            .weight-light();
+            color:@color_3;
+            text-align: center;
+            border-top:1px solid @color_7;
+            border-left:1px solid @color_7;
+            border-bottom:1px solid @color_7;
+            border-radius: 5px 0 0 5px;
+            text-decoration: none;
+            transition: border-color 0.2s;
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+        }
+
+        > .plus {
+            display:block;
+            width:34px;
+            height:38px;
+            line-height:38px;
+            font-size:20px;
+            font-weight: 900;
+            color:@color_2;
+            text-align: center;
+            border-right:1px solid @color_7;
+            border-top:1px solid @color_7;
+            border-bottom:1px solid @color_7;
+            border-radius: 0 5px 5px 0;
+            text-decoration: none;
+            transition: border-color 0.2s;
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+        }
+
+        > .value {
+            border-top:1px solid @color_7;
+            border-bottom:1px solid @color_7;
+            height:38px;
+            line-height:38px;
+            font-size:20px;
+            .weight-light();
+            min-width: 20px;
+            text-align: center;
+            padding:0 5px;
+        }
+
+        > .minus:hover, > .plus:hover {
+            border-color:@color_2;
+        }
+    }
 }

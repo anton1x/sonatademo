@@ -39,8 +39,14 @@ Vue.component('ui-liner', uiLiner);
 import uiSwitcher from './vue_components/uiSwitcher.vue';
 Vue.component('ui-switcher', uiSwitcher);
 
+import uiCounter from './vue_components/uiCounter.vue';
+Vue.component('ui-counter', uiCounter);
+
 import blockFading from './vue_components/blockFading.vue';
 Vue.component('block-fading', blockFading);
+
+import blockTaps from './vue_components/blockTaps.vue';
+Vue.component('block-taps', blockTaps);
 
 import itemsSliderComponent from './vue_components/itemsSlider.vue';
 Vue.component('items-slider-component', itemsSliderComponent);

@@ -65,4 +65,15 @@ class Price
     }
 
 
+    public function plus(Price $price)
+    {
+        $this->setConnectionPrice($this->getConnectionPrice() + $price->getConnectionPrice());
+        $this->setMonthlyPrice($this->getMonthlyPrice() + $price->getMonthlyPrice());
+    }
+
+    public function getSummarizedValue()
+    {
+        return $this->getMonthlyPrice() + $this->getConnectionPrice();
+    }
+
 }

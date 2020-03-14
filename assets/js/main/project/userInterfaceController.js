@@ -131,5 +131,73 @@ export default class extends projectController {
         return false;
     }
 
+    //Список каналов для ТВ тарифа
+
+    showTvPlanChannelsList(id, type = 'plan')
+    {
+        this.getApi().getFuncs().loadBox((resolve, reject) =>
+        {
+            //setTimeout(() => {
+                axios.get(window.channel_list_callback(id)).then((response) =>
+                {
+                    let content = `<div class="box_tv_plan_content">
+                        <div class="title">`+(type == 'plan' ? 'Тариф' : 'Пакет каналов')+` «${response.data.name}»</div>
+                        <div class="count">Количество каналов: <span>${response.data.channels.length}</span></div>
+                        <div class="items">`;
+
+                        response.data.channels.forEach((e) => {
+                            content += `<div>
+                                <div style="background-image:url(${e.image})" title="${e.name}"><div></div></div>
+                            </div>`;
+                        });
+
+                    content += `
+                        </div>
+                        <div class="close">
+                            <a href="javascript://" class="button_3 close_this_box">Закрыть</a>
+                        </div>
+                    </div>`;
+
+                    resolve({
+                        content : content
+                    });
+
+                }).catch(()=> {
+                    reject();
+                });
+            //}, 3000);
+        }, {
+            animate : true,
+            minWidth : 300,
+            maxWidth : 805,
+            maximaze_width : true,
+            close_on_bg_click : true,
+            wrapper_extra_classes : 'box_tv_plan_wrapper'
+        });
+
+        return false;
+    }
+
+    //Кинотеатр
+
+    showTvTheaherInfo(id, title, description, image)
+    {
+        let content = `<div class="box_tv_theather_content">
+            <div class="image" style="background-image:url(${image})"><div></div></div>
+            <div class="title">${title}</div>
+            `+(description !== null ? `<div class="desc">${description}</div>` : '')+`
+            <div class="close"><a href="javascript://" class="button_3 close_this_box">Закрыть</a></div>
+        </div>`;
+
+        this.getApi().getBoxes().create({
+            animate : true,
+            minWidth : 300,
+            maxWidth : 600,
+            maximaze_width : true,
+            close_on_bg_click : true,
+            wrapper_extra_classes : 'box_tv_theather_wrapper',
+            content : content
+        });
+    }
 
 }
