@@ -47,10 +47,4 @@ class InternetPlanReducer extends ReducerAbstract
     }
 
 
-    public function getResultRoot()
-    {
-        return 'internet';
-    }
-
-
 }

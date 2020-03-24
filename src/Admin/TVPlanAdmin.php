@@ -54,7 +54,7 @@ class TVPlanAdmin extends ProductAdmin
 
     protected function getRootCategoryCode()
     {
-        return 'tv';
+        return TVPlan::ROOT_CATEGORIES;
     }
 
     public function postUpdate($object)

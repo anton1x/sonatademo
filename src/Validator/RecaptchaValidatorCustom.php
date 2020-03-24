@@ -134,6 +134,7 @@ class RecaptchaValidatorCustom extends ConstraintValidator
             }
         }
 
+
         // Verify user response with Google
         if (null !== $this->httpProxy['host'] && null !== $this->httpProxy['port']) {
             $requestMethod = new ProxyPost($this->httpProxy, $this->recaptchaVerifyServer, $this->timeout);

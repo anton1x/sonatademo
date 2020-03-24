@@ -17,7 +17,7 @@ class VisionParkingReducer extends ReducerAbstract
         if ($this->source['vision'] ?? false) {
 
             $planId = $this->source['vision']['visionParkingTariff'] ?? false;
-            if(!$planId)
+            if (!$planId)
                 return;
 
             $poePort = $this->source['vision']['poePort'] ?? false;
@@ -26,23 +26,16 @@ class VisionParkingReducer extends ReducerAbstract
 
             $vision = $this->parseSingle($planId, 'visionParking', 'plan', 'additional_vision_parking', false);
 
-            if(!$vision)
+            if (!$vision)
                 return;
 
             $devices = $this->source['vision']['devicesParking'] ?? false;
             if ($devices)
                 $this->parseMultiple($devices, 'deviceParking', 'devices', 'devices_additional_vision_parking', true);
-            
+
 
         }
 
-    }
-
-
-
-    public function getResultRoot()
-    {
-        return 'vision_parking';
     }
 
 

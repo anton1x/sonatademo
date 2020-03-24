@@ -21,7 +21,7 @@ class AddressObjectRepository extends ServiceEntityRepository
 
     public function getSortedList()
     {
-        return $this->createQueryBuilder('a')
+        $addresses =  $this->createQueryBuilder('a')
             ->select('a, tvplans, connection_type, pricing_type')
             ->leftJoin('a.tvPlans', 'tvplans')
             ->join('a.connectionType', 'connection_type')
@@ -32,6 +32,14 @@ class AddressObjectRepository extends ServiceEntityRepository
             ->getQuery()
             ->execute()
             ;
+
+        $result = [];
+
+        foreach ($addresses as $address) {
+            $result[$address->getId()] = $address;
+        }
+
+        return $result;
     }
 
     // /**

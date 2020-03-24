@@ -3,6 +3,7 @@
 
 namespace App\Service\Products;
 
+use App\Entity\AddressObject;
 use App\Entity\BaseProduct;
 use App\Entity\Basket;
 
@@ -28,11 +29,17 @@ class ProductsRequestData
      */
     private $objects;
 
+    private $address;
+
     private $collection = [];
 
     private $invalidEntities = [];
 
+    private $complatLogin;
+
     public $basket;
+
+    private $contact;
 
 
     /**
@@ -96,6 +103,75 @@ class ProductsRequestData
     }
 
 
+    /**
+     * @return mixed
+     */
+    public function getComplatLogin()
+    {
+        return $this->complatLogin;
+    }
 
+    /**
+     * @param mixed $complatLogin
+     */
+    public function setComplatLogin($complatLogin): void
+    {
+        $this->complatLogin = $complatLogin;
+    }
+
+
+    public function toResponse()
+    {
+        if ($this->getInvalidEntities()) {
+            return ProductsResponseData::createErrorResponse();
+        }
+
+        return ProductsResponseData::create($this);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * @param mixed $address
+     */
+    public function setAddress(AddressObject $address): void
+    {
+        $this->address = $address;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getContact()
+    {
+        return $this->contact;
+    }
+
+    public function getContactParam($param)
+    {
+        return $this->contact[$param] ?? '';
+    }
+
+    /**
+     * @param mixed $contact
+     */
+    public function setContact($contact): void
+    {
+        $this->contact = $contact;
+    }
+
+    public function needLoginCreate() {
+        $contactType =  $this->getContact()['type'] ?? false;
+
+        $contactAlreadyClient = $this->getContact()['checkbox_already_client'] ?? false;
+
+        return $contactType == "self" && !$contactAlreadyClient;
+    }
 
 }

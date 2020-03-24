@@ -1,8 +1,46 @@
 {% extends 'mail_base.html.twig' %}
 {% import _self as utils %}
 {% set basket = data.basket %}
+{% set contact = data.contact %}
 {% block body %}
     {% apply spaceless %}
+        {% block contact %}
+            <h2>Данные заявки</h2>
+            <div>
+                <div>Тип подключения: <b>{{ contact.type == "self" ? "Самостоятельно" : (contact.type == "phone" ? "По телефону") }}</b></div>
+                <div>Уже является клиентом: {{ contact.checkbox_already_client ? "Да" : "Нет" }}</div>
+                <div>Переходит от другого оператора: {{ contact.checkbox_from_other_operator ? "Да" : "Нет" }}</div>
+                <h3>Данные контакта</h3>
+                {% if contact.type == "self" %}
+                <div>Присвоенный логин в биллинге: <i>{{ data.complatLogin }}</i></div>
+                {% endif %}
+                <div>ФИО: {{ contact.input_fio }}</div>
+                <div>Телефон: {{ contact.input_phone }}</div>
+                {% if contact.type == "self" %}
+                    <div>E-mail: {{ contact.input_email }}</div>
+                {% endif %}
+                <div>Объект: {{ data.address.title }} ({{ data.address.address }})</div>
+                {% if contact.type == "self" %}
+                    <div>Корпус: {{ contact.input_building }}</div>
+                    <div>Квартира: {{ contact.input_apartment }}</div>
+
+                    <h3>Паспортные данные</h3>
+                    <div>Серия и номер: {{ contact.input_passport_series }} {{ contact.input_passport_num }}</div>
+                    <div>Кем и когда выдан: {{ contact.input_passport_who }}</div>
+                    <div>Адрес прописки: {{ contact.input_passport_address }}</div>
+                {% endif %}
+
+                {% if contact.use_connect_time %}
+                    <h3>Желаемое время подключения</h3>
+                    <div>Дата: {{ contact.connect_time.day }}.{{ contact.connect_time.month }}.{{ contact.connect_time.year }}</div>
+                    <div>Время: c {{ contact.connect_time.hour_start }} ч. до {{ contact.connect_time.hour_end }} ч.</div>
+                {% endif %}
+
+                {% if contact.input_comment %}
+                    Комментарий: {{ data.contactParam('input_comment') }}
+                {% endif %}
+            </div>
+        {% endblock contact %}
         {% block details %}
             <h2>Детали заказа</h2>
             <div>

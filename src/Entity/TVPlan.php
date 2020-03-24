@@ -16,6 +16,7 @@ use JMS\Serializer\Annotation as JMS;
  */
 class TVPlan extends BaseProduct
 {
+    const ROOT_CATEGORIES = ['tv'];
     /**
      * @ORM\Column(type="integer")
      */

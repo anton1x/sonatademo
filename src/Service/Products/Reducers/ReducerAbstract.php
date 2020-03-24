@@ -35,6 +35,7 @@ abstract class ReducerAbstract implements ReducerInterface
 
     abstract public function reduce();
 
+
     protected function parseSingle($sourceItem, $type, $resultKey, $group = null, $mergeResultAsArray = true, $countable = false)
     {
         if ($countable) {
@@ -113,19 +114,11 @@ abstract class ReducerAbstract implements ReducerInterface
         $this->basket = $context->basket;
     }
 
-    protected function putToResult($data)
-    {
-        if (!isset($this->result[$this->getResultRoot()]) || !is_array($this->result[$this->getResultRoot()]))
-            $this->result[$this->getResultRoot()] = [];
-
-        $this->result[$this->getResultRoot()] = array_merge_recursive($this->result[$this->getResultRoot()], $data);
-    }
 
     protected function putToBasket(BasketItem $item) {
         $this->basket->addItem($item);
     }
 
-    abstract protected function getResultRoot();
 
     /**
      * @param $sourceItem

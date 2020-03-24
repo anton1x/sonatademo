@@ -3,6 +3,7 @@
 
 namespace App\Admin;
 
+use App\Entity\AdditionalServicePlan;
 use Sonata\AdminBundle\Form\FormMapper;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
@@ -18,7 +19,7 @@ class AdditionalServicePlanAdmin extends ProductAdmin
 
     protected function getRootCategoryCode()
     {
-        return 'additional';
+        return AdditionalServicePlan::ROOT_CATEGORIES;
     }
 
 

@@ -40,10 +40,5 @@ class PhoneReducer extends ReducerAbstract
     }
 
 
-    public function getResultRoot()
-    {
-        return 'phone';
-    }
-
 
 }

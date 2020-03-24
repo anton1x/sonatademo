@@ -64,7 +64,7 @@
                                     <div class="b2"><span>нашего</span> города</div>
                                 </div>
                                 <div class="button">
-                                    <a href="javascript://">Подключиться</a>
+                                    <a href="{{ path('calculator_index') }}">Подключиться</a>
                                 </div>
                             </div>
                         </div>
@@ -74,7 +74,7 @@
                 {% if header_options.options.banner %}
                     <div id="header_image_wrapper">
                         <div style="background-image:url({{ asset(header_options.options.banner) }});">
-                            <div class="button"><a href="javascript://">Подключиться</a></div>
+                            <div class="button"><a href="{{ path('calculator_index') }}">Подключиться</a></div>
                         </div>
                     </div>
                 {% endif %}
@@ -145,30 +145,6 @@
                         {% block bottom_menu %}
                         {{ knp_menu_render('main_menu', {depth: 2}) }}
                         {% endblock %}
-{#                        <div class="menu">#}
-{#                            <div>#}
-{#                                <div class="menu_title"><a href="javascript://"><span>Новости и акции</span></a></div>#}
-{#                            </div>#}
-{#                            <div>#}
-{#                                <div class="menu_title"><a href="javascript://" class="sel"><span>О нас</span></a></div>#}
-{#                                <div class="menu_subs">#}
-{#                                    <div><a href="javascript://">Документы</a></div>#}
-{#                                    <div><a href="javascript://">Реквизиты</a></div>#}
-{#                                    <div><a href="javascript://">Лицензии</a></div>#}
-{#                                    <div><a href="javascript://">Застройщикам и УК</a></div>#}
-{#                                    <div><a href="javascript://" class="sel">Контакты</a></div>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                            <div>#}
-{#                                <div class="menu_title"><a href="javascript://"><span>Блог</span></a></div>#}
-{#                            </div>#}
-{#                            <div>#}
-{#                                <div class="menu_title"><a href="javascript://"><span>FAQ</span></a></div>#}
-{#                            </div>#}
-{#                            <div>#}
-{#                                <div class="icons"><a href="javascript://" class="vk">&nbsp;</a></div>#}
-{#                            </div>#}
-{#                        </div>#}
                     </div>
                 </div>
             </div>

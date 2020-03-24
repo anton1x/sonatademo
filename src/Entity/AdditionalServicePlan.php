@@ -14,6 +14,7 @@ class AdditionalServicePlan extends BaseProduct
 {
 
     public const type = "additional_service_plan";
+    const ROOT_CATEGORIES = ['additional'];
 
 
 }

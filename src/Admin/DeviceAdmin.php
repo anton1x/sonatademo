@@ -3,6 +3,7 @@
 
 namespace App\Admin;
 
+use App\Entity\Device;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\MediaBundle\Form\Type\MediaType;
@@ -30,11 +31,12 @@ class DeviceAdmin extends ProductAdmin
 
     protected function getRootCategoryCode()
     {
-        return [
-            'devices_internet',
-            'devices_tv',
-            'devices_additional_phone',
-            'devices_additional_vision'
-        ];
+        return Device::ROOT_CATEGORIES;
+//        return [
+//            'devices_internet',
+//            'devices_tv',
+//            'devices_additional_phone',
+//            'devices_additional_vision'
+//        ];
     }
 }

@@ -51,7 +51,7 @@ class Calculator
         $groupedProducts = $this->productsRepository->groupListByCategoryCode($products);
 
         $result = [
-            'addresses' => $this->addressObjectRepository->getSortedList(),
+            'addresses' => array_values($this->addressObjectRepository->getSortedList()),
             'products' => $groupedProducts,
             'products_all' => $products,
         ];

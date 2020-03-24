@@ -63,6 +63,10 @@ class ConnectionFormHandler
             )
         ;
 
+        if ($order->getEmail()) {
+            $message->setReplyTo([$order->getEmail()]);
+        }
+
         return $message;
     }
 

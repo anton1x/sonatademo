@@ -41,7 +41,7 @@ class AmoHelper
         return $this->handleResponse($response);
     }
 
-    private function makeContactArray($fio, $phone, $email)
+    private function makeContactArray($fio, $phone, $email, $login = '')
     {
         $contact = array(
             'name' => $fio,
@@ -49,7 +49,7 @@ class AmoHelper
             //'created_at' => time(),
             'custom_fields' => array(
                 array(
-                    'id' => "73563", // Телефон
+                    'id' => 73563, // Телефон
                     'values' => array(
                         array(
                             'value' => $phone,
@@ -63,6 +63,14 @@ class AmoHelper
                         array(
                             'value' => $email,
                             'enum' => 103691,
+                        )
+                    )
+                ),
+                array(
+                    'id' => 596303, // логин
+                    'values' => array(
+                        array(
+                            'value' => $login,
                         )
                     )
                 ),
@@ -85,13 +93,26 @@ class AmoHelper
     }
 
 
-    private function makeLeadArray($fio, $tariff, $address, $home = '', $corp = '', $notes = array(), $contactId = false, $tariffId = false)
+    private function makeLeadArray(
+        $fio,
+        $tariff,
+        $address,
+        $home = '',
+        $corp = '',
+        $notes = array(),
+        $contactId = false,
+        $services = [],
+        $tv = [],
+        $devices = [],
+        $budget = 0
+    )
     {
         $lead = array(
             'name' => 'Заявка от '.$fio,
             'created_at' => time(),
             //'responsible_user_id' => 0,
             //'tags' => 'rosfondom.ru',
+            'sale' => $budget,
             'notes' => array(),
             'custom_fields' => array(
                 array( // Квартира
@@ -111,11 +132,11 @@ class AmoHelper
                     )
                 ),
                 array( // тариф
-                    'id' => 572283,
+                    'id' => 596297,
                     'values' => array(
                         array(
                             'value' => $tariff,
-                            'enum' => 817079,
+                            //'enum' => 817079,
                         )
                     )
                 ),
@@ -127,6 +148,18 @@ class AmoHelper
                             'enum' => 817107,
                         )
                     )
+                ),
+                array( // устройства
+                    'id' => 596291,
+                    'values' => $devices,
+                ),
+                array( // ТВ
+                    'id' => 596295,
+                    'values' => $tv,
+                ),
+                array(
+                    'id' => 596293,
+                    'values' => $services,
                 )
             )
         );
@@ -145,17 +178,6 @@ class AmoHelper
         if($contactId)
             $lead['contacts_id'] = $contactId;
 
-        /*
-        if($tariffId){
-            $catalogItem = $this->findCatalogItemBySKU($tariffId);
-            if($catalogItem){
-                $lead['catalog_elements_id'] = array(
-                  '11177' => array(
-                      $catalogItem['id'] => 1,
-                  )
-                );
-            }
-        }*/
 
         return $lead;
     }
@@ -197,13 +219,17 @@ class AmoHelper
         $home = '',
         $corp = '',
         $notes = array(),
-        $tariffId = false
+        $services = [],
+        $tv = [],
+        $devices = [],
+        $login = '',
+        $budget = 0
     )
     {
         $incomingLeads['add'] = array();
         $incomingLeads['add'][] = $this->makeIncomingLeadArray(
-            $this->makeContactArray($fio, $phone, $email),
-            $this->makeLeadArray($fio, $tariff, $address, $home, $corp, $notes, false, $tariffId)
+            $this->makeContactArray($fio, $phone, $email, $login),
+            $this->makeLeadArray($fio, $tariff, $address, $home, $corp, $notes, false, $services, $tv, $devices, $budget)
         );
 
         $this->preRequest();

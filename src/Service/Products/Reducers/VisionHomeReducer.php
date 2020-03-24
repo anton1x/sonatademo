@@ -17,12 +17,12 @@ class VisionHomeReducer extends ReducerAbstract
         if ($this->source['vision'] ?? false) {
 
             $planId = $this->source['vision']['visionHomeTariff'] ?? false;
-            if(!$planId)
+            if (!$planId)
                 return;
 
             $vision = $this->parseSingle($planId, 'visionHome', 'plan', 'additional_vision_home', false);
 
-            if(!$vision)
+            if (!$vision)
                 return;
 
             $devices = $this->source['vision']['devicesHome'] ?? false;
@@ -32,13 +32,6 @@ class VisionHomeReducer extends ReducerAbstract
 
         }
 
-    }
-
-
-
-    public function getResultRoot()
-    {
-        return 'vision_home';
     }
 
 

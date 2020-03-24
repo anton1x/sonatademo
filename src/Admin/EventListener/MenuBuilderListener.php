@@ -12,7 +12,7 @@ class MenuBuilderListener
     {
         $menu = $event->getMenu();
 
-        $child = $menu->addChild('reports', [
+        $child = $menu->addChild('settings', [
             'label' => 'Настройки',
             'route' => 'settings_create',
         ])->setExtras([

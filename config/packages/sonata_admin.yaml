@@ -53,9 +53,9 @@ sonata_admin:
                 items:
                     - app.admin.menu_schema_item
 
-            Настройки:
-                items:
-                    - app.admin.global_settings
+#            Настройки:
+#                items:
+#                    - app.admin.global_settings
 
 
     security:

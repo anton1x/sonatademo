@@ -20,7 +20,7 @@ class TvPlanReducer extends ReducerAbstract
 //            $this->parseSingle($planId, 'internetPlan', 'plan', 'internet_basic', false);
 //
             $planId = $this->source['tv']['tvPlan'] ?? false;
-            if(!$planId)
+            if (!$planId)
                 return;
 
             $this->parseSingle($planId, 'tvPlan', 'plan', 'tv_basic', false);
@@ -41,13 +41,6 @@ class TvPlanReducer extends ReducerAbstract
 
         }
 
-    }
-
-
-
-    public function getResultRoot()
-    {
-        return 'tv';
     }
 
 

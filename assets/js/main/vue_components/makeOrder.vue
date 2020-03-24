@@ -1648,15 +1648,35 @@ export default {
             eApi.getFuncs().sendData(window.order_form_callback, data)
             .then((response) => {
 
-                this.clearCookies();
+                if (response.data.error == true)
+                {
+                    eApi.getFuncs().alert('Произошла неизвестная ошибка.');
+                }
+                else
+                {
+                    this.clearCookies();
 
-                eApi.getFuncs().alert('Ваша заявка принята. Мы свяжемся с Вами в ближайшее время.', {
-                    box_destroy : function() {
-                        window.location.href = '/';
+                    if (response.data.should_show_payment)
+                    {
+                        window.pay(response.data.login, response.data.amount, () => {
+                            eApi.getFuncs().alert('Ваша заявка принята и успешно оплачена. Мы свяжемся с Вами в ближайшее время.', {
+                                box_destroy : function() {
+                                    window.location.href = '/';
+                                }
+                            });
+                        });
                     }
-                });
+                    else
+                    {
+                        eApi.getFuncs().alert('Ваша заявка принята. Мы свяжемся с Вами в ближайшее время.', {
+                            box_destroy : function() {
+                                window.location.href = '/';
+                            }
+                        });
+                    }
+                }
             })
-            .catch(function() {
+            .catch(function(e) {
                 eApi.getFuncs().alert('Произошла ошибка в ходе отправки данных.');
             });
         },
@@ -1831,6 +1851,11 @@ export default {
                 this.dataStep3.canceled = false;
             }
 
+            if (v == 4)
+            {
+                this.dataStep4.canceled = false;
+            }
+
             if (v == 5)
             {
                 this.$nextTick(() => {
@@ -1914,9 +1939,9 @@ export default {
 
         
         this.contact_fields_self = ['input_building', 'input_apartment', 'input_fio', 'input_passport_series', 'input_passport_num', 'input_passport_who', 'input_passport_address', 
-        'input_email', 'input_phone'];
+        'input_email', 'input_phone', 'input_comment'];
 
-        this.contact_fields_not_self = ['input_fio', 'input_phone'];
+        this.contact_fields_not_self = ['input_fio', 'input_phone', 'input_comment'];
 
         this.cookies_vars = {
             form_nowStep : {

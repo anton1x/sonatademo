@@ -9,7 +9,9 @@ use App\Entity\MenuSchemaItem;
 use App\Entity\NewsItem;
 use App\Pagination\PaginatedItemsList;
 use App\Service\Products\Calculator;
+use App\Validator\RecaptchaValidatorCustom;
 use App\ViewOptions\HeaderOptions;
+use EWZ\Bundle\RecaptchaBundle\Validator\Constraints\IsTrue;
 use JMS\Serializer\ArrayTransformerInterface;
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\Serializer;
@@ -17,9 +19,13 @@ use JMS\Serializer\SerializerBuilder;
 use JMS\Serializer\SerializerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Validator\Exception\ValidatorException;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class ProductsController extends AbstractController
 {
@@ -37,8 +43,7 @@ class ProductsController extends AbstractController
         $resultSerialized = $serializer->serialize($calculator->getCalculatorData(), 'json', SerializationContext::create()->setSerializeNull(true));
 
         $viewHeaderOptions
-            ->setShortInner()
-        ;
+            ->setShortInner();
 
         return $this->render('products/index.html.twig', [
             'jsonList' => $resultSerialized,
@@ -50,51 +55,31 @@ class ProductsController extends AbstractController
      * @param Request $request
      * @param SerializerInterface $serializer
      * @param Calculator $calculator
-     * @Route(name="calculator_send", path="/connect/send")
+     * @param ValidatorInterface $validator
      * @return Response
+     * @Route(name="calculator_send", path="/connect/send")
      */
-    public function sendAction(Request $request, SerializerInterface $serializer, Calculator $calculator)
+    public function sendAction(Request $request, SerializerInterface $serializer, Calculator $calculator, ValidatorInterface $validator)
     {
+        $isValid = $validator->validate(null, new IsTrue())->count() == 0;
+
+        if (!$isValid) {
+            throw new ValidatorException('wrong recaptcha');
+        }
+
 
         $data = $serializer->deserialize($request->getContent(), 'array', 'json');
 
-        dump($calculator->parseCalculatorAnswer($data));
+        $answer = $calculator->parseCalculatorAnswer($data);
 
-        $this->createAccessDeniedException();
-    }
+        $json = $serializer->serialize($answer->toResponse(), 'json');
 
-    /**
-     * @Route(name="test3", path="/test3")
-     */
-    public function test3(ArrayTransformerInterface $serializer)
-    {
-        $rep = $this->getDoctrine()->getRepository(MenuSchemaItem::class);
-        $list = $rep->findBy(['level' => 1], ['left' => 'asc']);
+        throw new AccessDeniedException();
 
-
-        $result = $serializer->toArray($list);
-
-
-        return $this->render('layout.html.twig', []);
-    }
-
-
-
-    /**
-     * @Route(name="test", path="/test")
-     */
-    public function testAction(SerializerInterface $serializer)
-    {
-        $repoProduct = $this->getDoctrine()->getRepository(BaseProduct::class);
-        $repoAddress = $this->getDoctrine()->getRepository(AddressObject::class);
-        $result['addresses'] = $repoAddress->findAll();
-        $result['products'] = $repoProduct->getAllProductsGroupedByCategory();
-
-        $resultSerialized = $serializer->serialize($result, 'json', SerializationContext::create()->setSerializeNull(true));
-
-        return new Response($resultSerialized, Response::HTTP_OK, [
+        return new Response($json, Response::HTTP_OK, [
             'Content-Type' => 'application/json'
         ]);
     }
+
 
 }

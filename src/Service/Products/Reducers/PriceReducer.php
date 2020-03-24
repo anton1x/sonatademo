@@ -21,31 +21,20 @@ class PriceReducer extends ReducerAbstract
         if (!$this->isInitialized)
             throw new \Exception('You should init reducer with init() before use reduce()');
 
-        $this->basket->getItemsByProductCategoryCode($this->saleApplyCats);
+        $this->saleApplyItems = $this->basket->getItemsByProductCategoryCode($this->saleApplyCats);
 
         $calculatedDiscount = $this->calculateDiscount();
 
         $this->basket->setDiscount(new Discount($calculatedDiscount));
 
-        dump($this->basket->getDiscountedPrice()); dump($this->basket->getPrice()); dump($this->basket->getDiscount()->getPercentage());
-
-
     }
 
-    public function getResultRoot()
-    {
-        return 'price';
-    }
 
     public function setSaleCats($catCodes)
     {
         $this->saleApplyCats = $catCodes;
     }
 
-    public function addSaleItem(BaseProduct $product)
-    {
-        $this->saleApplyItems[] = $product;
-    }
 
 
     private function calculateDiscount()

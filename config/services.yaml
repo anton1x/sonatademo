@@ -25,12 +25,12 @@ parameters:
     connection_order.mailing.to: ['antongaran@mail.ru']
 
     news.view.route: news_view
-    news.list.items_per_page: 1
+    news.list.items_per_page: 10
     news.root_category: news_news_offers
     news.title: Новости и акции
 
     blog.root_category: news_blog
-    blog.list.items_per_page: 1
+    blog.list.items_per_page: 10
     blog.view.route: blog_view
     google_recaptcha_site_key: '%env(GOOGLE_RECAPTCHA_SITE_KEY)%'
     blog.title: Блог
@@ -68,6 +68,10 @@ services:
 
     App\Service\AmoCRM\TonixAmoCrmClient:
         arguments: ['%amocrm.login%', '%amocrm.password_hash%','%amocrm.subdomain%', '%amocrm.cookie_path%']
+
+
+    App\Service\AmoCRM\BasketConverter:
+        arguments: ['@sonata.classification.manager.category']
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
@@ -300,10 +304,10 @@ services:
             - [setContainer, ['@service_container']]
         tags: ['controller.service_arguments']
 
-    app.admin.menu_listener:
-        class: App\Admin\EventListener\MenuBuilderListener
-        tags:
-            - { name: kernel.event_listener, event: sonata.admin.event.configure.menu.sidebar, method: addMenuItems }
+#    app.admin.menu_listener:
+#        class: App\Admin\EventListener\MenuBuilderListener
+#        tags:
+#            - { name: kernel.event_listener, event: sonata.admin.event.configure.menu.sidebar, method: addMenuItems }
 
     App\Service\Products\Calculator:
         arguments: ['@App\Repository\AddressObjectRepository', '@App\Repository\ProductsRepository', !tagged_iterator 'app.products.data_reducer', '@App\Service\Products\ProductsHandler']

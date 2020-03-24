@@ -17,3 +17,29 @@
     </div>
 
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://widget.cloudpayments.ru/bundles/cloudpayments"></script>
+    <script type="text/javascript">
+        window.pay = function (login, amount, onSuccess) {
+            var widget = new cp.CloudPayments();
+            widget.charge({ // options
+                    publicId: '{{ _cloudpayments_api_key }}',  //id из личного кабинета
+                    description: 'Пополнение счета для клиента ' + login, //назначение
+                    amount: amount, //сумма
+                    currency: 'RUB', //валюта
+                    accountId: login, //идентификатор плательщика (необязательно)
+                    skin: "mini" //дизайн виджета
+                },
+                function (options) { // success
+                    //действие при успешной оплате
+                    onSuccess(options);
+                },
+                function (reason, options) { // fail
+                    //действие при неуспешной оплате
+                });
+        };
+
+    </script>
+{% endblock javascripts %}

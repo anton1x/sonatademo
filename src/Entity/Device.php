@@ -19,6 +19,13 @@ class Device extends BaseProduct
 
     public const type = "device";
 
+    public const ROOT_CATEGORIES = [
+        'devices_internet',
+        'devices_tv',
+        'devices_additional_phone',
+        'devices_additional_vision'
+    ];
+
     /**
      * @ORM\ManyToOne(targetEntity="App\Application\Sonata\MediaBundle\Entity\Media", fetch="EAGER", cascade={"persist"})
      * @JMS\Groups({"calculator", "sonata_api_read"})
