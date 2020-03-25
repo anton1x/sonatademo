@@ -74,7 +74,7 @@ class ProductsController extends AbstractController
 
         $json = $serializer->serialize($answer->toResponse(), 'json');
 
-        throw new AccessDeniedException();
+        //throw new AccessDeniedException();
 
         return new Response($json, Response::HTTP_OK, [
             'Content-Type' => 'application/json'
