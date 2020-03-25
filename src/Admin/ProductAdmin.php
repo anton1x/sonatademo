@@ -3,104 +3,148 @@
 namespace App\Admin;
 
 use App\Application\Sonata\ClassificationBundle\Entity\Category;
-use App\Entity\Address;
-use App\Entity\City;
+use App\Form\Type\PriceType;
+use App\Repository\CategoryRepository;
+use App\Repository\ProductsRepository;
+use Metadata\ClassMetadata;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Admin\AdminExtensionInterface;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Form\Type\CollectionType;
-use Sonata\AdminBundle\Form\Type\ModelListType;
-use Sonata\AdminBundle\Form\Type\ModelType;
-use Sonata\ClassificationBundle\Form\ChoiceList\CategoryChoiceLoader;
-use Sonata\ClassificationBundle\Form\Type\CategorySelectorType;
-use Sonata\FormatterBundle\Form\Type\FormatterType;
+use App\Application\Sonata\ClassificationBundle\Form\Type\CategorySelectorType;
+use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\DoctrineORMAdminBundle\Filter\ChoiceFilter;
+use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
+use Sonata\DoctrineORMAdminBundle\Filter\ModelFilter;
 use Sonata\FormatterBundle\Form\Type\SimpleFormatterType;
 use Sonata\MediaBundle\Form\Type\MediaType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
-final class ProductAdmin extends AbstractAdmin
+abstract class ProductAdmin extends AbstractAdmin
 {
-    private $context = 'products';
-    private $dispatcher;
+    protected $context = 'products';
+    protected $categoryRepository;
 
-    public function __construct($code, $class, $baseControllerName, EventDispatcherInterface $dispatcher)
+    public function __construct($code, $class, $baseControllerName, CategoryRepository $categoryRepository)
     {
+        $this->categoryRepository = $categoryRepository;
         parent::__construct($code, $class, $baseControllerName);
-        $this->dispatcher = $dispatcher;
+    }
+
+    protected function getCategoryManager()
+    {
+        return $this->getConfigurationPool()->getContainer()->get('sonata.classification.manager.category');
     }
 
     protected function configureFormFields(FormMapper $formMapper)
     {
-
-        dump($this->getSubject());
+        $classInterfaces = class_implements($this->getClass());
         $formMapper
             ->tab('Основное')
-            ->with('Product', ['class' => 'col-md-6'])
-            ->add('title', TextType::class)
-            ->add('category', \App\Application\Sonata\ClassificationBundle\Form\Type\CategorySelectorType::class, [
-                'context' =>  $this->getConfigurationPool()->getContainer()->get('sonata.classification.manager.context')->find($this->context),
-                'model_manager' => $this->getConfigurationPool()->getAdminByAdminCode('sonata.classification.admin.category')->getModelManager(),
-                'class' => $this->getConfigurationPool()->getAdminByAdminCode('sonata.classification.admin.category')->getClass(),
-                'category' => $this->getSubject()->getCategory() ? $this->getSubject()->getCategory() : new Category(),
-                'required' => false,
-                'by_reference' => false,
-                'placeholder' => $this->getSubject()->getCategory(),
-                'btn_add' => false
-            ])
+                ->with('Product', [
+                    'class' => 'col-md-6',
+                    'label' => 'Основное',
+                ])
+                    ->add('title', TextType::class)
+//                    ->add('category', CategorySelectorType::class, [
+//                        'class' => Category::class,
+//                        'required' => true,
+//                        'by_reference' => false,
+//                        'context' =>  $this->getConfigurationPool()->getContainer()->get('sonata.classification.manager.context')->find($this->context),
+//                        'model_manager' => $this->getConfigurationPool()->getAdminByAdminCode('sonata.classification.admin.category')->getModelManager(),
+//                        'category' => new Category(),
+//                        'btn_add' => false,
+//                    ])
 
-            ->add('description', SimpleFormatterType::class, [
-                'format' => 'richhtml',
-                'ckeditor_context' => 'default',
-                'ckeditor_image_format' => 'big',
-            ])
+                    ->add('category', ChoiceType::class, [
+                        'choices' => $this
+                            ->getCategoryManager()
+                            ->loadChildrenCategoriesByParentCode($this->getRootCategoryCode(), $this->context),
+                        'choice_label' => function (Category $category) {
+                            return $category->getName();
+                        },
+                        'group_by' => function(Category $category, $key, $value) {
+                            return $category->getParent()->getName();
+                        },
+                    ])
 
-            ->end()
-            ->with('Картинка', ['class' => 'col-md-6'])
-            ->add('image', MediaType::class, [
-                'context' => 'default',
-                'provider' => 'sonata.media.provider.image'
-            ])
-            ->end()
+                    ->add('description', SimpleFormatterType::class, [
+                        'format' => 'richhtml',
+                        'ckeditor_context' => 'default',
+                        'ckeditor_image_format' => 'big',
+                        'required' => false,
+                    ])
+                ->end()
+
+                ->with('Цена', [
+                    'class' => 'col-md-6'
+                ])
+                    ->add('price', PriceType::class, [
+                        'label' => false
+                    ])
+                ->end()
             ->end()
         ;
-//        $formMapper->add('title', TextType::class);
-//        $formMapper->add('category', \App\Application\Sonata\ClassificationBundle\Form\Type\CategorySelectorType::class, [
-//            'context' =>  $this->getConfigurationPool()->getContainer()->get('sonata.classification.manager.context')->find($this->context),
-//            'model_manager' => $this->getConfigurationPool()->getAdminByAdminCode('sonata.classification.admin.category')->getModelManager(),
-//            'class' => $this->getConfigurationPool()->getAdminByAdminCode('sonata.classification.admin.category')->getClass(),
-//            'category' => $this->getSubject()->getCategory() ? $this->getSubject()->getCategory() : new Category(),
-//            'required' => false,
-//            'by_reference' => false,
-//            'placeholder' => $this->getSubject()->getCategory(),
-//            'btn_add' => false
-//        ]);
-//        $formMapper->add('description', TextareaType::class);
-//        $formMapper->with('Картинка', ['class' => 'col-md-6'])
-//            ->add('image', MediaType::class, [
-//                'context' => 'default',
-//                'provider' => 'sonata.media.provider.image'
-//            ])
-//            ->end();
+
+    }
+
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection
+            ->add('clone', $this->getRouterIdParameter().'/clone');
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper->add('title');
-        $datagridMapper->add('category');
+        $datagridMapper->add('category', ChoiceFilter::class, [], ChoiceType::class,
+            [
+                        'choices' => $this
+                            ->getCategoryManager()
+                            ->loadChildrenCategoriesByParentCode($this->getRootCategoryCode(), $this->context),
+                        'choice_label' => function (Category $category) {
+                            return $category->getName();
+                        },
+                        'group_by' => function(Category $category, $key, $value) {
+                            return $category->getParent()->getName();
+                        },
+                    ]);
+//        $datagridMapper->add('category', ChoiceFilter::class, [
+//            'mapping_type' => \Doctrine\ORM\Mapping\ClassMetadata::MANY_TO_ONE,
+//            'field_name' => 'category',
+//        ], null, [
+//            'class' => Category::class,
+//            'group_by' => 'parent.name',
+//            'query_builder' => function (CategoryRepository $repository) {
+//                //return null;
+//                return $repository->getQueryBuilderForFilterCategoryByContext($this->context);
+//            }
+//        ]);
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
-        $listMapper->addIdentifier('title');
-        $listMapper->addIdentifier('category');
+        $listMapper
+            ->addIdentifier('title')
+            ->add('category')
+            ->add('_action', null, [
+                'actions' => [
+                    'edit' => [],
+                    'delete' => [],
+                    'clone' => [],
+                ],
+                'label' => 'Действия',
+            ]);
     }
 
+
+    /**
+     * @return array|string
+     */
+    abstract protected function getRootCategoryCode();
 
 
 }

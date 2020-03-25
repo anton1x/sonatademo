@@ -1,0 +1,95 @@
+{% extends 'layout.html.twig' %}
+
+
+{% block inner %}
+    <div id="about_contacts_1">
+        <div>
+            <a href="tel:+74956459828" class="phone_connect" title="Подключение">
+                <span class="icon"><span>&nbsp;</span></span>
+                <span class="text">
+        <span>Подключение:</span>
+        +7 (495) 645-98-28
+      </span>
+            </a>
+            <a href="tel:+74995515331" class="phone_support" title="Техподдержка">
+                <span class="icon"><span>&nbsp;</span></span>
+                <span class="text">
+        <span>Техподдержка:</span>
+        +7 (499) 551-53-31
+      </span>
+            </a>
+        </div>
+    </div>
+
+    <div id="about_contacts_2">
+        <div class="info">
+            <div class="title">Центральный офис</div>
+            <div class="address">125315, Москва, Ленинградский проспект, дом 68, строение 24</div>
+        </div>
+        <div class="map"><div id="about_contacts_1_map"></div></div>
+    </div>
+
+    <div id="about_contacts_3">
+        <div class="info">
+            <div class="title">Офис в ЖК ЭкоВидное 2.0</div>
+            <div class="address">МО, Ленинский р-н, д. Сапроново, мкрн. Купелинка, квартал Центральный, д. 1 (помещение УК)</div>
+        </div>
+        <div class="map"><div id="about_contacts_2_map"></div></div>
+    </div>
+
+    <script>
+        window.jsReady(function() {
+            yMR.exec(function() {
+                ymaps.ready(function() {
+                    var map = new ymaps.Map('about_contacts_1_map', {
+                        center: [55.804452, 37.524893],
+                        zoom: 17
+                    });
+                    map.behaviors.disable('scrollZoom');
+                    map.controls.remove('searchControl');
+                    map.controls.remove('geolocationControl');
+                    map.controls.remove('zoomControl');
+                    map.controls.add('zoomControl', {
+                        position : {
+                            top: 10,
+                            left: 10
+                        }
+                    });
+
+                    var placemark = new ymaps.Placemark([55.804452, 37.524893], {}, {
+                        iconLayout: 'default#image',
+                        iconImageHref: '/files/map_point.svg',
+                        iconImageSize: [50, 73],
+                        iconImageOffset: [-50, -73]
+                    });
+
+                    map.geoObjects.add(placemark);
+
+                    var map_2 = new ymaps.Map('about_contacts_2_map', {
+                        center: [55.531966, 37.722185],
+                        zoom: 17
+                    });
+                    map_2 .behaviors.disable('scrollZoom');
+                    map_2 .controls.remove('searchControl');
+                    map_2 .controls.remove('geolocationControl');
+                    map_2 .controls.remove('zoomControl');
+                    map_2 .controls.add('zoomControl', {
+                        position : {
+                            top: 10,
+                            left: 10
+                        }
+                    });
+
+                    var placemark_2 = new ymaps.Placemark([55.531966, 37.722185], {}, {
+                        iconLayout: 'default#image',
+                        iconImageHref: '/files/map_point.svg',
+                        iconImageSize: [50, 73],
+                        iconImageOffset: [-50, -73]
+                    });
+
+                    map_2.geoObjects.add(placemark_2);
+                });
+            });
+        });
+    </script>
+{% endblock %}

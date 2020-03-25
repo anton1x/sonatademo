@@ -1,0 +1,47 @@
+{% extends 'admin/standard_layout.html.twig' %}
+
+{% block sonata_page_content %}
+    <div style="position: absolute; height: calc(100% - 50px); width: 100%;overflow: hidden !important;">
+        <iframe src="{{ path('file_manager', {'conf': 'default'}) }}" style="min-height:700px;width:100%;position: relative;" frameborder="no" width="100%" height="100%">
+        </iframe>
+    </div>
+{#    {% set request = app.request.createFromGlobals.query.all|merge({'conf' : 'default'}) %}#}
+
+{#    {{ render(url('file_manager', request)) }}#}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet"
+          href="{{ asset('bundles/artgrisfilemanager/libs/bootstrap/dist/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+          crossorigin="anonymous">
+    <link rel="stylesheet"
+          href="{{ asset('bundles/artgrisfilemanager/libs/jstree/dist/themes/default/style.min.css') }}">
+    <link rel="stylesheet"
+          href="{{ asset('bundles/artgrisfilemanager/libs/blueimp-file-upload/css/jquery.fileupload.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/artgrisfilemanager/css/manager.css') }}">
+    <link rel="stylesheet"
+          href="{{ asset('bundles/artgrisfilemanager/libs/jQuery-contextMenu/dist/jquery.contextMenu.min.css') }}">
+    <style>
+        .content-wrapper {
+            position: relative;
+        }
+    </style>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/artgrisfilemanager/libs/jstree/dist/jstree.min.js') }}"></script>
+    <script src="{{ asset('bundles/artgrisfilemanager/libs/blueimp-file-upload/js/vendor/jquery.ui.widget.js') }}"></script>
+    <script src="{{ asset('bundles/artgrisfilemanager/libs/blueimp-file-upload/js/jquery.iframe-transport.js') }}"></script>
+    <script src="{{ asset('bundles/artgrisfilemanager/libs/blueimp-file-upload/js/jquery.fileupload.js') }}"></script>
+    <script src="{{ asset('bundles/artgrisfilemanager/libs/blueimp-file-upload/js/jquery.fileupload-process.js') }}"></script>
+    <script src="{{ asset('bundles/artgrisfilemanager/libs/sticky-kit/jquery.sticky-kit.min.js') }}"></script>
+    <script src="{{ asset('bundles/artgrisfilemanager/libs/remarkable-bootstrap-notify/dist/bootstrap-notify.min.js') }}"></script>
+    <script src="{{ asset('bundles/artgrisfilemanager/libs/jQuery-contextMenu/dist/jquery.contextMenu.min.js') }}"></script>
+    <script type="text/javascript"
+            src="{{ asset('bundles/artgrisfilemanager/libs/jquery-lazy/jquery.lazy.min.js') }}"></script>
+    <script src="{{ asset('bundles/artgrisfilemanager/js/manager.js') }}"></script>
+{% endblock %}

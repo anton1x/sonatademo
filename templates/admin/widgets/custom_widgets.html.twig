@@ -1,0 +1,16 @@
+{% block entity_widget %}
+    {% if show_select_all or show_unselect_all %}
+        <div class="mb">
+            {% if show_select_all %}
+                <a href="javascript://" class="js-select-all" data-id="{{ id }}">{{ 'select_all' | trans }}</a>
+            {% endif %}
+            {{ (show_select_all and show_unselect_all) ? '|' : '' }}
+            {% if show_unselect_all %}
+                <a href="javascript://" class="js-select-all" data-unselect="1" data-id="{{ id }}">{{ 'unselect_all' | trans }}</a>
+            {% endif %}
+        </div>
+    {% endif %}
+    {{ block('choice_widget') }}
+
+
+{% endblock %}

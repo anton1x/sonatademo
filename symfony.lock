@@ -1,6 +1,15 @@
 {
+    "artgris/filemanager-bundle": {
+        "version": "1.6.4"
+    },
+    "behat/transliterator": {
+        "version": "v1.3.0"
+    },
     "cocur/slugify": {
         "version": "v3.2"
+    },
+    "composer/installers": {
+        "version": "v1.8.0"
     },
     "doctrine/annotations": {
         "version": "1.0",
@@ -42,7 +51,7 @@
         ]
     },
     "doctrine/doctrine-cache-bundle": {
-        "version": "1.3.5"
+        "version": "1.4.0"
     },
     "doctrine/doctrine-migrations-bundle": {
         "version": "1.2",
@@ -96,11 +105,39 @@
     "egulias/email-validator": {
         "version": "2.1.11"
     },
+    "excelwebzone/recaptcha-bundle": {
+        "version": "1.5",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.5",
+            "ref": "fd4da7bc71749db65bc83abf5d164bfa9c839cf4"
+        },
+        "files": [
+            "config/packages/dev/ewz_recaptcha.yaml",
+            "config/packages/ewz_recaptcha.yaml"
+        ]
+    },
     "friendsofsymfony/ckeditor-bundle": {
         "version": "1.2.0"
     },
     "friendsofsymfony/user-bundle": {
         "version": "v2.1.2"
+    },
+    "gedmo/doctrine-extensions": {
+        "version": "v2.4.39"
+    },
+    "google/recaptcha": {
+        "version": "1.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.1",
+            "ref": "d087df3e087f50da3955f2def05079380da5894b"
+        },
+        "files": [
+            "config/packages/google_recaptcha.yaml"
+        ]
     },
     "guzzlehttp/psr7": {
         "version": "1.6.1"
@@ -186,7 +223,7 @@
         "version": "v0.16.1"
     },
     "michelf/php-markdown": {
-        "version": "1.8.0"
+        "version": "1.9.0"
     },
     "monolog/monolog": {
         "version": "1.25.1"
@@ -200,6 +237,15 @@
     "ocramius/proxy-manager": {
         "version": "2.2.3"
     },
+    "oomphinc/composer-installers-extender": {
+        "version": "v1.1.2"
+    },
+    "php": {
+        "version": "7.2"
+    },
+    "pixassociates/sortable-behavior-bundle": {
+        "version": "v1.5"
+    },
     "psr/cache": {
         "version": "1.0.1"
     },
@@ -211,6 +257,12 @@
     },
     "psr/log": {
         "version": "1.1.1"
+    },
+    "purplebooth/htmlstrip": {
+        "version": "1.0.2"
+    },
+    "purplebooth/twig-htmlstrip": {
+        "version": "v1.2.0"
     },
     "ralouphie/getallheaders": {
         "version": "3.0.3"
@@ -310,6 +362,18 @@
     "sonata-project/user-bundle": {
         "version": "4.5.1"
     },
+    "stof/doctrine-extensions-bundle": {
+        "version": "1.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.2",
+            "ref": "6c1ceb662f8997085f739cd089bfbef67f245983"
+        },
+        "files": [
+            "config/packages/stof_doctrine_extensions.yaml"
+        ]
+    },
     "swiftmailer/swiftmailer": {
         "version": "v6.2.1"
     },
@@ -368,6 +432,9 @@
     "symfony/dotenv": {
         "version": "v4.3.5"
     },
+    "symfony/error-handler": {
+        "version": "v4.4.5"
+    },
     "symfony/event-dispatcher": {
         "version": "v4.3.5"
     },
@@ -417,6 +484,12 @@
             "./src/Kernel.php"
         ]
     },
+    "symfony/http-client": {
+        "version": "v4.4.5"
+    },
+    "symfony/http-client-contracts": {
+        "version": "v2.0.1"
+    },
     "symfony/http-foundation": {
         "version": "v4.3.5"
     },
@@ -428,6 +501,18 @@
     },
     "symfony/intl": {
         "version": "v4.3.5"
+    },
+    "symfony/mailer": {
+        "version": "4.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.3",
+            "ref": "15658c2a0176cda2e7dba66276a2030b52bd81b2"
+        },
+        "files": [
+            "config/packages/mailer.yaml"
+        ]
     },
     "symfony/maker-bundle": {
         "version": "1.0",
@@ -460,6 +545,21 @@
     },
     "symfony/options-resolver": {
         "version": "v4.3.5"
+    },
+    "symfony/phpunit-bridge": {
+        "version": "4.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.3",
+            "ref": "6d0e35f749d5f4bfe1f011762875275cd3f9874f"
+        },
+        "files": [
+            ".env.test",
+            "bin/phpunit",
+            "phpunit.xml.dist",
+            "tests/bootstrap.php"
+        ]
     },
     "symfony/polyfill-intl-icu": {
         "version": "v1.12.0"
@@ -529,6 +629,20 @@
     "symfony/stopwatch": {
         "version": "v4.3.5"
     },
+    "symfony/swiftmailer-bundle": {
+        "version": "2.5",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "2.5",
+            "ref": "ae4d22af30bbd484506bc1817c5a3ef72c855b93"
+        },
+        "files": [
+            "config/packages/dev/swiftmailer.yaml",
+            "config/packages/swiftmailer.yaml",
+            "config/packages/test/swiftmailer.yaml"
+        ]
+    },
     "symfony/templating": {
         "version": "v4.3.5"
     },
@@ -596,6 +710,25 @@
             "config/packages/dev/web_profiler.yaml",
             "config/packages/test/web_profiler.yaml",
             "config/routes/dev/web_profiler.yaml"
+        ]
+    },
+    "symfony/webpack-encore-bundle": {
+        "version": "1.6",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "1.6",
+            "ref": "69e1d805ad95964088bd510c05995e87dc391564"
+        },
+        "files": [
+            "assets/css/app.css",
+            "assets/js/app.js",
+            "config/packages/assets.yaml",
+            "config/packages/prod/webpack_encore.yaml",
+            "config/packages/test/webpack_encore.yaml",
+            "config/packages/webpack_encore.yaml",
+            "package.json",
+            "webpack.config.js"
         ]
     },
     "symfony/yaml": {

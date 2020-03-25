@@ -33,17 +33,17 @@ security:
 
         # This firewall is used to handle the public login area
         # This part is handled by the FOS User Bundle
-        main:
-            pattern:             .*
-            context:             user
-            form_login:
-                provider:       fos_userbundle
-                login_path:     /login
-                use_forward:    false
-                check_path:     /login_check
-                failure_path:   null
-            logout:             true
-            anonymous:          true
+#        main:
+#            pattern:             .*
+#            context:             user
+#            form_login:
+#                provider:       fos_userbundle
+#                login_path:     /login
+#                use_forward:    false
+#                check_path:     /login_check
+#                failure_path:   null
+#            logout:             true
+#            anonymous:          true
     access_control:
         # Admin login page needs to be accessed without credential
         - { path: ^/admin/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }

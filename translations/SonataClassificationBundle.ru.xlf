@@ -233,6 +233,10 @@
           <source>group_options</source>
           <target>Дополнительные</target>
         </trans-unit>
+      <trans-unit id="add_subcategory" resname="add_subcategory">
+        <source>add_subcategory</source>
+        <target>Подкатегория</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

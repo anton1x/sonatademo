@@ -1,0 +1,22 @@
+{% extends 'layout.html.twig' %}
+
+{% block inner %}
+    <div id="news_item_1">
+        <div class="title"><a href="{{ path(routes.list) }}">{{ title }}</a></div>
+        <div id="news_item_1_content">
+            <div class="list_2_content_news_item">
+                {% if item.image is not empty %}
+                <div class="image"><span style="background-image:url({% path item.image, 'preview' %});">&nbsp;</span></div>
+                {% endif %}
+                <div class="date">{{ item.rusFormattedDate }}</div>
+                <div class="title"><a href="javascript://">{{ item.title }}</a></div>
+                <div class="desc">
+                    {{ item.body|raw }}
+                </div>
+                <div class="but"><a href="{{ path('news_list') }}" class="button_3">К списку новостей</a></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+

@@ -1,11 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+
+        <link rel="icon" type="image/png" href="{{ asset('/favicon-16x16.png') }}" sizes="16x16">
+        <link rel="icon" type="image/png" href="{{ asset('/favicon-32x32.png') }}" sizes="32x32">
+
+        <title>{% block title %}Rosfondom{% endblock %}</title>
+        {% block top_javascripts %}
+            <script type="text/javascript">
+                var jsR = new function(){var t=this;t.l=[];t.s=!1;window.addEventListener('DOMContentLoaded',function(){t.s=!0;for(var i in t.l){t.l[i]()}});window.jsReady=function(f){if(t.s){f()}else{t.l.push(f)}}};
+                var yMR = new function(){var t=this;t.l=[];t.s=!1;t.exec=function(f){if(t.s){f()}else{t.l.push(f)}};t.ready=function(){t.s=!0;for(var i in t.l){t.l[i]()}}};
+                var gCR = new function(){var t=this;t.l=[];t.s=!1;t.exec=function(f){if(t.s){f()}else{t.l.push(f)}};t.ready=function(){t.s=!0;for(var i in t.l){t.l[i]()}}};
+            </script>
+
+            <script>
+                window.jsReady(function() {
+                    eApi.init();
+                    projectApi.getUserInterface().checkAnimOnScroll();
+                });
+            </script>
+        {% endblock %}
+
+        {% block stylesheets %}
+            <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700,900&display=swap&subset=cyrillic" rel="stylesheet">
+        {% endblock %}
     </head>
-    <body>
+    <body class="{{ header_options.option('body_class') ? header_options.option('body_class') : '' }}">
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>

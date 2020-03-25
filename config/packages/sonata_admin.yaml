@@ -1,22 +1,62 @@
 sonata_admin:
-    title: 'Sonata Admin'
+    title: 'Росфондом'
+    title_logo: images/rfd_logo.png
+    show_mosaic_button: false
     dashboard:
         blocks:
            # - { type: sonata.admin.block.admin_list, position: left }
         groups:
             География: ~
             Продукты:
-                keep_open: true
+                label: Калькулятор
+                icon: '<i class="fa fa-calculator"></i>'
                 items:
-                    - app.admin.product_admin
-                    -
-                        route: admin_sonata_classification_category_tree
-                        label: "Категории"
-                        #admin: sonata.classification.admin.category
-                        route_params: { context: products, hide_context: true }
+                    - app.admin.internet
+                    - app.admin.tvplan
+                    - app.admin.additional_service
+                    - app.admin.devices
+                    - app.admin.address_object
+                    - app.admin.connection_type
+                    - app.admin.pricing_type
+#                    -
+#                        route: admin_sonata_classification_category_tree
+#                        label: "Категории"
+#                        #admin: sonata.classification.admin.category
+#                        route_params: { context: products, hide_context: true }
+            Слайдеры:
+                icon: '<i class="fa fa-image"></i>'
+                items:
+                    - app.admin.slide_gallery
             Новости:
+                icon: '<i class="fa fa-newspaper-o"></i>'
                 items:
                     - admin.news_item
+
+            Застройщикам и УК:
+                icon: '<i class="fa fa-building"></i>'
+                items:
+                    - app.admin.developer
+
+            Документы:
+                icon: '<i class="fa fa-file-archive-o"></i>'
+                items:
+                    - app.admin.document_group
+                    - app.admin.document
+
+            Лицензии:
+                icon: '<i class="fa fa-legal"></i>'
+                items:
+                    - app.admin.license
+
+            Меню:
+                icon: '<i class="fa fa-bars"></i>'
+                items:
+                    - app.admin.menu_schema_item
+
+#            Настройки:
+#                items:
+#                    - app.admin.global_settings
+
 
     security:
              handler: sonata.admin.security.handler.role
@@ -33,6 +73,9 @@ sonata_admin:
             - bundles/sonatacore/vendor/moment/min/moment-with-locales.min.js
             - bundles/sonatacore/vendor/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js
 
+            - /js/admin/form/extension/select_all.js
+            #- /build/admin.js
+
 
         extra_stylesheets:
             # ...
@@ -41,11 +84,20 @@ sonata_admin:
             - bundles/sonataformatter/markitup/sets/html/style.css
             - bundles/sonataformatter/markitup/sets/textile/style.css
             - bundles/sonatacore/vendor/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css
+#            - /build/admin.css
+
+    templates:
+        layout: 'admin/standard_layout.html.twig'
 
     extensions:
         app.admin.extension.seo_info_extension:
             implements:
                 - App\Entity\SeoPoweredInterface
+        app.admin.extension.sortable_list_extension:
+            admins:
+#                - app.admin.document
+            implements:
+                - App\Entity\Addons\SortableList
 
 
 

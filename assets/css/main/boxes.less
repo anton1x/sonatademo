@@ -1,0 +1,167 @@
+.errors_in_box_wrapper {
+
+    > .text {
+        > div {
+            //width:350px;
+            //display:flex;
+            margin-top:5px;
+            font-size:18px;
+            display:list-item;
+            //width:fit-content;
+
+            /*
+            &::before {
+                content:'—';
+                display:block;
+                float:left;
+                margin-right:5px;
+            }
+
+            &::after {
+                content:'';
+                display:block;
+                clear:both;
+            }
+            */
+
+            &:first-child {
+                margin-top:0;
+            }
+
+            > span {
+                display:block;
+                float:left;
+            }
+        }
+    }
+    > .button {
+        font-size:0;
+        margin-top:30px;
+    }
+}
+
+//ТВ тариф
+
+.box_tv_plan_wrapper {
+    > .content {
+        padding:20px 0 0 0;
+
+        .sm-block({
+            padding:10px 0 0 0;
+        });
+    }
+}
+
+.box_tv_plan_content {
+    > .title {
+        font-size:32px;
+        .weight-light();
+        text-align:center;
+
+        .sm-block({
+            font-size:24px;
+        });
+    }
+
+    > .count {
+        font-size:16px;
+        .weight-light();
+        text-align:center;
+        padding:10px 0 0 0;
+
+        > span {
+            font-weight: 900;
+        }
+    }
+
+    > .items {
+        padding:40px 1px 0 1px;
+        display:flex;
+        flex-wrap: wrap;
+
+        > div {
+            flex-basis: calc((100% - 3px) / 4);
+            border-top:1px solid #fff;
+            border-right:1px solid #fff;
+            background:@color_3;
+
+            > div {
+                background-size:cover;
+
+                .not-touch-dev({
+                    transition: opacity 0.3s;
+
+                    &:hover {
+                        opacity:0.6;
+                    }
+                });
+
+                > div {
+                    padding-top:56.25%;
+                }
+            }
+
+            &:nth-child(4n + 4) {
+                border-right:0;
+            }
+        }
+    }
+
+    > .close {
+        font-size:0;
+        text-align: center;
+        padding:40px 0;
+    }
+}
+
+//ТВ кинотеатр
+
+.box_tv_theather_wrapper {
+    position: relative;
+
+    > .top {
+        position: absolute;
+        left:0;
+        top:0;
+        width:100%;
+    }
+
+    > .content {
+        padding:0;
+    }
+}
+
+.box_tv_theather_content {
+    > .image {
+        background-size:cover;
+
+        > div {
+            padding-top:56.25%;
+        }
+    }
+
+    > .title {
+        font-size:32px;
+        .weight-light();
+        text-align:center;
+        padding:60px 0 0 0;
+
+        .sm-block({
+            padding:40px 0 0 0;
+            font-size:24px;
+        });
+    }
+
+    > .desc {
+        font-size:16px;
+        .weight-light();
+        text-align:center;
+        padding:20px 0 0 0;
+    }
+
+    > .close {
+        font-size:0;
+        text-align: center;
+        padding:40px 0;
+    }
+}

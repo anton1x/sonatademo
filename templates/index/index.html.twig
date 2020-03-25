@@ -1,0 +1,428 @@
+{% extends 'layout.html.twig' %}
+
+{% block inner %}
+    <div id="main_1">
+        <div>
+            <div class="title">Рассчитать стоимость услуг за <span class="black"><span class="font_icon clock gray s32_24">&nbsp;</span> 2 минуты</span></div>
+            <div class="desc">
+                Ответьте на несколько вопросов и получите <span class="black">персональный тариф</span> под свои интересы и потребности:
+            </div>
+            <div class="but">
+                <a href="{{ path('calculator_index') }}" class="button_2"><span>Начать</span></a>
+            </div>
+        </div>
+    </div>
+
+    <div id="main_2">
+        <div>
+            <div class="top">
+                <div>Для тех, кто не представляет свою жизнь без современных технологий</div>
+            </div>
+            <div id="main_2_content">
+                <div id="main_2_1">
+                    <div>
+                        <div class="short_block">
+                            <span class="icon">&nbsp;</span>
+                            <span class="icon_white">&nbsp;</span>
+                            <span class="title">Интернет</span>
+                            <span class="desc">
+                      Домашний интернет на космической скорости без перебоев до 1000 Мбит/с
+                      <span class="hidden_text">
+                        <br><br>
+                        Гарантия надежности и устойчивости соединения
+                        <br><br>
+                        Оперативное подключение 24 часа
+                        <br><br>
+                        P.S. Резервные каналы и надежное оборудование позволяют нашим клиентам получать услугу доступа в интернет без сбоев
+                      </span>
+                    </span>
+                            <span class="but"><a href="{{ path('calculator_index') }}">Подключиться</a></span>
+                        </div>
+                    </div>
+                </div>
+                <div id="main_2_2">
+                    <div>
+                        <div class="short_block">
+                            <span class="icon">&nbsp;</span>
+                            <span class="icon_white">&nbsp;</span>
+                            <span class="title">Телевидение</span>
+                            <span class="desc">
+                      До 257 каналов - это 1000 фильмов и сотни программ для избирательных клиентов
+                      <span class="hidden_text">
+                        <br><br>
+                        Единый доступ на 3-х разных устройствах одновременно
+                        <br><br>
+                        Online кинотеатры
+                        <br><br>
+                        Функция управление эфиром. «Паузы» и «Перемотки».
+                        <br><br>
+                        Архив до 5-х дней
+                      </span>
+                    </span>
+                            <span class="but"><a href="{{ path('calculator_index') }}">Подключиться</a></span>
+                        </div>
+                    </div>
+                </div>
+                <div id="main_2_3">
+                    <div>
+                        <div class="short_block">
+                            <span class="icon">&nbsp;</span>
+                            <span class="icon_white">&nbsp;</span>
+                            <span class="title">Телефон</span>
+                            <span class="desc">
+                      Высокое качество по низкой цене за телефонную связь
+                      <span class="hidden_text">
+                        <br><br>
+                        Подключение номера в коде 499
+                        <br><br>
+                        Подберём красивый номер, который легко запомнить
+                      </span>
+                    </span>
+                            <span class="but"><a href="{{ path('calculator_index') }}">Подключиться</a></span>
+                        </div>
+                    </div>
+                </div>
+                <div id="main_2_4">
+                    <div>
+                        <div class="short_block">
+                            <span class="icon">&nbsp;</span>
+                            <span class="icon_white">&nbsp;</span>
+                            <span class="title">Умный дом</span>
+                            <span class="desc">
+                      Комфортная жизнь с эффективными инструментами для обеспечения безопасности и уюта
+                      <span class="hidden_text">
+                        <br><br>
+                        Экономия времени и средств на оплату коммунальных счетов. За освещением следит набор датчиков
+                        <br><br>
+                        Наблюдать за происходящим в доме онлайн, где бы вы не находились со своего смартфона
+                        <br><br>
+                        Оперативные осведомления о вторжении, протечке воды, возгорании
+                      </span>
+                    </span>
+                            <span class="but"><a href="{{ path('calculator_index') }}">Подключиться</a></span>
+                        </div>
+                    </div>
+                </div>
+                <div id="main_2_5">
+                    <div>
+                        <div class="short_block">
+                            <span class="icon">&nbsp;</span>
+                            <span class="icon_white">&nbsp;</span>
+                            <span class="title">Сигнализация</span>
+                            <span class="desc">
+                      Персональная охранная сигнализация - надёжная и проверенная защита квартиры
+                      <span class="hidden_text">
+                        <br><br>
+                        Современное беспроводное оборудование и датчики охранной сигнализации реагируют на любые признаки бытовой аварии и несанкционированного проникновения
+                        <br><br>
+                        От 5 минут время прибытия экипажей быстрого реагирования
+                      </span>
+                    </span>
+                            <span class="but"><a href="{{ path('calculator_index') }}">Подключиться</a></span>
+                        </div>
+                    </div>
+                </div>
+                <div id="main_2_6">
+                    <div>
+                        <div class="short_block">
+                            <span class="icon">&nbsp;</span>
+                            <span class="icon_white">&nbsp;</span>
+                            <span class="title">Домофон</span>
+                            <span class="desc">
+                      Угол обзора до 180 градусов
+                      <span class="hidden_text">
+                        <br><br>
+                        Подключение к подъездному домофону
+                        <br><br>
+                        Возможность записи фото и видео
+                        <br><br>
+                        Домофон в вашем смартфоне
+                      </span>
+                    </span>
+                            <span class="but"><a href="{{ path('calculator_index') }}">Подключиться</a></span>
+                        </div>
+                    </div>
+                </div>
+                <div id="main_2_7">
+                    <div>
+                        <div class="short_block">
+                            <span class="icon">&nbsp;</span>
+                            <span class="icon_white">&nbsp;</span>
+                            <span class="title">Облачное видеонаблюдение</span>
+                            <span class="desc">
+                      Удаленный контроль за самым дорогим
+                      <span class="hidden_text">
+                        <br><br>
+                        Обеспечит безопасность вашей семьи и имущества в режиме 24/7
+                        <br><br>
+                        Наблюдайте за всем, что происходит в квартире, на экране смартфона из любой точки мира
+                        <br><br>
+                        Видеозаписи в HD-качестве
+                      </span>
+                    </span>
+                            <span class="but"><a href="{{ path('calculator_index') }}">Подключиться</a></span>
+                        </div>
+                    </div>
+                </div>
+                <div id="main_2_8"></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.jsReady(function() {
+            projectApi.getFuncs().addAnimShow(document.querySelectorAll('#main_2_content > div > div'));
+        });
+    </script>
+
+    <div id="main_3">
+        <div>
+            <div class="title">Время переходить на новый уровень обслуживания</div>
+            <div id="main_3_content">
+                <div id="main_3_1" class="item_anim">
+                    <div class="icon"></div>
+                    <div class="title">Конструктор тарифа под себя</div>
+                    <div class="desc">Соберите свой эксклюзивный пакет услуг под свои интересы и потребности.</div>
+                </div>
+                <div id="main_3_2" class="item_anim">
+                    <div class="icon"></div>
+                    <div class="title">Персональная<br> помощь</div>
+                    <div class="desc">Наши специалисты мобильно реагируют и готовы помочь решить любой технический вопрос.<br><br> Поддержка абонентов круглосуточно и без выходных.</div>
+                </div>
+                <div id="main_3_3" class="item_anim">
+                    <div class="icon"></div>
+                    <div class="title">Современное оборудование </div>
+                    <div class="desc">Гарантирует долгий срок службы и бесперебойную работу устройств.</div>
+                </div>
+                <div id="main_3_4" class="item_anim">
+                    <div class="icon"></div>
+                    <div class="title">Подключим по-настоящему быстро!</div>
+                    <div class="desc">Установка на следующий день или в согласованное время.</div>
+                </div>
+                <div id="main_3_5" class="item_anim">
+                    <div class="icon"></div>
+                    <div class="title">Космическая скорость интернета <span class="black bl">до 1000 Мбит/с</span></div>
+                </div>
+                <div id="main_3_6" class="item_anim">
+                    <div class="button"><a href="{{ path('calculator_index') }}"><span>Подключиться</span></a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="main_4">
+        <div>
+            <div class="title">Вниманию абонентов!</div>
+            <div id="main_4_content" class="list_content_1">
+                {{ news_widget(3, false, 'news', 'news_attention')|raw }}
+            </div>
+        </div >
+    </div>
+
+{#    <div id="main_5">#}
+{#        <div>#}
+{#            <div class="title">Материалы из нашего блога</div>#}
+{#            <div id="main_5_content" class="list_content_1">#}
+{#                {{ news_widget(6, true, 'blog')|raw }}#}
+{#            </div>#}
+{#            <div id="main_5_content_more"><a href="{{path('blog_list')}}" class="button_3">Читать еще</a></div>#}
+{#        </div>#}
+{#    </div>#}
+
+    <div id="main_6">
+        <div>
+            <div id="main_6_1">
+                <div class="title">Пополнить счет</div>
+                <div class="form">
+                    <form action="/" id="main_form_make_payment">
+                        <div class="form_fields">
+                            <div>
+                                <div class="title"><span class="star">*</span> Логин:</div>
+                                <div class="input"><input type="text" name="login"></div>
+                            </div>
+                            <div>
+                                <div class="title"><span class="star">*</span> Сумма:</div>
+                                <div class="input"><input type="text" name="sum"></div>
+                            </div>
+                        </div>
+                        <div class="button"><a href="javascript://" class="button_3 submit_button">Оплатить</a></div>
+                    </form>
+                </div>
+            </div>
+
+            <script>
+                window.jsReady(function() {
+                    projectApi.getFuncs().validateForm(
+                        document.getElementById('main_form_make_payment'),
+                        function(data, formdata, form)
+                        {
+                            pay(data.login, parseInt(data.sum));
+                            //console.log('Форма проверена, оправляй куда надо', data, formdata);
+                        },
+                        function(data, form)
+                        {
+                            var errors = [];
+
+                            if (data.login.length == 0)
+                            {
+                                errors.push('Поле логин не заполнено');
+                            }
+
+                            if (data.sum.length == 0)
+                            {
+                                errors.push('Поле сумма не заполнено');
+                            }
+                            else if (isNaN(parseFloat(data.sum)) == true)
+                            {
+                                errors.push('Укажите поле сумма корректно');
+                            }
+
+                            return errors;
+                        },
+                        function(errors, form)
+                        {
+                            projectApi.getFuncs().showErrorsInBox(errors);
+                        }
+                    );
+                });
+            </script>
+
+            <div id="main_6_2">
+                <div class="title">Заявка на подключение</div>
+                <div class="form">
+                    <form action="{{ path('connection_form') }}" id="main_form_make_connect_order" method="post" class="recaptcha-form">
+
+                        <div class="form_fields">
+                            <div>
+                                <div class="title"><span class="star">*</span> Имя:</div>
+                                <div class="input"><input type="text" name="name"></div>
+                            </div>
+                            <div>
+                                <div class="title"><span class="star">*</span> Контактный телефон:</div>
+                                <div class="input"><input type="text" name="phone"></div>
+                            </div>
+                            <div>
+                                <div class="title">E-mail:</div>
+                                <div class="input"><input type="text" name="email"></div>
+                            </div>
+                        </div>
+
+
+                        <input type="hidden" value="{{ form.type.vars.value }}" name="{{ form.type.vars.name }}">
+                        <input type="hidden" name="_token" value="{{ csrf_token('connection_order') }}">
+
+                        <div class="button"><a href="javascript://" class="button_3 submit_button" id="main_form_make_connect_order_submit">Оставить заявку</a></div>
+                    </form>
+                </div>
+            </div>
+
+
+            <script>
+                window.jsReady(function() {
+                    var phoneInput = document.querySelector('#main_form_make_connect_order input[name=phone]');
+                    var inputmask_phone = new Inputmask("+7 (999) 999-99-99", {clearIncomplete: true, onincomplete : function(){ phoneInput.setAttribute('value', ''); }});
+                    inputmask_phone.mask(phoneInput);
+
+                    projectApi.getFuncs().validateForm(
+                        document.getElementById('main_form_make_connect_order'),
+                        function(data, formdata, form)
+                        {
+                            eApi.getInterface().showCaptcha('Для отправки Вашей заявки необходимо подтверждение', function(captchaResponse) {
+                                data['g-recaptcha-response'] = captchaResponse;
+
+                                eApi.getFuncs().sendData('{{ path('connection_form') }}', data)
+                                    .then(function(response) {
+
+                                        if (response.data.success) {
+                                            eApi.getFuncs().alert('Заявка отправлена', {
+                                                box_destroy : function() {
+                                                    //Можно перезагрузить страницу если надо
+                                                    //document.location.reload();
+                                                }
+                                            });
+                                        }
+                                        else {
+                                            eApi.getFuncs().alert('Произошла ошибка в ходе отправки формы');
+                                        }
+
+
+
+
+                                    })
+                                    .catch(function() {
+
+                                        eApi.getFuncs().alert('Произошла ошибка в ходе отправки формы');
+
+                                    });
+                            });
+                        },
+                        function(data, form)
+                        {
+                            var errors = [];
+
+
+                            if (data.name.length == 0)
+                            {
+                                errors.push('Поле имя не заполнено');
+                            }
+
+                            if (data.phone.length == 0)
+                            {
+                                errors.push('Поле телефон не заполнено');
+                            }
+
+                            if (data.email.length > 0 && eApi.getFuncs().checkIsEmail(data.email) == false)
+                            {
+                                errors.push('Поле e-mail заполнено некорректно');
+                            }
+
+
+                            return errors;
+                        },
+                        function(errors, form)
+                        {
+                            projectApi.getFuncs().showErrorsInBox(errors);
+                        }
+                    );
+                });
+            </script>
+
+        </div>
+    </div>
+{% endblock inner %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style type="text/css">
+        #main_form_make_connect_order .form_fields.hidden {
+            display: none !important;
+        }
+    </style>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://widget.cloudpayments.ru/bundles/cloudpayments"></script>
+    <script type="text/javascript">
+
+        window.pay = function (login, amount) {
+            var widget = new cp.CloudPayments();
+            widget.charge({ // options
+                    publicId: '{{ _cloudpayments_api_key }}',  //id из личного кабинета
+                    description: 'Пополнение счета для клиента ' + login, //назначение
+                    amount: amount, //сумма
+                    currency: 'RUB', //валюта
+                    accountId: login, //идентификатор плательщика (необязательно)
+                    skin: "mini" //дизайн виджета
+                },
+                function (options) { // success
+                    //действие при успешной оплате
+                },
+                function (reason, options) { // fail
+                    //действие при неуспешной оплате
+                });
+        };
+
+    </script>
+{% endblock %}

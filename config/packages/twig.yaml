@@ -6,3 +6,8 @@ twig:
         - '@SonataMedia/Form/media_widgets.html.twig'
         - '@SonataFormatter/Form/formatter.html.twig'
         - '@SonataCore/Form/datepicker.html.twig'
+        - 'admin/widgets/custom_widgets.html.twig'
+    globals:
+        header_options: '@App\ViewOptions\HeaderOptions'
+        google_recaptcha_site_key: '%google_recaptcha_site_key%'
+        _cloudpayments_api_key: '%env(CLOUDPAYMENTS_API_KEY)%'

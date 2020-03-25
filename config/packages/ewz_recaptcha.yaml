@@ -1,0 +1,22 @@
+# See https://github.com/excelwebzone/EWZRecaptchaBundle for full configuration
+ewz_recaptcha:
+    public_key:  '%env(EWZ_RECAPTCHA_SITE_KEY)%'
+    private_key: '%env(EWZ_RECAPTCHA_SECRET)%'
+    enabled: true
+
+services:
+    ewz_recaptcha.validator.true:
+        class: App\Validator\RecaptchaValidatorCustom
+        public: true
+        arguments:
+            - '%ewz_recaptcha.enabled%'
+            - '%ewz_recaptcha.private_key%'
+            - '@request_stack'
+            - '%ewz_recaptcha.http_proxy%'
+            - '%ewz_recaptcha.verify_host%'
+            - '@?security.authorization_checker'
+            - '%ewz_recaptcha.trusted_roles%'
+            - '%ewz_recaptcha.api_host%'
+            - '%ewz_recaptcha.timeout%'
+        tags:
+            - { name: validator.constraint_validator, alias: 'ewz_recaptcha.true' }

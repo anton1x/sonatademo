@@ -1,0 +1,30 @@
+knp_menu:
+  twig:
+    template: 'menu/custom_menu.html.twig'
+
+parameters:
+  knp_menu.renderer.twig.options:
+    currentClass: sel
+
+services:
+  app.knp.main_menu:
+    class: Knp\Menu\MenuItem
+    factory: ['@App\Menu\MenuBuilder', createMainMenu]
+    arguments: ["bottom_menu"]
+    tags:
+      - { name: knp_menu.menu, alias: main_menu }
+
+  app.knp.mobile_main_menu:
+    class: Knp\Menu\MenuItem
+    factory: ['@App\Menu\MenuBuilder', createMobileTopMenu]
+    arguments: ["top_menu"]
+    tags:
+      - { name: knp_menu.menu, alias: mobile_main_menu }
+
+  app.knp.top_main_menu:
+    class: Knp\Menu\MenuItem
+    factory: ['@App\Menu\MenuBuilder', createTopMenu]
+    arguments: ["top_menu"]
+    tags:
+      - { name: knp_menu.menu, alias: top_menu }
+

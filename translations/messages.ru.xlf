@@ -13,6 +13,203 @@
         <source>Publish</source>
         <target>Опубликовать</target>
       </trans-unit>
+        <trans-unit id="0">
+            <source>Удалить</source>
+            <target>messages</target>
+        </trans-unit>
+      <trans-unit id="1">
+        <source>Удалить</source>
+        <target>messages</target>
+      </trans-unit>
+        <trans-unit id="2">
+            <source>select_all</source>
+            <target>Выбрать все</target>
+        </trans-unit>
+      <trans-unit id="3">
+        <source>unselect_all</source>
+        <target>Снять выбор</target>
+      </trans-unit>
+      <trans-unit id="Title">
+        <source>Title</source>
+        <target>Название</target>
+      </trans-unit>
+      <trans-unit id="Address">
+        <source>Address</source>
+        <target>Адрес</target>
+      </trans-unit>
+      <trans-unit id="Address Object List">
+        <source>Address Object List</source>
+        <target>Список адресов</target>
+      </trans-unit>
+      <trans-unit id="Action">
+        <source>Action</source>
+        <target>Действия</target>
+      </trans-unit>
+      <trans-unit id="Category">
+        <source>Category</source>
+        <target>Категория</target>
+      </trans-unit>
+      <trans-unit id="Additional Service Plan List">
+        <source>Additional Service Plan List</source>
+        <target>Список доп. услуг</target>
+      </trans-unit>
+      <trans-unit id="Internet Plan List">
+        <source>Internet Plan List</source>
+        <target>Список интернет-тарифов</target>
+      </trans-unit>
+      <trans-unit id="T V Plan List">
+        <source>T V Plan List</source>
+        <target>Список ТВ-тарифов</target>
+      </trans-unit>
+      <trans-unit id="Pricing Type">
+        <source>Pricing Type</source>
+        <target>Ценовая группа</target>
+      </trans-unit>
+      <trans-unit id="Address Object Create">
+        <source>Address Object Create</source>
+        <target>Создать адрес подключения</target>
+      </trans-unit>
+      <trans-unit id="Connection Type">
+        <source>Connection Type</source>
+        <target>Тип подключения</target>
+      </trans-unit>
+      <trans-unit id="Connection Type Name">
+        <source>Connection Type Name</source>
+        <target>Тип подключения</target>
+      </trans-unit>
+      <trans-unit id="Pricing Type Name">
+        <source>Pricing Type Name</source>
+        <target>Ценовая группа</target>
+      </trans-unit>
+      <trans-unit id="Description">
+        <source>Description</source>
+        <target>Описание</target>
+      </trans-unit>
+      <trans-unit id="Device List">
+        <source>Device List</source>
+        <target>Список устройств</target>
+      </trans-unit>
+      <trans-unit id="Device Create">
+        <source>Device Create</source>
+        <target>Создать устройство</target>
+      </trans-unit>
+      <trans-unit id="Image">
+        <source>Image</source>
+        <target>Картинка</target>
+      </trans-unit>
+      <trans-unit id="Additional Service Plan Create">
+        <source>Additional Service Plan Create</source>
+        <target>Создать доп. услугу</target>
+      </trans-unit>
+      <trans-unit id="Pricing Type List">
+        <source>Pricing Type List</source>
+        <target>Список ценовых категорий</target>
+      </trans-unit>
+      <trans-unit id="Pricing Type Create">
+        <source>Pricing Type Create</source>
+        <target>Создать ценовую категорию</target>
+      </trans-unit>
+      <trans-unit id="Name">
+        <source>Name</source>
+        <target>Наименование</target>
+      </trans-unit>
+      <trans-unit id="Devices">
+        <source>Devices</source>
+        <target>Устройства</target>
+      </trans-unit>
+      <trans-unit id="Addresses">
+        <source>Addresses</source>
+        <target>Адреса</target>
+      </trans-unit>
+      <trans-unit id="Connection Type List">
+        <source>Connection Type List</source>
+        <target>Список типов подключения</target>
+      </trans-unit>
+      <trans-unit id="Connection Type Create">
+        <source>Connection Type Create</source>
+        <target>Создать тип подключения</target>
+      </trans-unit>
+      <trans-unit id="4">
+          <source>clone</source>
+          <target>Клонировать</target>
+      </trans-unit>
+      <trans-unit id="html_slide">
+        <source>html_slide</source>
+        <target>HTML-слайд</target>
+      </trans-unit>
+      <trans-unit id="image_slide">
+        <source>image_slide</source>
+        <target>Картинка-слайд</target>
+      </trans-unit>
+      <trans-unit id="apartmentsCount">
+        <source>Apartments Count</source>
+        <target>Количество квартир</target>
+      </trans-unit>
+      <trans-unit id="builder">
+        <source>Builder</source>
+        <target>Застройщик</target>
+      </trans-unit>
+      <trans-unit id="Document Group List">
+        <source>Document Group List</source>
+        <target>Список групп</target>
+      </trans-unit>
+      <trans-unit id="Document Group Create">
+        <source>Document Group Create</source>
+        <target>Создать группу</target>
+      </trans-unit>
+      <trans-unit id="Document List">
+        <source>Document List</source>
+        <target>Список документов</target>
+      </trans-unit>
+      <trans-unit id="Document Create">
+        <source>Document Create</source>
+        <target>Создать документ</target>
+      </trans-unit>
+      <trans-unit id="Developer List">
+        <source>Developer List</source>
+        <target>Список реализованных проектов</target>
+      </trans-unit>
+      <trans-unit id="Developer Create">
+        <source>Developer Create</source>
+        <target>Создать</target>
+      </trans-unit>
+      <trans-unit id="Slide Gallery List">
+        <source>Slide Gallery List</source>
+        <target>Список галерей</target>
+      </trans-unit>
+      <trans-unit id="Slide Gallery Create">
+        <source>Slide Gallery Create</source>
+        <target>Создать галерею</target>
+      </trans-unit>
+      <trans-unit id="License List">
+        <source>License List</source>
+        <target>Список лицензий</target>
+      </trans-unit>
+      <trans-unit id="License Create">
+        <source>License Create</source>
+        <target>Создать лицензию</target>
+      </trans-unit>
+      <trans-unit id="Show In Menus">
+        <source>Show In Menus</source>
+        <target>Отображать элемент</target>
+      </trans-unit>
+      <trans-unit id="MenuSchemaItem">
+        <source>MenuSchemaItem</source>
+        <target>Структура меню</target>
+      </trans-unit>
+      <trans-unit id="Menu Schema Item List">
+        <source>Menu Schema Item List</source>
+        <target>Список элементов</target>
+      </trans-unit>
+      <trans-unit id="Menu Schema Item Create">
+        <source>Menu Schema Item Create</source>
+        <target>Создать элемент</target>
+      </trans-unit>
+      <trans-unit id="Code">
+        <source>Code</source>
+        <target>Символьный код</target>
+      </trans-unit>
+
     </body>
   </file>
 </xliff>

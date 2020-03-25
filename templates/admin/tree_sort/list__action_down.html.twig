@@ -1,0 +1,9 @@
+{% block field %}
+    {% spaceless %}
+		{% if object.parent is not null and object.parent.right - 1 != object.right %}
+        <a class="btn btn-sm btn-default" href="{{ admin.generateObjectUrl('down', object) }}">
+            <i class="fa fa-angle-down"></i>
+        </a>
+		{% endif %}
+    {% endspaceless %}
+{% endblock %}

@@ -1,0 +1,18 @@
+{% if slider is not null and slider.slides is not empty %}
+    <div id="header_slider_wrapper">
+        <div>
+            <items-slider-component class="vueInit">
+                {% set styles = [] %}
+                {% for slide in slider.slides %}
+                    {% if slide.styles is not null %}
+                        {% set styles = styles|merge([slide.styles]) %}
+                    {% endif %}
+                    {{- display_slide(slide)|raw }}
+                {% endfor %}
+            </items-slider-component>
+            <style type="text/css">
+                {{ styles|join('\n')|raw }}
+            </style>
+        </div>
+    </div>
+{% endif %}

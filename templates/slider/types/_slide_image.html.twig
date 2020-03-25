@@ -1,0 +1,5 @@
+{% if slide.image %}
+<div class="absolute" data-min-height="300px" data-max-height="500px">
+    <a href="{{ slide.link ? slide.link : 'javascript://' }}" target="_blank" class="absolute_image_link" style="background-image:url({% path slide.image, 'preview' %})">&nbsp;</a>
+</div>
+{% endif %}

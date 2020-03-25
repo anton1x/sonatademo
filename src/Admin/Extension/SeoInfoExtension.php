@@ -3,8 +3,7 @@
 
 namespace App\Admin\Extension;
 
-use App\Admin\SeoAdminType;
-use App\Form\SeoInfoType;
+use App\Form\Type\SeoInfoType;
 use Sonata\AdminBundle\Admin\AbstractAdminExtension;
 use Sonata\AdminBundle\Form\FormMapper;
 

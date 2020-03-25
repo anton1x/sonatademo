@@ -23,6 +23,7 @@ file that was distributed with this source code.
             <li class="sonata-ba-list-field" objectId="{{ element.id }}" >
                 <div class="sonata-tree__item"{% if depth < 2 %} data-treeview-toggled{% endif %}>
                     {% if element.parent or root %}<i class="fa fa-caret-right" data-treeview-toggler></i>{% endif %}
+
                     {% if admin.hasRoute('edit') and admin.hasAccess('edit') %}
                         <a class="sonata-tree__item__edit" href="{{ admin.generateObjectUrl('edit', element) }}">{{ element.name }}</a>
                     {% elseif admin.hasRoute('show') and admin.hasAccess('show') %}
@@ -33,7 +34,10 @@ file that was distributed with this source code.
                     <i class="text-muted">{{ element.code }}</i>
                     {#<a class="label label-default pull-right" href="{{ admin.generateObjectUrl('edit', element) }}">edit <i class="fa fa-magic"></i></a>#}
                     {% if admin.hasRoute('delete') and admin.hasAccess('delete') %}
-                        <a class="label label-default pull-right" href="{{ admin.generateObjectUrl('delete', element) }}">delete <i class="fa fa-close"></i></a>
+                        <a class="label label-danger pull-right" href="{{ admin.generateObjectUrl('delete', element) }}"><i class="fa fa-close"></i></a>
+                    {% endif %}
+                    {% if admin.hasRoute('create') and admin.hasAccess('create') %}
+                        <a class="label label-primary pull-right ml-2" href="{{ admin.generateObjectUrl('create', {}, {'parent_cat': element.id}) }}">{{ admin.trans('add_subcategory', {}, admin.translationDomain) }} <i class="fa fa-plus"></i></a>
                     {% endif %}
                     {% if element.enabled %}<span class="label label-success pull-right"><i class="fa fa-check"></i> {{ admin.trans('active', {}, admin.translationDomain) }}</span>{% endif %}
                     {% if not element.enabled %}<span class="label label-danger pull-right"><i class="fa fa-times"></i> {{ admin.trans('disabled', {}, admin.translationDomain) }}</span>{% endif %}

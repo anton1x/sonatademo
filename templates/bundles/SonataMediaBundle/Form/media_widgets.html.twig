@@ -1,0 +1,30 @@
+{% block sonata_media_type_widget %}
+
+    <div class="row">
+        <div class="col-md-6 pull-left">
+            {% if value is not empty and value.providerReference %}
+                <div class="pull-left" style="margin-right: 5px">
+                    {% if value.providerName == 'sonata.media.provider.image' %}
+                        {% thumbnail value, 'admin' with {'class': 'img-polaroid media-object'} %}
+                    {% elseif value.providerName == 'sonata.media.provider.file' %}
+                        <div style="margin-top: 10px; text-align: center;">
+                            <div>
+                                <span class="fa fa-file-pdf-o fa-3x py-1"></span><br>
+                                <a style="padding-top: 10px; display: block;" href="{% path value, 'reference' %}" target="_blank">{{ value.name }}</a>
+                            </div>
+
+                        </div>
+                    {% endif %}
+                </div>
+            {% else %}
+                <div class="pull-left" style="margin-right: 5px">
+                    <img src="{{ asset('bundles/sonatamedia/grey.png') }}" class="img-polaroid media-object" style="width: 85px; height: 85px"/>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="col-md-6 pull-left">
+            {{ block('form_widget') }}
+        </div>
+    </div>
+{% endblock sonata_media_type_widget %}

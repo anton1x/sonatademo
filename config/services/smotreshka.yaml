@@ -1,0 +1,9 @@
+parameters:
+  app.smotreshka.options.url: 'http://rosfondom.ru/channel_list/list.json'
+services:
+  App\Service\Smotreshka\JsonDownloader:
+    arguments: ['%app.smotreshka.options.url%', '%kernel.cache_dir%/smotreshka.json']
+
+  App\Service\Smotreshka\SmotreshkaHelper:
+    public: true
+    arguments: ['@App\Service\Smotreshka\JsonDownloader', '@cache.app', '@doctrine.orm.entity_manager']
