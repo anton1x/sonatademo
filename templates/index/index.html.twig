@@ -403,7 +403,7 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="https://widget.cloudpayments.ru/bundles/cloudpayments"></script>
+    <script src="https://widget.cloudpayments.ru/bundles/cloudpayments" async onload="cPR.ready();"></script>
     <script type="text/javascript">
 
         window.pay = function (login, amount) {
