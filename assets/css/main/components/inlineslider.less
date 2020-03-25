@@ -32,9 +32,13 @@
                 vertical-align: top;
                 position:relative;
 
+                .size-block(1250px, {
+                    padding-bottom:25px;
+                });
+
                 > .c {
                     width:100%;
-                    overflow: hidden;
+                    //overflow: hidden;
 
                     &.absolute {
                         position: absolute;
@@ -112,7 +116,7 @@
 
     > .points_wrapper {
         font-size:0;
-        padding:25px 0;
+        padding:0 0 25px 0;
         display:none;
 
         .size-block(1250px, {
