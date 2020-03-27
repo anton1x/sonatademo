@@ -150,7 +150,7 @@
                         <div class="simple">
                             <div id="make_order_app_step_3_tv_box">
                                 <div class="title">Внимание!</div>
-                                <div class="text">При отсутствии смарт-тв для просмотра интерактивного телевидения понадобится тв-приставка.</div>
+                                <div class="text">При отсутствии Smart TV для просмотра Интерактивного телевидения понадобится ТВ-приставка.</div>
                                 <div class="item">
                                     <div class="image" :style="{'background-image' : 'url('+getTvBox().image.url.reference+')'}"><div :style="{'min-height' : Math.round((160 / getTvBox().image.sizes.reference.width) * getTvBox().image.sizes.reference.height) + 'px' }"></div></div>
                                     <div class="content">

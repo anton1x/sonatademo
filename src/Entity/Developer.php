@@ -36,7 +36,7 @@ class Developer
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $builder;
+    private $builder = '';
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Application\Sonata\MediaBundle\Entity\Media", cascade={"all"}, fetch="EAGER")

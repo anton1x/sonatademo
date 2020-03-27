@@ -27,8 +27,8 @@ final class DeveloperAdmin extends AbstractAdmin
             ->add('id')
             ->add('name')
             ->add('address')
-            ->add('apartmentsCount')
-            ->add('builder')
+            //->add('apartmentsCount')
+            //->add('builder')
             ;
     }
 
@@ -52,9 +52,9 @@ final class DeveloperAdmin extends AbstractAdmin
             ->add('apartmentsCount', null, [
                 'editable' => true,
             ])
-            ->add('builder', null, [
-                'editable' => true,
-            ])
+//            ->add('builder', null, [
+//                'editable' => true,
+//            ])
             ->add('_action', null, [
                 'actions' => [
                     'edit' => [],
@@ -79,7 +79,7 @@ final class DeveloperAdmin extends AbstractAdmin
             ->add('apartmentsCount', null, [
                 'required' => false,
             ])
-            ->add('builder')
+            //->add('builder')
             ;
     }
 
