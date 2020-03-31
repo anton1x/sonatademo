@@ -468,7 +468,7 @@
                                         <div class="input">
                                             <div class="birthday_wrapper">
                                                 <div class="day">
-                                                    <ui-select :options="selectDaysList" v-model="dataStep5.input_cday" :key="'cday_selector'"></ui-select>
+                                                    <ui-select :options="selectConnectDaysList" v-model="dataStep5.input_cday" :key="'cday_selector'"></ui-select>
                                                 </div>
                                                 <div class="month">
                                                     <ui-select :options="selectMonthsList" v-model="dataStep5.input_cmonth" :key="'cmonth_selector'"></ui-select>
@@ -498,6 +498,7 @@
                             </template>  
                         </block-fading>
                     </div>
+                    <!--
                     <div class="checkbox_block">
                         <div class="checkbox"><ui-switcher v-model="dataStep5.checkbox_already_client" mode="checkbox" :key="'checkbox_already_client'"></ui-switcher></div>
                         <div class="info">
@@ -505,12 +506,15 @@
                             <div class="desc">Отметьте, пожалуйста, галочкой, если Вы являетесь действующим абонентом РосфонДом.</div>
                         </div>
                     </div>
+                    -->
+                    <!--
                     <div class="checkbox_block">
                         <div class="checkbox"><ui-switcher v-model="dataStep5.checkbox_from_other_operator" mode="checkbox" :key="'checkbox_from_other_operator'"></ui-switcher></div>
                         <div class="info">
                             <div class="text"><span @click="(dataStep5.checkbox_from_other_operator = true)">Я переключаюсь с другого оператора связи</span></div>
                         </div>
                     </div>
+                    -->
                     <div class="checkbox_block">
                         <div class="checkbox"><ui-switcher v-model="dataStep5.checkbox_policy" mode="checkbox" :key="'checkbox_policy'"></ui-switcher></div>
                         <div class="info">
@@ -1287,8 +1291,19 @@ export default {
 
         selectDaysList()
         {
+            let maxd = parseInt(new Date(this.dataStep5.input_byear, this.dataStep5.input_bmonth, 0).getDate());
             let r = [];
-            for (let i = 1; i <= 31; i++)
+            for (let i = 1; i <= maxd; i++)
+            {
+                r.push({value : i, text : i});
+            }
+            return r;
+        },
+        selectConnectDaysList()
+        {
+            let maxd = parseInt(new Date(this.dataStep5.input_cyear, this.dataStep5.input_cmonth, 0).getDate());
+            let r = [];
+            for (let i = 1; i <= maxd; i++)
             {
                 r.push({value : i, text : i});
             }
@@ -1315,8 +1330,8 @@ export default {
         {
             let r = [];
             let d = new Date();
-            var s = parseInt(d.getFullYear()) - 13;
-            for (let i = s; i >= (s - 100); i--)
+            var s = parseInt(d.getFullYear()) - 14;
+            for (let i = s; i >= (parseInt(d.getFullYear()) - 100); i--)
             {
                 r.push({value : i, text : i});
             }
@@ -1336,7 +1351,7 @@ export default {
         selectHoursList()
         {
             let r = [];
-            for (let i = 0; i <= 23; i++)
+            for (let i = 7; i <= 23; i++)
             {
                 r.push({value : i, text : (i < 10 ? '0' + i : i)});
             }
@@ -1514,7 +1529,7 @@ export default {
                 }
 
                 for (let e in fields) {
-                    if (this.dataStep5[fields[e]].length < 1)
+                    if (fields[e] != 'input_comment' && this.dataStep5[fields[e]].length < 1)
                     {
                         this.showErrors(['Заполните все обязательные поля']);
                         return false;
@@ -1648,7 +1663,7 @@ export default {
             eApi.getFuncs().sendData(window.order_form_callback, data)
             .then((response) => {
 
-                if (response.data.error == true)
+                if (response.data.error)
                 {
                     eApi.getFuncs().alert('Произошла неизвестная ошибка.');
                 }
@@ -1676,7 +1691,7 @@ export default {
                     }
                 }
             })
-            .catch(function(e) {
+            .catch(function() {
                 eApi.getFuncs().alert('Произошла ошибка в ходе отправки данных.');
             });
         },
@@ -2045,6 +2060,9 @@ export default {
         var date = new Date();
         date.setDate(date.getDate() + 1);
         let dataStep5 = this.dataStep5;
+        dataStep5.input_bday = 1;
+        dataStep5.input_bmonth = 1;
+        dataStep5.input_byear = parseInt(date.getFullYear()) - 14;
         dataStep5.input_cday = date.getDate();
         dataStep5.input_cmonth = date.getMonth() + 1;
         dataStep5.input_cyear = date.getFullYear();

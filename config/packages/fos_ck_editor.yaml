@@ -31,6 +31,11 @@ fos_ck_editor:
         context: default # Optional, to upload in a custom context
         format: big # Optional, media format or original size returned to editor
 
+    ugly:
+      toolbar:
+        - [Bold, Italic]
+        - [Maximize, Source]
+
   styles:
     my_styles:
       - { name: "Оранжевый", element: "span", attributes: { class: "orange" }}
