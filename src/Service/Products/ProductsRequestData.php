@@ -169,9 +169,9 @@ class ProductsRequestData
     public function needLoginCreate() {
         $contactType =  $this->getContact()['type'] ?? false;
 
-        $contactAlreadyClient = $this->getContact()['checkbox_already_client'] ?? false;
+        //$contactAlreadyClient = $this->getContact()['checkbox_already_client'] ?? false;
 
-        return $contactType == "self" && !$contactAlreadyClient;
+        return $contactType == "self";
     }
 
 }

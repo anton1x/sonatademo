@@ -8,8 +8,6 @@
             <h2>Данные заявки</h2>
             <div>
                 <div>Тип подключения: <b>{{ contact.type == "self" ? "Самостоятельно" : (contact.type == "phone" ? "По телефону") }}</b></div>
-                <div>Уже является клиентом: {{ contact.checkbox_already_client ? "Да" : "Нет" }}</div>
-                <div>Переходит от другого оператора: {{ contact.checkbox_from_other_operator ? "Да" : "Нет" }}</div>
                 <h3>Данные контакта</h3>
                 {% if contact.type == "self" %}
                 <div>Присвоенный логин в биллинге: <i>{{ data.complatLogin }}</i></div>
