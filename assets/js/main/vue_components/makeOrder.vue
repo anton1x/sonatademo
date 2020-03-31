@@ -963,6 +963,11 @@ export default {
         //Генераторы
         currentDataAddress()
         {
+            if (typeof this.formData == 'undefined')
+            {
+                this.formData = window.order_form_data;
+            }
+
             let i = this.formData.addresses.findIndex((e) => {
                 return e.id == this.dataAddressId;
             });
@@ -975,7 +980,7 @@ export default {
         currentAddressTvTheathers()
         {
             let result = [];
-            if (this.dataStep3.tvPlan !== null && this.formData.products.tv_basic[this.dataStep3.tvPlan].include_theatres == false && this.dataStep3.openedTheathers)
+            if (this.dataStep3.tvPlan !== null && this.formData.products.tv_basic[this.dataStep3.tvPlan].include_theatres == false /*&& this.dataStep3.openedTheathers*/)
             {
                 for (let i in this.addressesTvTheatresList)
                 {
@@ -990,7 +995,7 @@ export default {
         currentAddressTvAddons()
         {
             let result = [];
-            if (this.dataStep3.openedAddons)
+            //if (this.currentDataAddress !== null)
             {
                 for (let i in this.addressesTvAddonsList)
                 {
@@ -1005,7 +1010,7 @@ export default {
         currentAddressPhoneDectDevices()
         {
             let result = [];
-            if (this.checkPhoneHasTariff && this.dataStep4.openedPhoneDectDevs)
+            if (this.checkPhoneHasTariff /*&& this.dataStep4.openedPhoneDectDevs*/)
             {
                 for (let i in this.dynamicListPhoneDectDevices)
                 {
@@ -1020,7 +1025,7 @@ export default {
         currentAddressPhoneTableDevices()
         {
             let result = [];
-            if (this.checkPhoneHasTariff && this.dataStep4.openedPhoneTableDevs)
+            if (this.checkPhoneHasTariff /*&& this.dataStep4.openedPhoneTableDevs*/)
             {
                 for (let i in this.dynamicListPhoneTableDevices)
                 {
@@ -1066,7 +1071,7 @@ export default {
         //Чекеры
         checkPhoneHasTariff()
         {
-            if (this.nowStep >= 4 && this.dataStep4.canceled == false && this.dataStep4.openedPhone && this.dataStep4.phoneTariff !== null)
+            if (this.nowStep >= 4 && this.dataStep4.canceled == false /*&& this.dataStep4.openedPhone*/ && this.dataStep4.phoneTariff !== null)
             {
                 return true;
             }
@@ -1074,7 +1079,7 @@ export default {
         },
         checkVisionHomeHasTariff()
         {
-            if (this.nowStep >= 4 && this.dataStep4.canceled == false && this.dataStep4.openedVision && this.dataStep4.visionHomeTariff !== null)
+            if (this.nowStep >= 4 && this.dataStep4.canceled == false /*&& this.dataStep4.openedVision*/ && this.dataStep4.visionHomeTariff !== null)
             {
                 return true;
             }
@@ -1082,7 +1087,7 @@ export default {
         },
         checkVisionParkingHasTariff()
         {
-            if (this.nowStep >= 4 && this.dataStep4.canceled == false && this.dataStep4.openedVision && this.dataStep4.visionParkingTariff !== null)
+            if (this.nowStep >= 4 && this.dataStep4.canceled == false /*&& this.dataStep4.openedVision*/ && this.dataStep4.visionParkingTariff !== null)
             {
                 return true;
             }
@@ -1950,6 +1955,8 @@ export default {
     },
     created() {
 
+        this.formData = window.order_form_data;
+
         this.inputmask_phone = new Inputmask("+7 (999) 999-99-99", {clearIncomplete: true, onincomplete : () => { this.dataStep5.input_phone = ''; }});
 
         
@@ -2010,8 +2017,6 @@ export default {
         };
 
         this.cookie_save_timeout = 0;
-
-        this.formData = window.order_form_data;
 
         let tv_theathers = {};
         for (let i in this.formData.products.tv_theatres)
