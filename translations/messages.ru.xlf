@@ -39,7 +39,7 @@
       </trans-unit>
       <trans-unit id="Address Object List">
         <source>Address Object List</source>
-        <target>Список адресов</target>
+        <target>Список ЖК</target>
       </trans-unit>
       <trans-unit id="Action">
         <source>Action</source>
@@ -67,7 +67,7 @@
       </trans-unit>
       <trans-unit id="Address Object Create">
         <source>Address Object Create</source>
-        <target>Создать адрес подключения</target>
+        <target>Создать ЖК</target>
       </trans-unit>
       <trans-unit id="Connection Type">
         <source>Connection Type</source>
@@ -171,6 +171,14 @@
       </trans-unit>
       <trans-unit id="Developer Create">
         <source>Developer Create</source>
+        <target>Создать</target>
+      </trans-unit>
+      <trans-unit id="Developer Planned List">
+        <source>Developer Planned List</source>
+        <target>Список планируемых проектов</target>
+      </trans-unit>
+      <trans-unit id="Developer Planned Create">
+        <source>Developer Planned Create</source>
         <target>Создать</target>
       </trans-unit>
       <trans-unit id="Slide Gallery List">

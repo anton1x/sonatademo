@@ -170,7 +170,7 @@ services:
         class: App\Admin\AddressObjectAdmin
         arguments: [~, App\Entity\AddressObject, 'PixSortableBehaviorBundle:SortableAdmin']
         tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: "Адреса подключения" }
+            - { name: sonata.admin, manager_type: orm, group: admin, label: "Жилые комплексы" }
         public: true
 
     app.serializer.media_handler_devices:
@@ -243,9 +243,16 @@ services:
 
     app.admin.developer:
         class: App\Admin\DeveloperAdmin
-        arguments: [~, App\Entity\Developer, 'PixSortableBehaviorBundle:SortableAdmin']
+        arguments: [~, App\Entity\Developer, 'PixSortableBehaviorBundle:SortableAdmin', false]
         tags:
             - { name: sonata.admin, manager_type: orm, group: admin, label: 'Реализованные проекты' }
+        public: true
+
+    app.admin.developer_planned:
+        class: App\Admin\DeveloperAdmin
+        arguments: [~, App\Entity\Developer, 'PixSortableBehaviorBundle:SortableAdmin', true]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: 'Планируемые проекты' }
         public: true
 
     app.admin.document_group:

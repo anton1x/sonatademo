@@ -19,7 +19,7 @@ class AddressReducer extends ReducerAbstract
             if (!$id)
                 return;
 
-            $filtered = array_filter($this->addresses, function ($addr) use($id) {
+            $filtered = array_filter($this->addresses, function ($addr) use ($id) {
 
                 /** @var AddressObject $addr */
                 return $addr->getId() == $id;

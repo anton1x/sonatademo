@@ -61,6 +61,11 @@ class AddressObject implements SortableList
      */
     private $pricingType;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $needBuildingInput = true;
+
 
 
     public function __construct()
@@ -166,6 +171,24 @@ class AddressObject implements SortableList
 
         return $this;
     }
+
+    /**
+     * @return bool
+     */
+    public function isNeedBuildingInput(): bool
+    {
+        return $this->needBuildingInput;
+    }
+
+    /**
+     * @param bool $needBuildingInput
+     */
+    public function setNeedBuildingInput(bool $needBuildingInput): void
+    {
+        $this->needBuildingInput = $needBuildingInput;
+    }
+
+
 
 
 

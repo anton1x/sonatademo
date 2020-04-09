@@ -291,80 +291,6 @@
             );
         });
     </script>
-
-{#    <script>#}
-{#        window.jsReady(function() {#}
-{#            var phoneInput = document.querySelector('#about_developers_contact_form input[name=phone]');#}
-{#            var inputmask_phone = new Inputmask("+7 (999) 999-99-99", {clearIncomplete: true, onincomplete : function(){ phoneInput.setAttribute('value', ''); }});#}
-{#            inputmask_phone.mask(phoneInput);#}
-
-{#            projectApi.getFuncs().validateForm(#}
-{#                document.getElementById('about_developers_contact_form'),#}
-{#                function(data, formdata, form)#}
-{#                {#}
-{#                    function throwRequestError() {#}
-{#                        projectApi.getFuncs().showErrorsInBox(['Ошибка соединения. Попробуйте позже.']);#}
-{#                    }#}
-
-{#                    function onRequestSuccess() {#}
-{#                        projectApi.getFuncs().showErrorsInBox(['Ваша заявка успешно отправлена!']);#}
-{#                        form.reset();#}
-{#                        grecaptcha.reset();#}
-{#                        changeStep(1);#}
-{#                    }#}
-
-{#                    var xhr = new XMLHttpRequest();#}
-{#                    xhr.open('POST', '{{ path('connection_form') }}', true);#}
-{#                    xhr.responseType = 'json';#}
-{#                    xhr.onerror = throwRequestError;#}
-{#                    xhr.onload = function () {#}
-{#                        var response = xhr.response;#}
-{#                        if (response.success) {#}
-{#                            onRequestSuccess();#}
-{#                        }#}
-{#                        else {#}
-{#                            throwRequestError();#}
-{#                        }#}
-{#                    };#}
-
-{#                    xhr.send(formdata);#}
-
-{#                },#}
-{#                function(data, form)#}
-{#                {#}
-
-{#                    console.log(data['g-recaptcha-response']);#}
-{#                    var errors = [];#}
-
-{#                    if (data.name.length === 0)#}
-{#                    {#}
-{#                        errors.push('Поле имя не заполнено');#}
-{#                    }#}
-
-{#                    if (data.phone.length === 0)#}
-{#                    {#}
-{#                        errors.push('Поле телефон не заполнено');#}
-{#                    }#}
-
-{#                    if (data.email.length > 0 && eApi.getFuncs().checkIsEmail(data.email) === false)#}
-{#                    {#}
-{#                        errors.push('Поле e-mail заполнено некорректно');#}
-{#                    }#}
-
-{#                    if (typeof data['g-recaptcha-response'] !== 'undefined' && data['g-recaptcha-response'].length === 0)#}
-{#                    {#}
-{#                        errors.push('CAPTCHA не заполнена');#}
-{#                    }#}
-
-{#                    return errors;#}
-{#                },#}
-{#                function(errors, form)#}
-{#                {#}
-{#                    projectApi.getFuncs().showErrorsInBox(errors);#}
-{#                }#}
-{#            );#}
-{#        });#}
-{#    </script>#}
 {% endblock %}
 
 {% block stylesheets %}
@@ -376,3 +302,7 @@
         }
     </style>
 {% endblock %}
+
+{%- block title %}
+    Застройщикам и УК | РосФонДом - Оператора связи нашего города
+{%- endblock %}

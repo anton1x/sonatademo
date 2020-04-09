@@ -19,11 +19,13 @@ class DeveloperRepository extends ServiceEntityRepository
         parent::__construct($registry, Developer::class);
     }
 
-    public function findAllSorted()
+    public function findAllSorted($planned = false)
     {
         return $this->createQueryBuilder('d')
             ->join('d.image', 'image')
             ->orderBy('d.position', 'ASC')
+            ->andWhere('d.isPlannedProject = :planned')
+            ->setParameter('planned', $planned)
             ->getQuery()
             ->getResult()
             ;

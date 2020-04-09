@@ -58,6 +58,9 @@ final class AddressObjectAdmin extends AbstractAdmin
         $formMapper
             ->add('title')
             ->add('address')
+            ->add('needBuildingInput', null, [
+                'label' => 'Требует указания корпуса',
+            ])
             ->add('connectionType', EntityType::class, [
                 'class' => ConnectionType::class,
                 'label' => 'Тип подключения',

@@ -36,6 +36,9 @@ sonata_admin:
                 icon: '<i class="fa fa-building"></i>'
                 items:
                     - app.admin.developer
+                    - app.admin.developer_planned
+
+
 
             Документы:
                 icon: '<i class="fa fa-file-archive-o"></i>'

@@ -49,6 +49,13 @@ class Developer
      */
     private $position;
 
+    /**
+     * @ORM\Column(type="boolean")
+     * @Gedmo\SortableGroup
+     */
+    private $isPlannedProject = 0;
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -129,6 +136,18 @@ class Developer
     public function __toString()
     {
         return $this->getName();
+    }
+
+    public function getIsPlannedProject(): ?bool
+    {
+        return $this->isPlannedProject;
+    }
+
+    public function setIsPlannedProject(bool $isPlannedProject): self
+    {
+        $this->isPlannedProject = $isPlannedProject;
+
+        return $this;
     }
 
 //    /**
