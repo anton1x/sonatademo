@@ -5,17 +5,26 @@
 
     > div {
         box-sizing: border-box;
-        flex-basis: calc((100% - 120px) / 3);
-        margin-right:60px;
+        flex-basis: calc((100% - 160px) / 3);
+        margin-right:80px;
         margin-top:60px;
 
         .bad-calc-widths({
-            flex-basis: calc((100% - 120px) * 0.3333);
+            flex-basis: calc((100% - 160px) * 0.3333);
         });
 
         &:nth-child(3n+3) {
             margin-right:0;
         }
+
+        .size-block(1300px, {
+            flex-basis: calc((100% - 120px) / 3);
+            margin-right:60px;
+
+            .bad-calc-widths({
+                flex-basis: calc((100% - 120px) * 0.3333);
+            });
+        });
 
         .size-block(1000px, {
             flex-basis: calc((100% - 60px) / 2);
@@ -266,9 +275,9 @@
             justify-content: center;
 
             > div {
-                padding:0 20px;
+                padding:0 15px 0 20px;
                 font-weight:900;
-                font-size:24px;
+                font-size:22px;
             }
         }
 
@@ -280,9 +289,9 @@
             border-bottom:1px solid @color_4;
 
             > div {
-                padding:0 20px;
+                padding:0 15px 0 20px;
                 .weight-light();
-                font-size:12px;
+                font-size:11px;
             }
         }
 
@@ -368,7 +377,8 @@
 
     padding-left:@std_wrapper_paddings;
     padding-right:@std_wrapper_paddings;
-
+    max-width:980px;
+    
     .xs-block({
         padding-left:0;
         padding-right:0;
@@ -505,6 +515,56 @@
 
         .xs-block({
             padding:0 @std_wrapper_paddings_xs;
+        });
+    }
+}
+
+.list_content_3 {
+    display:flex;
+    flex-wrap: wrap;
+
+    > div {
+        box-sizing: border-box;
+        flex-basis: calc((100% - 180px) / 4);
+        margin-right:60px;
+        margin-top:60px;
+
+        &:nth-child(4n+4) {
+            margin-right:0;
+        }
+
+        .size-block(1300px, {
+            flex-basis: calc((100% - 120px) / 3);
+
+            &:nth-child(4n+4) {
+                margin-right:60px;
+            }
+
+            &:nth-child(3n+3) {
+                margin-right:0;
+            }
+
+            .bad-calc-widths({
+                flex-basis: calc((100% - 120px) * 0.3333);
+            });
+        });
+
+        .size-block(1000px, {
+            flex-basis: calc((100% - 60px) / 2);
+
+            &:nth-child(3n+3) {
+                margin-right:60px;
+            }
+
+            &:nth-child(2n+2) {
+                margin-right:0;
+            }
+        });
+
+        .sm-block({
+            flex-basis:100%;
+            margin-right:0 !important;
+            margin-top:40px;
         });
     }
 }

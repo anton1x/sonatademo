@@ -25,9 +25,11 @@ class DevelopersController extends AbstractController
             ;
 
         $list = $this->getDoctrine()->getRepository(Developer::class)->findAllSorted();
+        $listPlanned = $this->getDoctrine()->getRepository(Developer::class)->findAllSorted(true);
         $form = $this->createForm(ConnectionFormType::class, null, ['type' => ConnectionFormOrder::TYPE_DEVELOPERS])->createView();
         return $this->render('developers/index.html.twig', [
             'list' => $list,
+            'listPlanned' => $listPlanned,
             'form' => $form,
         ]);
     }

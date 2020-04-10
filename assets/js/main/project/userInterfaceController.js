@@ -32,6 +32,15 @@ export default class extends projectController {
     pageUpdated(is_init, oldVars = {})
     {
         this.selSubMenu(this.getProjectApi().tplVars.selSubMenu);
+
+        let url_vars = this.getApi().getFuncs().getUrlParams();
+        if (typeof url_vars.scrollToBlock != 'undefined')
+        {
+            let scroll_block = url_vars.scrollToBlock;
+            this.getApi().getFuncs().removeUrlParams({vars : ['scrollToBlock']});
+
+            this.getApi().getFuncs().windowScrollToBlock(scroll_block);
+        }
     }
 
   
@@ -138,7 +147,7 @@ export default class extends projectController {
         this.getApi().getFuncs().loadBox((resolve, reject) =>
         {
             //setTimeout(() => {
-                axios.get(window.channel_list_callback(id)).then((response) =>
+                axios.get('/ajax_tv_plan_channels_list.php?id='+id).then((response) =>
                 {
                     let content = `<div class="box_tv_plan_content">
                         <div class="title">`+(type == 'plan' ? 'Тариф' : 'Пакет каналов')+` «${response.data.name}»</div>
@@ -198,6 +207,21 @@ export default class extends projectController {
             wrapper_extra_classes : 'box_tv_theather_wrapper',
             content : content
         });
+    }
+
+    //Перейти к оплате
+    goToPayment()
+    {
+        if ((document.location.pathname.length == 0 || document.location.pathname == '/') == false)
+        {
+            window.location.href = '/?scrollToBlock=main_6';
+        }
+        else
+        {
+            this.getApi().getFuncs().windowScrollToBlock('main_6');
+        }
+
+        return false;
     }
 
 }

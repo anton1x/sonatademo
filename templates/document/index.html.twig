@@ -15,28 +15,28 @@
                         <div class="file_item">
                             <a href="{% path parentFile.file, 'reference' %}">
                               <span>
-                                <span class="icon"><span class="file_icon {{ parentFile.fileExtension }} s54 sm27">&nbsp;</span></span>
+                                <span class="icon"><span class="file_icon {{ parentFile.fileExtension }} s42 sm18">&nbsp;</span></span>
                                 <span class="title">{{ parentFile.name }}</span>
                               </span>
                             </a>
                         </div>
 
+                    </div>
+
                         {% if parentFile.children is not empty %}
                             {% for child in parentFile.children %}
-                            <div class="sub_files">
-                                <div class="sub_file_item">
-                                    <a href="{% path child.file, 'reference' %}">
-                                        <span>
-                                          <span class="icon"><span class="file_icon {{ child.fileExtension }} s42 sm18">&nbsp;</span></span>
-                                          <span class="title">{{ child.name }}</span>
-                                        </span>
-                                    </a>
+                                <div>
+                                    <div class="file_item">
+                                        <a href="{% path child.file, 'reference' %}">
+                                            <span>
+                                              <span class="icon"><span class="file_icon {{ child.fileExtension }} s42 sm18">&nbsp;</span></span>
+                                              <span class="title">{{ child.name }}</span>
+                                            </span>
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
                             {% endfor %}
                         {% endif %}
-
-                    </div>
                     {% endfor %}
                 </div>
             </div>

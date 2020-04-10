@@ -586,8 +586,8 @@
 
     > div {
         box-sizing: border-box;
-        flex-basis: calc((100% - 120px) / 3);
-        margin-right:60px;
+        flex-basis: calc((100% - 160px) / 3);
+        margin-right:80px;
         margin-top:60px;
 
         &.r {
@@ -596,12 +596,21 @@
         }
 
         .bad-calc-widths({
-            flex-basis: calc((100% - 120px) * 0.3333);
+            flex-basis: calc((100% - 160px) * 0.3333);
         });
 
         &:nth-child(3n+3) {
             margin-right:0;
         }
+
+        .size-block(1300px, {
+            flex-basis: calc((100% - 120px) / 3);
+            margin-right:60px;
+
+            .bad-calc-widths({
+                flex-basis: calc((100% - 120px) * 0.3333);
+            });
+        });
 
         .size-block(1000px, {
             flex-basis: calc((100% - 60px) / 2);
@@ -644,6 +653,12 @@
 
             .sm-block({
                 font-size:20px;
+            });
+
+            .size-block-min(1301px, {
+                br {
+                    display:none;
+                }
             });
         }
 
@@ -888,8 +903,13 @@
 }
 
 #main_6_1 {
-    flex-basis: 260px;
-    margin-right:120px;
+    flex-basis: 325px;
+    margin-right:150px;
+
+    .size-block(1200px, {
+        flex-basis: 260px;
+        margin-right:120px;
+    });
 
     .size-block(1000px, {
         flex-basis:100%;
@@ -918,7 +938,11 @@
 }
 
 #main_6_2 {
-    flex-basis:calc(100% - 380px);
+    flex-basis:calc(100% - 475px);
+
+    .size-block(1200px, {
+        flex-basis:calc(100% - 380px);
+    });
 
     .size-block(1000px, {
         flex-basis:100%;

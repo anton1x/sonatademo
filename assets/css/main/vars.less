@@ -1,4 +1,5 @@
-@std_wrapper_maxwidth: 980px;
+//@std_wrapper_maxwidth: 980px;
+@std_wrapper_maxwidth: 1225px;
 @std_wrapper_paddings: 30px;
 @std_wrapper_paddings_xs: 15px;
 
@@ -42,6 +43,12 @@
 
 .size-block(@size, @content){
     @media screen and (max-width: @size){
+        @content();
+    }
+}
+
+.size-block-min(@size, @content){
+    @media screen and (min-width: @size){
         @content();
     }
 }

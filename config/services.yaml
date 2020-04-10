@@ -32,10 +32,10 @@ parameters:
     blog.root_category: news_blog
     blog.list.items_per_page: 10
     blog.view.route: blog_view
-    google_recaptcha_site_key: '%env(GOOGLE_RECAPTCHA_SITE_KEY)%'
     blog.title: Блог
 
 
+    google_recaptcha_site_key: '%env(GOOGLE_RECAPTCHA_SITE_KEY)%'
 
 
 services:

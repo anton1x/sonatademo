@@ -55,7 +55,7 @@
                 <div class="step_wrapper" id="make_order_app_step_2_wrapper">
                     <div class="block_wrapper">
                         <div class="title">Настройте тариф так, как нужно вам</div>
-                        <div class="input" :style="{maxWidth : (addressesInternetPlansList.length * 160) + 'px'}">
+                        <div class="input" :style="{maxWidth : (addressesInternetPlansList.length * 180) + 'px'}">
                             <ui-liner :options="addressesInternetPlansList" v-model="dataStep2.internetPlan" :helpblock="internetPlansFormHelpBlock" :key="'internet_liner'">
                                  <template v-slot:title="i">
                                     <span class="mb">{{i.speed}}</span> Мбит/с
@@ -64,23 +64,13 @@
                         </div>
                     </div>
                     <div class="block_wrapper">
-                        <div class="title">Дополнительно</div>
-                        <div class="switcher_option">
-                            <div class="input"><ui-switcher v-model="dataStep2.staticIp" :key="'internet_addon_static_ip'"></ui-switcher></div>
-                            <div class="content">
-                                <div class="title">Статический IP-адрес</div>
-                                <div class="desc">(для стабильного удалённого доступа к вашим сетевым устройствам)</div>
-                                <div class="price">{{coolNumber(addressesInternetAdds['3'].price.monthly_price)}} <span>р/мес</span></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="block_wrapper">
                         <div class="title">Выбор оборудования</div>
                         <div id="make_order_app_step_2_devices" :class="{gpon : currentAddressConType == 'gpon'}">
                             <div class="gpon_block" v-if="currentAddressConType == 'gpon'">
                                 <div class="desc">
                                     <div class="title">Внимание!</div>
-                                    <div class="text">В вашем жилом комплексе подключение к интернету осуществляется по технологии <span>GPON</span>. <span>Обязательным оборудованием для подключения является ont-модем Eltex</span>.</div>
+                                    <div class="text">В вашем жилом комплексе подключение к интернету осуществляется по технологии <span>GPON</span>. <span>Обязательным оборудованием для подключения является PON-модем Eltex</span>.</div>
+                                    <div class="link"><a href="/upload/media/documents/0001/01/15e3ef476f87e2730e5dca69d884c17d52f5a911.pdf" target="_blank">Подробнее</a></div>
                                 </div>
                                 <div class="devices">
                                     <template v-for="(d,i) in currentDataAddress.connection_type.devices">
@@ -112,7 +102,7 @@
                                 <div class="devices">
                                     <template v-for="(d,i) in currentDataAddress.connection_type.devices">
                                         <template v-if="formData.products.devices_internet_wifi[d] !== undefined">
-                                            <div :key="i + '_wifi_devices'">
+                                            <div :key="i + '_wifi_devices'" :class="{not_sel : dataStep2.wifiDevice != d && dataStep2.wifiDevice !== null}">
                                                 <div class="image" :style="{'background-image' : 'url('+getWiFiDevice(d).image.url.reference+')'}"><div :style="{'min-height' : Math.round((160 / getWiFiDevice(d).image.sizes.reference.width) * getWiFiDevice(d).image.sizes.reference.height) + 'px' }"></div></div>
                                                 <div class="content">
                                                     <div class="title">{{getWiFiDevice(d).title}}</div>
@@ -122,6 +112,7 @@
                                                         <div class="input">
                                                             <ui-switcher v-model="dataStep2.wifiDevice" :truevalue="d" :falsevalue="null" mode="checkbox" :key="i + '_wifi_devices_switcher'"></ui-switcher>
                                                         </div>
+                                                        <!--
                                                         <div class="result">
                                                             <template v-if="dataStep2.wifiDevice == d">
                                                                 <span class="selected">выбрано</span>
@@ -129,6 +120,7 @@
                                                             </template>
                                                             <span v-else @click="(dataStep2.wifiDevice = d)" class="sel">выбрать</span>
                                                         </div>
+                                                        -->
                                                     </div>
                                                 </div>
                                             </div>
@@ -138,13 +130,24 @@
                             </div>
                         </div>
                     </div>
+                    <div class="block_wrapper">
+                        <div class="title">Дополнительно</div>
+                        <div class="switcher_option">
+                            <div class="input"><ui-switcher v-model="dataStep2.staticIp" :key="'internet_addon_static_ip'"></ui-switcher></div>
+                            <div class="content">
+                                <div class="title">Статический IP-адрес</div>
+                                <div class="desc">(для стабильного удалённого доступа к вашим сетевым устройствам)</div>
+                                <div class="price">{{coolNumber(addressesInternetAdds['3'].price.monthly_price)}} <span>р/мес</span></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </template>
             <template v-if="nowStep == 3">
                 <div class="step_wrapper" id="make_order_app_step_3_wrapper">
                     <div class="block_wrapper">
                         <div class="title">Настройте ваш телевизор</div>
-                        <div class="input" :style="{maxWidth : (addressesTvPlansList.length * 160) + 'px'}">
+                        <div class="input" :style="{maxWidth : (addressesTvPlansList.length * 180) + 'px'}">
                             <ui-liner :options="addressesTvPlansList" v-model="dataStep3.tvPlan" :helpblock="tvPlansFormHelpBlock" :key="'tv_liner'"></ui-liner>
                         </div>
                         <div class="simple">
@@ -186,7 +189,7 @@
                             </block-fading>
                         </div>
                         <div class="simple" v-if="dataStep3.tvPlan !== null && formData.products.tv_basic[dataStep3.tvPlan].include_theatres == false">
-                            <block-fading v-model="dataStep3.openedTheathers" title="Online кинотеатры" :key="'tv_theathers_block'">
+                            <block-fading v-model="dataStep3.openedTheathers" title="Онлайн кинотеатры" :key="'tv_theathers_block'">
                                 <template v-slot:icon><div id="make_order_app_step_3_icon_theathers"></div></template>
                                 <template v-slot:content="data">
                                     <div class="fading_block_list">
@@ -361,17 +364,17 @@
             <template v-if="nowStep == 5">
                 <div class="step_wrapper" id="make_order_app_step_5_wrapper">
                     <div class="title">Оформление заявки на подключение</div>
-                    <div class="desc">Выберите способ внесения данных — самостоятельно заполните заявку на подключение и она незамедлительно пойдет в работу, либо с вами свяжется наш специалист по указанному телефону.</div>
+                    <div class="desc"><b>Поздравляем!</b> Остался всего один заключительный шаг — оформление заявки на подключение услуг. По Российскому законодательству для этого понадобятся паспортные данные. Выберите пожалуйста способ их внесения —  в Онлайн режиме или с помощью нашего менеджера, который свяжется с вами и заполнит за вас всё что необходимо. <b>Подключение производится в течение 1 дня после оформления заявки и оплаты услуг связи.</b></div>
                     <div class="taps">
-                        <block-taps v-model="dataStep5.openedTap" :taps="{self : 'Самостоятельно', phone : 'По телефону'}" :key="'final_block_taps'" class="nohp">
+                        <block-taps v-model="dataStep5.openedTap" :taps="{self : 'Онлайн режим', phone : 'Помощь менеджера'}" :key="'final_block_taps'" class="nohp">
                             <template v-slot:tap_self>
                                 <div class="contacts_form">
                                     <div class="static">
-                                        <div class="title">Адрес:</div>
+                                        <div class="title">Жилой комплекс:</div>
                                         <div class="value">{{currentDataAddress.title}} ({{currentDataAddress.address}})</div>
                                     </div>
                                     <div class="dbl">
-                                        <div class="field">
+                                        <div class="field" v-if="currentDataAddress.need_building_input">
                                             <div class="title"><span>*</span> Корпус:</div>
                                             <div class="input"><input type="text" v-model="dataStep5.input_building"></div>
                                         </div>
@@ -396,10 +399,10 @@
                                     </div>
                                     <div class="field">
                                         <div class="title"><span>*</span> Кем и когда выдан:</div>
-                                        <div class="input"><input type="text" v-model="dataStep5.input_passport_who"></div>
+                                        <div class="input"><textarea v-model="dataStep5.input_passport_who" style="height:70px"></textarea></div>
                                     </div>
                                     <div class="field">
-                                        <div class="title"><span>*</span> Адрес прописки:</div>
+                                        <div class="title"><span>*</span> Адрес регистрации:</div>
                                         <div class="input"><input type="text" v-model="dataStep5.input_passport_address"></div>
                                     </div>
                                     <div class="field">
@@ -430,14 +433,14 @@
                                     </div>
                                     <div class="field">
                                         <div class="title">Комментарий к заявке:</div>
-                                        <div class="input"><textarea v-model="dataStep5.input_comment" style="height:150px"></textarea></div>
+                                        <div class="input"><textarea v-model="dataStep5.input_comment" style="height:100px"></textarea></div>
                                     </div>
                                 </div>
                             </template>
                             <template v-slot:tap_phone>
                                 <div class="contacts_form">
                                     <div class="static">
-                                        <div class="title">Адрес:</div>
+                                        <div class="title">Жилой комплекс:</div>
                                         <div class="value">{{currentDataAddress.title}} ({{currentDataAddress.address}})</div>
                                     </div>
                                     <div class="field">
@@ -452,7 +455,7 @@
                                     </div>
                                     <div class="field">
                                         <div class="title">Комментарий к заявке:</div>
-                                        <div class="input"><textarea v-model="dataStep5.input_comment" style="height:150px"></textarea></div>
+                                        <div class="input"><textarea v-model="dataStep5.input_comment" style="height:100px"></textarea></div>
                                     </div>
                                 </div>
                             </template>
@@ -483,6 +486,7 @@
                                         <div class="title">Время:</div>
                                         <div class="input">
                                             <div class="hours_wrapper">
+                                                <!--
                                                 <div>с:</div>
                                                 <div class="start">
                                                     <ui-select :options="selectHoursList" v-model="dataStep5.input_chour_start" :key="'chour_start_selector'"></ui-select>
@@ -491,6 +495,8 @@
                                                 <div class="end">
                                                     <ui-select :options="selectHoursList" v-model="dataStep5.input_chour_end" :key="'chour_end_selector'"></ui-select>
                                                 </div>
+                                                -->
+                                                <ui-select :options="selectCHoursList" v-model="dataStep5.input_chour" :key="'chour_start_selector'"></ui-select>
                                             </div>
                                         </div>
                                     </div>
@@ -518,7 +524,7 @@
                     <div class="checkbox_block">
                         <div class="checkbox"><ui-switcher v-model="dataStep5.checkbox_policy" mode="checkbox" :key="'checkbox_policy'"></ui-switcher></div>
                         <div class="info">
-                            <div class="text"><span @click="(dataStep5.checkbox_policy = true)">Я принимаю условия</span> <a href="javascript://">политики конфиденциальности</a></div>
+                            <div class="text"><span @click="(dataStep5.checkbox_policy = true)">Даю согласие на обработку персональных данных и принимаю условия</span> <a href="/upload/media/documents/0001/01/2854a85e4ea8ce9412ee86cd53da65329da320a8.pdf" target="_blank">политики конфиденциальности</a></div>
                         </div>
                     </div>
                 </div>
@@ -532,7 +538,7 @@
                         <div id="make_order_app_result_1">
                             <div class="title">
                                 <div class="icon"></div>
-                                <div class="text">Адрес:</div>
+                                <div class="text">Жилой комплекс:</div>
                             </div>
                             <div class="content">
                                 <div class="simple_text">{{currentDataAddress.title}} ({{currentDataAddress.address}})</div>
@@ -597,7 +603,7 @@
                                 </div>
                                 </template>
                                 <template v-if="currentAddressTvTheathers.length > 0">
-                                <div class="title">Online кинотеатры:</div>
+                                <div class="title">Онлайн кинотеатры:</div>
                                 <div class="items">
                                     <div v-for="i in currentAddressTvTheathers" class="item smt">
                                         <span class="t"><span class="black">{{getTvTheather(i).title}}</span></span>
@@ -753,7 +759,7 @@
                     <a href="javascript://" class="b" @click="goBackStep"><span>&nbsp;</span></a>
                 </div>
                 <div class="next">
-                    <a href="javascript://" class="button_3 pbig" @click="goNextStep"><template v-if="nowStep > 4">Оформить заявку</template><template v-else>Далее</template></a>
+                    <a href="javascript://" class="button_3 pbig" @click="goNextStep"><template v-if="nowStep > 4 && dataStep5.openedTap == 'self'">Перейти к оплате</template><template v-else-if="nowStep > 4 && dataStep5.openedTap == 'phone'">Оформить заявку</template><template v-else>Далее</template></a>
                 </div>
                 <div class="cancel" v-if="showButtonCancel">
                     <a href="javascript://" @click="cancelThisStep">Пропустить <span>этот шаг</span></a>
@@ -821,8 +827,7 @@ export default {
                 input_cday : undefined,
                 input_cmonth : undefined,
                 input_cyear : undefined,
-                input_chour_start : 11,
-                input_chour_end : 18,
+                input_chour : 0,
                 checkbox_already_client : false,
                 checkbox_from_other_operator : false,
                 checkbox_policy : false
@@ -1353,6 +1358,7 @@ export default {
             }
             return r;
         },
+        /*
         selectHoursList()
         {
             let r = [];
@@ -1362,6 +1368,16 @@ export default {
             }
             return r;
         },
+        */
+       selectCHoursList()
+       {
+           return [
+               {value : 0, text : 'с 7:00 до 11:00', start : 7, end : 11},
+               {value : 1, text : 'с 11:00 до 15:00', start : 11, end : 15},
+               {value : 2, text : 'с 15:00 до 19:00', start : 15, end : 19},
+               {value : 3, text : 'с 19:00 до 23:00', start : 19, end : 23},
+           ];
+       }
     },
     methods : {
         //Геттеры
@@ -1444,7 +1460,7 @@ export default {
             {
                 if (this.currentAddressConType == 'gpon' && this.dataStep2.optDevice === null)
                 {
-                    this.showErrors(['В вашем жилом комплексе подключение к интернету осуществляется по технологии GPON. Для продолжения необходимо выбрать подходящий ont-модем.']);
+                    this.showErrors(['В вашем жилом комплексе подключение к интернету осуществляется по технологии GPON. Для продолжения необходимо выбрать подходящий PON-модем.']);
                     return false;
                 }
             }
@@ -1534,10 +1550,13 @@ export default {
                 }
 
                 for (let e in fields) {
-                    if (fields[e] != 'input_comment' && this.dataStep5[fields[e]].length < 1)
+                    if (!(fields[e] == 'input_comment' || (fields[e] == 'input_building' && this.currentDataAddress.need_building_input == false)))
                     {
-                        this.showErrors(['Заполните все обязательные поля']);
-                        return false;
+                        if (this.dataStep5[fields[e]].length < 1)
+                        {
+                            this.showErrors(['Заполните все обязательные поля']);
+                            return false;
+                        }
                     }
                 }
 
@@ -1660,8 +1679,8 @@ export default {
                     day : this.dataStep5.input_cday,
                     month : this.dataStep5.input_cmonth,
                     year : this.dataStep5.input_cyear,
-                    hour_start : this.dataStep5.input_chour_start,
-                    hour_end : this.dataStep5.input_chour_end,
+                    hour_start : this.selectCHoursList[this.dataStep5.input_chour].start,
+                    hour_end : this.selectCHoursList[this.dataStep5.input_chour].end,
                 };
             }
 

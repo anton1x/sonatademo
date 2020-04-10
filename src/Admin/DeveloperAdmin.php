@@ -49,7 +49,6 @@ final class DeveloperAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
     {
         $datagridMapper
-            ->add('id')
             ->add('name')
             ->add('address')
             //->add('isPlannedProject')
@@ -68,7 +67,6 @@ final class DeveloperAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $listMapper): void
     {
         $listMapper
-            ->add('id')
             ->add('name', null, [
                 'editable' => true,
             ])

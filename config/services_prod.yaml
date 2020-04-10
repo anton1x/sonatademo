@@ -6,6 +6,7 @@
 parameters:
     connection_order.mailing.from: ['rfd-test@mail.ru']
     connection_order.mailing.to: ['rosfondom@rosfon.ru','antongaran@mail.ru']
+    app.smotreshka.options.url: 'http://rosfon.proxy.lfstrm.tv/v2/subscriptions'
 
 
 

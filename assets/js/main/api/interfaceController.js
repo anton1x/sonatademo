@@ -11,6 +11,7 @@ export default class extends controller {
 
         let html = `<div id="box_captcha_wrapper"><div class="text">${t}</div><div class="captcha"><div><div id="recovery_google_recaptcha"></div></div></div>`;
         let gc_init = false;
+        let google_token = false;
 
         let options = {
             id : 'captcha',
@@ -28,8 +29,6 @@ export default class extends controller {
         };
 
         let box = this.getApi().getBoxes().create(options);
-
-        let google_token = false;
 
         gCR.exec(() => {
             grecaptcha.render('recovery_google_recaptcha',

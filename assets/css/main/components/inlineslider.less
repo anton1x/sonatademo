@@ -1,3 +1,5 @@
+@slider_inline_mode_width : 1400px;
+
 .inline_slider_wrapper {
 
     margin:0 auto;
@@ -32,7 +34,7 @@
                 vertical-align: top;
                 position:relative;
 
-                .size-block(1250px, {
+                .size-block(@slider_inline_mode_width, {
                     padding-bottom:25px;
                 });
 
@@ -69,7 +71,7 @@
 
     > .arrows {
         
-        .size-block(1250px, {
+        .size-block(@slider_inline_mode_width, {
             display:none;
         });
 
@@ -119,7 +121,7 @@
         padding:0 0 25px 0;
         display:none;
 
-        .size-block(1250px, {
+        .size-block(@slider_inline_mode_width, {
             display:block;
         });
 

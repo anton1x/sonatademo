@@ -149,6 +149,15 @@ export default class extends controller {
         
     }
 
+    windowScrollToBlock(v)
+    {
+        if (document.getElementById(v) !== null)
+        {
+            let s = document.getElementById(v).getBoundingClientRect().top + pageYOffset;
+            this.windowScrollTo(s);
+        }
+    }
+
     windowScrollTo(v)
     {
         window.scrollTo({ top: v, behavior: 'smooth' });
@@ -221,4 +230,213 @@ export default class extends controller {
         return s.join(dec);
     }
 
+
+    decodeURIComponentSafe(uri, mod)
+	{
+		var out = new String(),
+			arr,
+			i = 0,
+			l,
+			x;
+		typeof mod === "undefined" ? mod = 0 : 0;
+		arr = uri.split(/(%(?:d0|d1)%.{2})/);
+		for (l = arr.length; i < l; i++) {
+			try {
+				x = decodeURIComponent(arr[i]);
+			} catch (e) {
+				x = mod ? arr[i].replace(/%(?!\d+)/g, '%25') : arr[i];
+			}
+			out += x;
+		}
+		return out;
+    }
+    
+    parseQueryString(query)
+	{
+		if (query.length == 0)
+		{
+			return {};
+		}
+		var vars = query.split('&');
+		var query_string = {};
+		for (var i = 0; i < vars.length; i++)
+		{
+			if (vars[i].length == 0)
+			{
+				continue;
+			}
+			var pair = vars[i].split("=");
+			if (pair.length == 1)
+			{
+				pair[1] = true;
+			}
+			var key = this.decodeURIComponentSafe(pair[0], 1);
+			var value = '';
+			for (var g = 1; g < pair.length; g++)
+			{
+				value += (g > 1 ? '=' : '') + this.decodeURIComponentSafe(pair[g], 1);
+			}
+			
+			if (typeof query_string[key] === "undefined")
+			{
+				query_string[key] = this.decodeURIComponentSafe(value);
+			}
+			else if (typeof query_string[key] === "string")
+			{
+				var arr = [query_string[key], this.decodeURIComponentSafe(value, 1)];
+				query_string[key] = arr;
+			}
+			else
+			{
+				query_string[key].push(this.decodeURIComponentSafe(value, 1));
+			}
+		}
+		return query_string;
+    }
+    
+    encodeUrlComponent(str)
+	{
+		return encodeURIComponent(str).replace(/%2C/g, ',');
+    }
+
+    replaceUrl(vars)
+	{
+        vars = Object.assign({
+            url : false,
+            title : false,
+            replace_history : true
+        }, vars);
+        
+        if (vars.title == false)
+        {
+            vars.title = document.title;
+        }
+        
+        if (history.pushState)
+        {
+            if (vars.url)
+            {
+                if (vars.replace_history == false)
+                {
+                    history.pushState({type : 'page', url : vars.url}, vars.title, vars.url);
+                }
+                else
+                {
+                    history.replaceState({type : 'page', url : vars.url}, vars.title, vars.url);
+                }
+            }
+        }
+    }
+    
+    getUrlParams()
+    {
+        var query = document.location.search;
+        if (query.length > 0 && query.substring(0,1) == '?')
+        {
+            query = query.substring(1);
+        }
+        var result = this.parseQueryString(query);
+        
+        return result;
+    }
+    
+    setUrlParamsVars(vars)
+    {
+        vars = Object.assign({
+            url : false,
+            vars : {},
+            replace_history : true
+        }, vars);
+
+        var new_vars = vars.vars;
+        var new_url = vars.url === false ? (document.location.pathname.length == 0 ? '/' : document.location.pathname) : vars.url;
+        
+        var c = 0; 
+        for (var i in new_vars)
+        {
+            if (typeof new_vars[i] == 'string' || typeof new_vars[i] == 'number')
+            {
+                new_url += c == 0 ? '?' : '&';
+                new_url += i + '=' + this.encodeUrlComponent(new_vars[i]);
+                c++;
+            }
+            else if (typeof new_vars[i] == 'boolean')
+            {
+                new_url += c == 0 ? '?' : '&';
+                new_url += i;
+                c++;
+            }
+            else if (typeof new_vars[i] == 'object')
+            {
+                if (new_vars[i].type == 'array')
+                {
+                    new_vars[i].separator = typeof new_vars[i].separator == 'undefined' ? ',' : new_vars[i].separator;
+                    new_url += c == 0 ? '?' : '&';
+                    var val = [];
+                    for (var g in new_vars[i].values)
+                    {
+                        val.push(this.encodeUrlComponent(new_vars[i].values[g]));
+                    }
+                    new_url += i + '=' + val.join(new_vars[i].separator);
+                    c++;
+                }
+            }
+        }
+        
+        new_url += document.location.hash;
+        
+        this.replaceUrl({
+            url : new_url,
+            replace_history : vars.replace_history
+        });
+    }
+
+    addUrlParams(vars)
+    {
+        vars = Object.assign({
+            url : false,
+            vars : {},
+            remove_existing : false,
+            replace_history : true
+        }, vars);
+        
+        var new_vars;
+        
+        if (vars.remove_existing == true)
+        {
+            new_vars = vars.vars;
+        }
+        else
+        {
+            new_vars = this.getUrlParams();
+            for (var i in vars.vars)
+            {
+                new_vars[i] = vars.vars[i];
+            }
+        }
+        
+        this.setUrlParamsVars({url : vars.url, vars : new_vars, replace_history : vars.replace_history});
+
+    }
+
+    removeUrlParams(vars)
+    {
+        vars = Object.assign({
+            vars : {},
+            replace_history : true
+        }, vars);
+        
+
+        var new_vars = this.getUrlParams();
+        for (var i in vars.vars)
+        {
+            if (typeof new_vars[vars.vars[i]] != 'undefined')
+            {
+                delete new_vars[vars.vars[i]];
+            }
+        }
+
+        this.setUrlParamsVars({vars : new_vars, replace_history : vars.replace_history});
+
+    }
 }
