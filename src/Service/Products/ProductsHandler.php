@@ -89,15 +89,15 @@ class ProductsHandler
             $this->complatHelper->doNewLoginQuery($productsRequestData);
         }
 
-        dump($productsRequestData);
+        //dump($productsRequestData);
         $this->mailer->send($this->createMessage($productsRequestData));
 
         $basketConverter = $this->amoBasketConverter->createWithBasket($productsRequestData->basket);
-        dump($basketConverter->getTv());
-        dump($basketConverter->getAdditional());
+        //dump($basketConverter->getTv());
+        //dump($basketConverter->getAdditional());
 
         $addrConverter = new AddressConverter($productsRequestData);
-        dump($this->generateNotes($productsRequestData));
+        //dump($this->generateNotes($productsRequestData));
 
         $this->amoHelper->createIncomingLead(
           $productsRequestData->getContactParam('input_fio'),
