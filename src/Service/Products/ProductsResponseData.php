@@ -45,7 +45,7 @@ class ProductsResponseData
 
         $new->amount = $data->basket->getFirstPaymentValue();
 
-        dump($new);
+        //dump($new);
         return $new;
     }
 
