@@ -147,7 +147,7 @@ export default class extends projectController {
         this.getApi().getFuncs().loadBox((resolve, reject) =>
         {
             //setTimeout(() => {
-                axios.get('/ajax_tv_plan_channels_list.php?id='+id).then((response) =>
+                axios.get(window.channel_list_callback(id)).then((response) =>
                 {
                     let content = `<div class="box_tv_plan_content">
                         <div class="title">`+(type == 'plan' ? 'Тариф' : 'Пакет каналов')+` «${response.data.name}»</div>
