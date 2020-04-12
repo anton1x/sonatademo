@@ -47,6 +47,10 @@ class ConnectionFormController extends AbstractController
 
     private function makeFailRequest($errors)
     {
-        return $this->json(['success' => false, 'errors' => $errors]);
+        $errorsArr = [];
+        foreach ($errors as $error) {
+            $errorsArr[] = $error->getMessage();
+        }
+        return $this->json(['success' => false, 'errors' => $errorsArr]);
     }
 }
