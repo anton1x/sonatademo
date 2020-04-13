@@ -14,3 +14,6 @@ php bin/console doctrine:mig:mig
 echo "Compiling assets"
 yarn install
 yarn encore production
+
+echo "refreshing right"
+chmod -R 0777 ./var
