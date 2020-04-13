@@ -165,7 +165,7 @@
                                             <div class="result">
                                                 <template v-if="dataStep3.tvBox == getTvBox().id">
                                                     <span class="selected">выбрано</span>
-                                                    <span class="cancel" @click="(dataStep3.tvBox = null)">отказаться</span>
+                                                    <!--<span class="cancel" @click="(dataStep3.tvBox = null)">отказаться</span>-->
                                                 </template>
                                                 <span v-else @click="(dataStep3.tvBox = getTvBox().id)" class="sel">выбрать</span>
                                             </div>
@@ -823,7 +823,7 @@ export default {
                 input_email : '',
                 input_phone : '',
                 input_comment : '',
-                openedConnectTime : false,
+                openedConnectTime : true,
                 input_cday : undefined,
                 input_cmonth : undefined,
                 input_cyear : undefined,
@@ -1697,7 +1697,7 @@ export default {
 
                     if (response.data.should_show_payment)
                     {
-                        window.pay(response.data.login, response.data.amount, () => {
+                        window.pay(response.data.login, response.data.amount, (typeof data.contact.input_email != 'undefined' ? data.contact.input_email : ''), () => {
                             eApi.getFuncs().alert('Ваша заявка принята и успешно оплачена. Мы свяжемся с Вами в ближайшее время.', {
                                 box_destroy : function() {
                                     window.location.href = '/';
