@@ -412,7 +412,7 @@
             var widget = new cp.CloudPayments();
             widget.charge({ // options
                     publicId: '{{ _cloudpayments_api_key }}',  //id из личного кабинета
-                    description: 'Пополнение счета для клиента ' + login, //назначение
+                    description: 'Аванс за Услуги связи, клиент ' + login, //назначение
                     amount: amount, //сумма
                     currency: 'RUB', //валюта
                     accountId: login, //идентификатор плательщика (необязательно)
