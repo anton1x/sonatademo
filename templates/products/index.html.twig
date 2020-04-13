@@ -22,7 +22,7 @@
     {{ parent() }}
     <script src="https://widget.cloudpayments.ru/bundles/cloudpayments" async onload="cPR.ready();"></script>
     <script type="text/javascript">
-        window.pay = function (login, amount, onSuccess) {
+        window.pay = function (login, amount, email, onSuccess) {
             var widget = new cp.CloudPayments();
             widget.charge({ // options
                     publicId: '{{ _cloudpayments_api_key }}',  //id из личного кабинета
@@ -30,7 +30,9 @@
                     amount: amount, //сумма
                     currency: 'RUB', //валюта
                     accountId: login, //идентификатор плательщика (необязательно)
-                    skin: "mini" //дизайн виджета
+                    skin: "mini", //дизайн виджета
+                    email: email,
+                    requireEmail: true
                 },
                 function (options) { // success
                     //действие при успешной оплате
