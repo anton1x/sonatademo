@@ -2050,6 +2050,60 @@
     }
 }
 
+//Куки бар
+
+#cookie_bar_wrapper {
+    position: fixed;
+    z-index:100;
+    left:0;
+    bottom:0;
+    width:100%;
+    //background:#fff;
+    //box-shadow: 0px 0px 20px rgba(0,0,0,0.25);
+    
+    > div {
+        margin:0 auto;
+        box-sizing: border-box;
+        max-width: @std_wrapper_maxwidth;
+        padding:30px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background:#fff;
+        box-shadow: 0px 0px 20px rgba(0,0,0,0.25);
+
+        > .text {
+            font-size:16px;
+
+            a {
+                color:@color_2;
+                text-decoration: underline;
+            }
+        }
+
+        > .close {
+            padding-left:20px;
+            font-size:0;
+
+            > a {
+                width:32px;
+                height:32px;
+                display:block;
+                cursor: pointer;
+                font-size:0;
+                background-position: center center;
+                background-repeat: no-repeat;
+                background-image:url(images/api/close.png);
+                background-size: 32px 32px;
+
+                .x2({
+                    background-image:url(images/api/close_x2.png);
+                });
+            }
+        }
+    }
+}
+
 //Инклуд внутренних
 
 @import './lists.less';

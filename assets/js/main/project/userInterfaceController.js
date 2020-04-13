@@ -2,7 +2,7 @@ import projectController from './../api/models/projectController.js';
 
 import axios from 'axios';
 import DLAnimate from './../libs/dl-animate-module.js';
-
+import Cookies from 'js-cookie';
 
 export default class extends projectController {
 
@@ -26,6 +26,7 @@ export default class extends projectController {
             });
         });
 
+        this.addCookiesBar();
         this.pageUpdated(true);
     }
 
@@ -138,6 +139,22 @@ export default class extends projectController {
         }
 
         return false;
+    }
+
+    addCookiesBar()
+    {
+        if (Cookies.get('showCookieBar') != 'yes')
+        {
+            let cookieBar = window.document.createElement('div');
+            cookieBar.setAttribute('id', 'cookie_bar_wrapper');
+            cookieBar.innerHTML = `<div><div class="text">Мы используем файлы cookie. Продолжив работу с сайтом, вы соглашаетесь с <a href="/upload/media/documents/0001/01/2854a85e4ea8ce9412ee86cd53da65329da320a8.pdf" target="_blank">политикой конфиденциальности</a>.</div><div class="close"><a href="javascript://">&nbsp;</a></div></div>`;
+            window.document.body.appendChild(cookieBar);
+            cookieBar.querySelector('.close a').addEventListener('click', (e)=> {
+                e.preventDefault();
+                Cookies.set('showCookieBar', 'yes', { expires: 365});
+                window.document.body.removeChild(cookieBar);
+            });
+        }
     }
 
     //Список каналов для ТВ тарифа
