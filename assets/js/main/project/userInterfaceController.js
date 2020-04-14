@@ -147,7 +147,7 @@ export default class extends projectController {
         {
             let cookieBar = window.document.createElement('div');
             cookieBar.setAttribute('id', 'cookie_bar_wrapper');
-            cookieBar.innerHTML = `<div><div class="text">Мы используем файлы cookie. Продолжив работу с сайтом, вы соглашаетесь с <a href="/upload/media/documents/0001/01/2854a85e4ea8ce9412ee86cd53da65329da320a8.pdf" target="_blank">политикой конфиденциальности</a>.</div><div class="close"><a href="javascript://">&nbsp;</a></div></div>`;
+            cookieBar.innerHTML = `<div><div class="text">Мы используем файлы cookie. Продолжив работу с сайтом, вы соглашаетесь с <a href="/upload/media/documents/0001/01/2854a85e4ea8ce9412ee86cd53da65329da320a8.pdf" target="_blank">Политикой конфиденциальности</a>.</div><div class="close"><a href="javascript://">&nbsp;</a></div></div>`;
             window.document.body.appendChild(cookieBar);
             cookieBar.querySelector('.close a').addEventListener('click', (e)=> {
                 e.preventDefault();
