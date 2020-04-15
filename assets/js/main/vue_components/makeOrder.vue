@@ -69,7 +69,7 @@
                             <div class="gpon_block" v-if="currentAddressConType == 'gpon'">
                                 <div class="desc">
                                     <div class="title">Внимание!</div>
-                                    <div class="text">В вашем жилом комплексе подключение к интернету осуществляется по технологии <span>GPON</span>. <span>Обязательным оборудованием для подключения является PON-модем Eltex</span>.</div>
+                                    <div class="text">В вашем жилом комплексе подключение к услуге доступа в Интернет осуществляется по современной технологии <span>GPON (оптика в квартиру)</span>. <span>Обязательным оборудованием для подключения является PON-модем Eltex</span>.</div>
                                     <div class="link"><a href="/upload/media/documents/0001/01/15e3ef476f87e2730e5dca69d884c17d52f5a911.pdf" target="_blank">Подробнее</a></div>
                                 </div>
                                 <div class="devices">
@@ -1850,6 +1850,7 @@ export default {
                 {
                     Cookies.set(i, (this.cookies_vars[i].t == 'json' ? JSON.stringify(data[this.cookies_vars[i].k]) : data[this.cookies_vars[i].k]), { expires: 7, path: window.location.pathname + window.location.search });
                 }
+                
             }, 500);
         },
         clearCookies()
@@ -1883,6 +1884,23 @@ export default {
                 }) == -1) {
                     this.dataStep2.wifiDevice = null;
                 }
+
+                let optc = 0;
+                let optc_id = null;
+                for (let d of this.currentDataAddress.connection_type.devices)
+                {
+                    if (this.formData.products.devices_internet_ont[d] !== undefined)
+                    {
+                        optc++;
+                        optc_id = d;
+                    }
+                }
+
+                if (this.currentAddressConType == 'gpon' && optc == 1)
+                {
+                    this.dataStep2.optDevice = optc_id;
+                }
+
             }
 
             if (v == 3)
