@@ -10,7 +10,10 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\Form\Type\CollectionType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 final class AddressObjectAdmin extends AbstractAdmin
 {
@@ -34,10 +37,16 @@ final class AddressObjectAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $listMapper): void
     {
         $listMapper
-            ->add('id')
-            ->addIdentifier('title')
+            //->add('id')
+            ->add('complatId', null, [
+                'editable' => true,
+            ])
+            ->add('title', null, [
+                'editable' => true,
+            ])
             ->add('address', null, [
                 'label' => 'Адрес',
+                'editable' => true,
             ])
             ->add('pricingType.name', null, [
                 'sortable' => true,
@@ -58,6 +67,9 @@ final class AddressObjectAdmin extends AbstractAdmin
         $formMapper
             ->add('title')
             ->add('address')
+            ->add('complatId', IntegerType::class, [
+                'label' => 'ID в биллинге',
+            ])
             ->add('needBuildingInput', null, [
                 'label' => 'Требует указания корпуса',
             ])
@@ -70,6 +82,12 @@ final class AddressObjectAdmin extends AbstractAdmin
                 'class' => PricingType::class,
                 'label' => 'Ценовая категория',
             ])
+//            ->add('availableBuildings', \Symfony\Component\Form\Extension\Core\Type\CollectionType::class, [
+//                'label' => 'Доступные корпуса',
+//                'entry_type' => TextType::class,
+//                'allow_add' => true,
+//                'allow_delete' => true
+//            ])
             ;
     }
 

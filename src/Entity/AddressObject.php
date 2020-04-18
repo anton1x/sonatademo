@@ -66,6 +66,18 @@ class AddressObject implements SortableList
      */
     private $needBuildingInput = true;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $complatId;
+
+    /**
+     * @ORM\Column(type="array")
+     * @JMS\Accessor(getter="getAvailableBuildings")
+     * @JMS\Type(name="array<string>")
+     */
+    private $availableBuildings = [];
+
 
 
     public function __construct()
@@ -186,6 +198,41 @@ class AddressObject implements SortableList
     public function setNeedBuildingInput(bool $needBuildingInput): void
     {
         $this->needBuildingInput = $needBuildingInput;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getComplatId()
+    {
+        return $this->complatId;
+    }
+
+    /**
+     * @param mixed $complatId
+     */
+    public function setComplatId($complatId): void
+    {
+        $this->complatId = $complatId;
+    }
+
+    /**
+     * @return array
+     */
+    public function getAvailableBuildings(): array
+    {
+        if (!$this->availableBuildings) {
+            return [];
+        }
+        return $this->availableBuildings;
+    }
+
+    /**
+     * @param array $availableBuildings
+     */
+    public function setAvailableBuildings(array $availableBuildings): void
+    {
+        $this->availableBuildings = $availableBuildings;
     }
 
 

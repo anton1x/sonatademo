@@ -415,7 +415,8 @@
                     description: 'Аванс за Услуги связи, клиент ' + login, //назначение
                     amount: amount, //сумма
                     currency: 'RUB', //валюта
-                    accountId: login, //идентификатор плательщика (необязательно)
+                    //accountId: login, //идентификатор плательщика (необязательно)
+                    accountId: 'test', //TODO: раскоментить верхнюю строчку при переходе в боевой режим биллинга
                     skin: "mini" //дизайн виджета
                 },
                 function (options) { // success
