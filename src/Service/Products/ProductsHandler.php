@@ -89,7 +89,6 @@ class ProductsHandler
             $this->complatHelper->doNewLoginQuery($productsRequestData);
         }
         $addrConverter = new AddressConverter($productsRequestData);
-        dump($addrConverter->getLocation()); //TODO: comment it before push
         $this->mailer->send($this->createMessage($productsRequestData));
 
         $basketConverter = $this->amoBasketConverter->createWithBasket($productsRequestData->basket);
