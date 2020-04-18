@@ -48,6 +48,7 @@ class SmotreshkaHelper
     {
 
         $this->repo = $entityManager->getRepository(TVPlan::class);
+        $this->em = $entityManager;
         $this->map = $this->repo->getSmotreshkaIdList();
         $this->downloader = $downloader;
         $this->cache = $cache;
@@ -73,8 +74,22 @@ class SmotreshkaHelper
         $result = [];
         foreach ($this->map as $innerId => $smotreshkaId) {
             $result[$innerId] = $data[$smotreshkaId] ?? [];
+            $count = count($data[$smotreshkaId]);
+            $this->refreshChannelCount($smotreshkaId, $count);
         }
+        $this->em->flush();
         return $result;
+    }
+
+    protected function refreshChannelCount($smotreshkaId, $count)
+    {
+        /** @var TVPlan $object */
+        $object = $this->repo->findOneBy(['smotreshkaId' => $smotreshkaId]);
+        if ($object->getChannelCount() != $count) {
+            $object->setChannelCount($count);
+            $this->em->persist($object);
+        }
+
     }
 
     public function getFormattedInfo(TVPlan $plan)

@@ -29,4 +29,9 @@ class AddressConverter
     {
         return $this->formatAddress($this->requestData->getAddress());
     }
+
+    public function getLocation()
+    {
+        return sprintf('%s', $this->requestData->getAddress()->getAddress());
+    }
 }

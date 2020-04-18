@@ -158,6 +158,16 @@ class ProductsRequestData
         return $this->contact[$param] ?? '';
     }
 
+    public function getConnectionDate()
+    {
+        if (!isset($this->contact['connect_time'])) {
+            return null;
+        }
+        $time = $this->contact['connect_time'];
+
+        return sprintf('%d.%d.%d %d:%s', $time['day'], $time['month'], $time['year'], $time['hour_start'], '00');
+    }
+
     /**
      * @param mixed $contact
      */

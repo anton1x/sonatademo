@@ -4,11 +4,14 @@
         {% import _self as knp_menu %}
         <div{{ knp_menu.attributes(listAttributes) }}>
             {{ block('children') }}
+            {% include "menu/social_links.html.twig" %}
         </div>
     {% endif %}
 {% endblock %}
 
-
+{% block root %}
+    {{ parent() }}
+{% endblock %}
 
 {% block linkElement %}
     {% import _self as knp_menu %}

@@ -1500,8 +1500,9 @@
 }
 
 #make_order_app_step_3_tv_box {
-    background:@color_15;
+    background:@color_2;
     padding:30px 40px;
+    color:#fff;
 
     .sm-block({
         padding:20px;
@@ -1520,7 +1521,7 @@
     > .text {
         font-size:16px;
         .weight-light();
-        line-height:1.4;
+        line-height:1.5;
         padding:5px 0 0 0;
 
         > span {
@@ -1530,6 +1531,19 @@
         .sm-block({
             font-size:12px;
         });
+    }
+
+    > .link {
+        padding:10px 0 0 0;
+
+        > a {
+            color:#fff;
+            text-decoration: underline;
+
+            .sm-block({
+                font-size:12px;
+            });
+        }
     }
 
     > .item {
@@ -1563,7 +1577,7 @@
                 font-size:32px;
                 font-weight: 900;
                 line-height: 1;
-                color:@color_2;
+                //color:@color_2;
 
                 > span {
                     font-size:16px;

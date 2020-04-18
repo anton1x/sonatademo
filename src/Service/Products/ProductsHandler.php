@@ -88,15 +88,15 @@ class ProductsHandler
         if ($productsRequestData->needLoginCreate()) {
             $this->complatHelper->doNewLoginQuery($productsRequestData);
         }
-
-        //dump($productsRequestData);
+        $addrConverter = new AddressConverter($productsRequestData);
+        dump($addrConverter->getLocation()); //TODO: comment it before push
         $this->mailer->send($this->createMessage($productsRequestData));
 
         $basketConverter = $this->amoBasketConverter->createWithBasket($productsRequestData->basket);
         //dump($basketConverter->getTv());
         //dump($basketConverter->getAdditional());
 
-        $addrConverter = new AddressConverter($productsRequestData);
+
         //dump($this->generateNotes($productsRequestData));
 
         $this->amoHelper->createIncomingLead(
@@ -112,7 +112,10 @@ class ProductsHandler
             $basketConverter->getTv(),
             $basketConverter->getDevices(),
             $productsRequestData->getComplatLogin(),
-            $basketConverter->getBudget()
+            $basketConverter->getBudget(),
+            $productsRequestData->getConnectionDate(),
+            $addrConverter->getLocation(),
+            $productsRequestData->getContactParam('input_comment')
         );
 
     }

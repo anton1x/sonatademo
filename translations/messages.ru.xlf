@@ -57,9 +57,17 @@
         <source>Internet Plan List</source>
         <target>Список интернет-тарифов</target>
       </trans-unit>
+      <trans-unit id="Internet Plan Create">
+        <source>Internet Plan Create</source>
+        <target>Создать интернет-тариф</target>
+      </trans-unit>
       <trans-unit id="T V Plan List">
         <source>T V Plan List</source>
         <target>Список ТВ-тарифов</target>
+      </trans-unit>
+      <trans-unit id="T V Plan Create">
+        <source>T V Plan Create</source>
+        <target>Создать ТВ-тариф</target>
       </trans-unit>
       <trans-unit id="Pricing Type">
         <source>Pricing Type</source>

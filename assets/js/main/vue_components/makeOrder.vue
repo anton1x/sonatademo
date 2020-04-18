@@ -54,7 +54,7 @@
             <template v-if="nowStep == 2">
                 <div class="step_wrapper" id="make_order_app_step_2_wrapper">
                     <div class="block_wrapper">
-                        <div class="title">Настройте тариф так, как нужно вам</div>
+                        <div class="title">Настройте Интернет как вам нужно</div>
                         <div class="input" :style="{maxWidth : (addressesInternetPlansList.length * 180) + 'px'}">
                             <ui-liner :options="addressesInternetPlansList" v-model="dataStep2.internetPlan" :helpblock="internetPlansFormHelpBlock" :key="'internet_liner'">
                                  <template v-slot:title="i">
@@ -153,14 +153,15 @@
                         <div class="simple">
                             <div id="make_order_app_step_3_tv_box">
                                 <div class="title">Внимание!</div>
-                                <div class="text">При отсутствии Smart TV для просмотра Интерактивного телевидения понадобится ТВ-приставка.</div>
+                                <div class="text"><span>При отсутствии технологии Smart TV</span> в вашем телевизоре для просмотра Интерактивного телевидения понадобится ТВ-приставка.</div>
+                                <div class="link"><a href="javascript://" target="_blank">Подробнее</a></div>
                                 <div class="item">
                                     <div class="image" :style="{'background-image' : 'url('+getTvBox().image.url.reference+')'}"><div :style="{'min-height' : Math.round((160 / getTvBox().image.sizes.reference.width) * getTvBox().image.sizes.reference.height) + 'px' }"></div></div>
                                     <div class="content">
                                         <div class="price">{{coolNumber(getTvBox().price.connection_price)}} <span>Р</span></div>
                                         <div class="switcher">
                                             <div class="input">
-                                                <ui-switcher v-model="dataStep3.tvBox" :truevalue="getTvBox().id" :falsevalue="null" mode="checkbox" :key="getTvBox().id + '_tvbox_devices_switcher'"></ui-switcher>
+                                                <ui-switcher v-model="dataStep3.tvBox" :truevalue="getTvBox().id" :falsevalue="null" mode="checkbox" :key="getTvBox().id + '_tvbox_devices_switcher'" class="invert"></ui-switcher>
                                             </div>
                                             <div class="result">
                                                 <template v-if="dataStep3.tvBox == getTvBox().id">
@@ -462,7 +463,7 @@
                         </block-taps>
                     </div>
                     <div class="connect_timing">
-                        <block-fading v-model="dataStep5.openedConnectTime" title="Желаемое время подключения" :key="'connect_time'">
+                        <block-fading v-model="dataStep5.openedConnectTime" title="Желаемая дата подключения" :key="'connect_time'">
                             <template v-slot:icon><div id="make_order_app_step_5_icon_connect_timing"></div></template>
                             <template v-slot:content>
                                 <div class="fading_block_wrapper contacts_form">
@@ -794,13 +795,13 @@ export default {
                 canceled : false,
                 tvPlan : null,
                 tvBox : null,
-                openedTheathers : false,
-                openedAddons : false,
+                openedTheathers : true,
+                openedAddons : true,
             },
             dataStep4 : {
                 canceled : false,
-                openedPhone : false,
-                openedVision : false,
+                openedPhone : true,
+                openedVision : true,
                 openedVisionTap : 'home',
                 phoneTariff : null,
                 openedPhoneDectDevs : false,
@@ -1672,6 +1673,8 @@ export default {
             for (let e in fields) {
                 data.contact[fields[e]] = this.dataStep5[fields[e]];
             }
+
+            data.contact.input_birthday = `${this.dataStep5.input_bday}.${this.dataStep5.input_bmonth}.${this.dataStep5.input_byear}`;
 
             if (this.dataStep5.openedConnectTime)
             {

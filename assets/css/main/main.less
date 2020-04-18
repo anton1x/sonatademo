@@ -1850,6 +1850,10 @@
 
                         .sm-block({
                             flex-basis: 100%;
+
+                            &:nth-child(3) {
+                                margin-top:35px;
+                            }
                         });
 
                         > .menu_title {
@@ -1917,9 +1921,19 @@
 
                         > .icons {
                             font-size:0;
+                            display:flex;
 
                             > a {
-                                display:inline-block;
+                                display:block;
+                                margin-right:20px;
+
+                                .sm-block({
+                                    margin-right:30px;
+                                });
+
+                                &:last-child {
+                                    margin-right: 0 !important;
+                                }
                             }
 
                             > .vk {
@@ -1930,6 +1944,50 @@
 
                                 .x2({
                                     background-image:url(images/icons/vk_x2.png);
+                                });
+                            }
+
+                            > .tw {
+                                width:19px;
+                                height:15px;
+                                background:url(images/icons/tw.png);
+                                background-size:19px 15px;
+
+                                .x2({
+                                    background-image:url(images/icons/tw_x2.png);
+                                });
+                            }
+
+                            > .ok {
+                                width:15px;
+                                height:15px;
+                                background:url(images/icons/ok.png);
+                                background-size:15px 15px;
+
+                                .x2({
+                                    background-image:url(images/icons/ok_x2.png);
+                                });
+                            }
+
+                            > .in {
+                                width:15px;
+                                height:15px;
+                                background:url(images/icons/in.png);
+                                background-size:15px 15px;
+
+                                .x2({
+                                    background-image:url(images/icons/in_x2.png);
+                                });
+                            }
+
+                            > .fb {
+                                width:8px;
+                                height:15px;
+                                background:url(images/icons/fb.png);
+                                background-size:8px 15px;
+
+                                .x2({
+                                    background-image:url(images/icons/fb_x2.png);
                                 });
                             }
                         }

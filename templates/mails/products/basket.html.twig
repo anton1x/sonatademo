@@ -25,7 +25,8 @@
                     <h3>Паспортные данные</h3>
                     <div>Серия и номер: {{ contact.input_passport_series }} {{ contact.input_passport_num }}</div>
                     <div>Кем и когда выдан: {{ contact.input_passport_who }}</div>
-                    <div>Адрес прописки: {{ contact.input_passport_address }}</div>
+                    <div>Адрес регистрации: {{ contact.input_passport_address }}</div>
+                    <div>Дата рождения: {{ contact.input_birthday }}</div>
                 {% endif %}
 
                 {% if contact.use_connect_time %}

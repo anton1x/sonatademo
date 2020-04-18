@@ -104,7 +104,10 @@ class AmoHelper
         $services = [],
         $tv = [],
         $devices = [],
-        $budget = 0
+        $budget = 0,
+        $connectionDate = null,
+        $addrLocation = '',
+        $comment = ''
     )
     {
         $lead = array(
@@ -160,9 +163,37 @@ class AmoHelper
                 array(
                     'id' => 596293,
                     'values' => $services,
+                ),
+                array(
+                    'id' => 597237,
+                    'values' => [
+                        [
+                            //'value' => 'ул. Воробьевское ш, 4',
+                            'value' => $addrLocation,
+                        ]
+                    ]
+                ),
+                array(
+                    'id' => 598337,
+                    'values' => [
+                        [
+                            'value' => $comment,
+                        ]
+                    ]
                 )
             )
         );
+
+        if ($connectionDate !== null) {
+            $lead['custom_fields'][] = [
+                'id' => 598333,
+                'values' => [
+                    [
+                        'value' => $connectionDate
+                    ]
+                ]
+            ];
+        }
 
         if(count($notes) > 0) {
             foreach ($notes as $note) {
@@ -223,13 +254,16 @@ class AmoHelper
         $tv = [],
         $devices = [],
         $login = '',
-        $budget = 0
+        $budget = 0,
+        $connectionDate = null,
+        $addrLocation = '',
+        $comment = ''
     )
     {
         $incomingLeads['add'] = array();
         $incomingLeads['add'][] = $this->makeIncomingLeadArray(
             $this->makeContactArray($fio, $phone, $email, $login),
-            $this->makeLeadArray($fio, $tariff, $address, $home, $corp, $notes, false, $services, $tv, $devices, $budget)
+            $this->makeLeadArray($fio, $tariff, $address, $home, $corp, $notes, false, $services, $tv, $devices, $budget, $connectionDate, $addrLocation, $comment)
         );
 
         $this->preRequest();
