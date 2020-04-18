@@ -34,6 +34,7 @@ class AddressReducer extends ReducerAbstract
 
             $this->context->setAddress($address);
 
+
         }
 
     }

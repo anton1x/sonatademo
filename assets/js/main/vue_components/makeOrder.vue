@@ -377,7 +377,7 @@
                                     <div class="dbl">
                                         <div class="field" v-if="currentDataAddress.need_building_input">
                                             <div class="title"><span>*</span> Корпус:</div>
-                                            <div class="input"><input type="text" v-model="dataStep5.input_building"></div>
+                                            <div class="input"><template v-if="currentDataAddress.available_buildings.length > 0"><ui-select :options="currentAddressAvailableBuildingsList" v-model="dataStep5.input_building" :key="'input_building_selector'"></ui-select></template><template v-else><input type="text" v-model="dataStep5.input_building"></template></div>
                                         </div>
                                         <div class="field">
                                             <div class="title"><span>*</span> Квартира:</div>
@@ -1069,6 +1069,19 @@ export default {
                     {
                         result.push(i);
                     }
+                }
+            }
+            return result;
+        },
+        currentAddressAvailableBuildingsList()
+        {
+            let result = [];
+            if (this.currentDataAddress.need_building_input && this.currentDataAddress.available_buildings.length > 0)
+            {
+                result.push({value : '', text : '------'});
+                for (let i of this.currentDataAddress.available_buildings)
+                {
+                    result.push({value : i, text : i});
                 }
             }
             return result;

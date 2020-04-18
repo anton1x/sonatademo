@@ -40,6 +40,8 @@ final class AddressObjectAdmin extends AbstractAdmin
             //->add('id')
             ->add('complatId', null, [
                 'editable' => true,
+                'sortable' => true,
+                'label' => 'Id'
             ])
             ->add('title', null, [
                 'editable' => true,
@@ -65,29 +67,33 @@ final class AddressObjectAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper): void
     {
         $formMapper
-            ->add('title')
-            ->add('address')
-            ->add('complatId', IntegerType::class, [
-                'label' => 'ID в биллинге',
-            ])
-            ->add('needBuildingInput', null, [
-                'label' => 'Требует указания корпуса',
-            ])
-            ->add('connectionType', EntityType::class, [
-                'class' => ConnectionType::class,
-                'label' => 'Тип подключения',
-                //'by_reference' => false,
-            ])
-            ->add('pricingType', EntityType::class, [
-                'class' => PricingType::class,
-                'label' => 'Ценовая категория',
-            ])
-//            ->add('availableBuildings', \Symfony\Component\Form\Extension\Core\Type\CollectionType::class, [
-//                'label' => 'Доступные корпуса',
-//                'entry_type' => TextType::class,
-//                'allow_add' => true,
-//                'allow_delete' => true
-//            ])
+            ->with('Основное', ['class' => 'col-md-8'])
+                ->add('title')
+                ->add('address')
+                ->add('complatId', TextType::class, [
+                    'label' => 'ID объекта',
+                ])
+                ->add('needBuildingInput', null, [
+                    'label' => 'Требует указания корпуса',
+                ])
+                ->add('connectionType', EntityType::class, [
+                    'class' => ConnectionType::class,
+                    'label' => 'Тип подключения',
+                    //'by_reference' => false,
+                ])
+                ->add('pricingType', EntityType::class, [
+                    'class' => PricingType::class,
+                    'label' => 'Ценовая категория',
+                ])
+            ->end()
+            ->with('Корпуса', ['class' => 'col-md-4'])
+                ->add('availableBuildings', \Symfony\Component\Form\Extension\Core\Type\CollectionType::class, [
+                    'label' => 'Доступные корпуса',
+                    'entry_type' => TextType::class,
+                    'allow_add' => true,
+                    'allow_delete' => true
+                ])
+            ->end()
             ;
     }
 

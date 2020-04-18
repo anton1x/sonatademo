@@ -67,7 +67,7 @@ class AddressObject implements SortableList
     private $needBuildingInput = true;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string")
      */
     private $complatId;
 

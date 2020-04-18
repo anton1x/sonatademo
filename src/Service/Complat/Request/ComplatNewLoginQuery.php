@@ -38,6 +38,7 @@ class ComplatNewLoginQuery implements ComplatQuery
     {
         $this->products = BasketConverter::convert($requestData->basket);
         $this->data = $requestData->getSource();
+        $this->data['addressId'] = $requestData->getAddress()->getComplatId();
     }
 
     public function getMethod(): string

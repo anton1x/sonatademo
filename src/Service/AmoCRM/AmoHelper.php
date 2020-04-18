@@ -144,7 +144,7 @@ class AmoHelper
                     )
                 ),
                 array( // адрес
-                    'id' => 597237,
+                    'id' => 572343,
                     'values' => array(
                         array(
                             'value' => $address,
